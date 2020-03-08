@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java-泛型 | steven&#39;s blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概述什么是泛型泛型就是类型参数化，处理的数据类型是不固定的，而可以作为参数传入。 基本原理Java虚拟机没有泛型类对象，会将泛型类代码转换为普通的非泛型代码，将类型参数消除，换成限定类型（无限定类型则用Object）。 优点 更好的安全性 使用Object在代码写错的时候开发环境和编译器不能帮我们发现问题。而使用泛型时，编译器可以根据类型参数检查，避免使用了错误的类型。  更好的可读性 可以很清楚">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-泛型">
+<meta property="og:url" content="stone-steven.github.io/2019/11/22/Java-%E6%B3%9B%E5%9E%8B/index.html">
+<meta property="og:site_name" content="steven&#39;s blog">
+<meta property="og:description" content="概述什么是泛型泛型就是类型参数化，处理的数据类型是不固定的，而可以作为参数传入。 基本原理Java虚拟机没有泛型类对象，会将泛型类代码转换为普通的非泛型代码，将类型参数消除，换成限定类型（无限定类型则用Object）。 优点 更好的安全性 使用Object在代码写错的时候开发环境和编译器不能帮我们发现问题。而使用泛型时，编译器可以根据类型参数检查，避免使用了错误的类型。  更好的可读性 可以很清楚">
+<meta property="article:published_time" content="2019-11-22T03:26:38.000Z">
+<meta property="article:modified_time" content="2019-12-03T13:49:24.000Z">
+<meta property="article:author" content="steven">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="steven&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">steven</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Flink/" style="font-size: 13.33px;">Flink</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/elasticsearch/" style="font-size: 13.33px;">elasticsearch</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" style="font-size: 10px;">对象结构</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">面向对象</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">steven</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">steven</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Java-泛型" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/22/Java-%E6%B3%9B%E5%9E%8B/" class="article-date">
+  	<time datetime="2019-11-22T03:26:38.000Z" itemprop="datePublished">2019-11-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java-泛型
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="什么是泛型"><a href="#什么是泛型" class="headerlink" title="什么是泛型"></a>什么是泛型</h2><p>泛型就是类型参数化，处理的数据类型是不固定的，而可以作为参数传入。</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>Java虚拟机没有泛型类对象，会将泛型类代码转换为普通的非泛型代码，将类型参数消除，换成限定类型（无限定类型则用Object）。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li><p>更好的安全性</p>
+<p>使用Object在代码写错的时候开发环境和编译器不能帮我们发现问题。而使用泛型时，编译器可以根据类型参数检查，避免使用了错误的类型。</p>
+</li>
+<li><p>更好的可读性</p>
+<p>可以很清楚的知道是什么类型。</p>
+</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><p>除了泛型类之外，方法也可以是泛型的，这与是否是泛型类无关，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">tansfer</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">String s = tarnsfer(<span class="string">"conetent"</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h2><p>接口也可以是泛型的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(T o)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerNumber</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Interger</span>&gt;</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Interger integer)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.value.compareTo(integer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类型参数的限定"><a href="#类型参数的限定" class="headerlink" title="类型参数的限定"></a>类型参数的限定</h2><p>可以为类型参数指定一个上界,限定类型后如果使用错误编译器会有提示，类型擦除时候就不会指定为Object，而会指定为边界类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//上界为一个类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumberClass</span>&lt;<span class="title">T</span> <span class="title">extendes</span> <span class="title">Number</span>&gt;</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">add</span><span class="params">(T t1,T t2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> t1 + t2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//上界为一个接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h2><? extends E> ?表示有限定通配符，匹配E或者E的某个子类型。
+
+###    <T extends E>和<? extends E>对比
+
+1. <T extends E>用于**定义**类型参数，声明了一个参数T，可以放在泛型限定类名后面，泛型方法返回值前面。
+
+2. <? extends E>用于**实例化**类型参数，用于实例化泛型变量中的类型参数，具体类型是未知的，只知道他是E或者E的子类型。
+
+### <?>  <?  extends E>和<? super E>对比
+
+1. 他们的目的都是使得方法接口更加灵活，可以接受更广泛的类型
+2. <? super E>用于灵活写入或比较，使得对象可以写入父类型的容器，使得父类型的比较方法可以应用于子类对象，他不能被类型参数形式替代。<? super T>可以赋值给任何T以及T的父类的集合，下界为T。它也可以进行get操作，但是类型会丢失，只能返回Object对象。
+3. <? extends E>和<?><p>用于灵活方式读取，他们可以使用类型参数的形式替代。&lt;? extends T&gt;可以赋值给任何T以及T的子类的集合，上界为T，取出来的泛型带有泛型限制，向上转型为T，除了null外任何元素都不能添加进&lt;? extends T&gt;集合内。它可以返回带类型的元素，但是只能返回T以及T的父类的对象，因为子类型被擦除了。</p>
+<h3 id="通配符和类型参数的选择"><a href="#通配符和类型参数的选择" class="headerlink" title="通配符和类型参数的选择"></a>通配符和类型参数的选择</h3><ol>
+<li>通配符形式的都可以用类型参数代替，通配符能做的类型参数都能做。</li>
+<li>通配符形式可以减少类型参数，形式上更为简单，可读性也更好。</li>
+<li>如果类型参数之间有依赖关系，或者返回值依赖类型参数，或者需要写操作，必须需要类型参数。</li>
+</ol>
+<h2 id="泛型类局限性"><a href="#泛型类局限性" class="headerlink" title="泛型类局限性"></a>泛型类局限性</h2><ol>
+<li><p>不能用基本类型实例化类型参数</p>
+</li>
+<li><p>运行时类型查询只适用于原始类型，判断泛型将返回错误。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a <span class="keyword">instanceof</span> Pair&lt;String&gt;) <span class="comment">//Error</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不能创建参数化类型数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Pair&lt;String&gt;[] table = <span class="keyword">new</span> Pair&lt;String&gt;[<span class="number">10</span>];<span class="comment">//Error</span></span><br><span class="line">可以声明通配符类型的数组，然后进行类型转换</span><br><span class="line">Pair&lt;String&gt;[] table = (Pair&lt;String&gt;[]) <span class="keyword">new</span> Pair&lt;?&gt;[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不能实例化类型变量，不能使用形如new T()这样的方式。可以使用构造器表达式实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式一</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Pair&lt;T&gt; <span class="title">makePair</span><span class="params">(Supplier&lt;T&gt; constr)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Pair&lt;&gt;(constr.get(),constr.get());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Pair&lt;String&gt; p = Pair.makePair(String::<span class="keyword">new</span>);</span><br><span class="line"><span class="comment">//方式二</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Pair&lt;T&gt; <span class="title">makePair</span><span class="params">(Class&lt;T&gt; cl)</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Pair&lt;&gt;(cl.newInstance(),cl.newInstance());</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不能抛出或者捕获泛型类的实例，如：</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Problem</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Exception</span></span>&#123;&#125;<span class="comment">//catch子句中不能抛出或者捕获</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>泛型类的静态上下文中类型变量无效</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/23/Java-%E7%B1%BB%E5%8A%A0%E8%BD%BD/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Java-类加载
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/18/Java-HashMap/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java-HashMap</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 steven
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

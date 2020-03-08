@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flink基本介绍 | steven&#39;s blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本架构分层架构 API&amp;Libraries层 如DataStream API、DataSet API。  Runtime核心层 负责对上层不同接口提供基础服务，支持分布式Stream作业的执行、JobGraph到ExecutionGraph的映射转换、任务调度等。  物理部署层 涉及Flink的部署模式，目前支持的有：本地、集群、云、Kubernetes。   通信组件之间的通信通过Ak">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flink基本介绍">
+<meta property="og:url" content="stone-steven.github.io/2019/12/21/Flink%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="steven&#39;s blog">
+<meta property="og:description" content="基本架构分层架构 API&amp;Libraries层 如DataStream API、DataSet API。  Runtime核心层 负责对上层不同接口提供基础服务，支持分布式Stream作业的执行、JobGraph到ExecutionGraph的映射转换、任务调度等。  物理部署层 涉及Flink的部署模式，目前支持的有：本地、集群、云、Kubernetes。   通信组件之间的通信通过Ak">
+<meta property="og:image" content="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/event_ingestion_processing_time.svg">
+<meta property="og:image" content="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/processes.svg">
+<meta property="og:image" content="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/slot_sharing.svg">
+<meta property="article:published_time" content="2019-12-21T08:27:40.000Z">
+<meta property="article:modified_time" content="2020-03-03T11:45:51.390Z">
+<meta property="article:author" content="steven">
+<meta property="article:tag" content="Flink">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/event_ingestion_processing_time.svg">
+  
+    <link rel="alternative" href="/atom.xml" title="steven&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">steven</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Flink/" style="font-size: 13.33px;">Flink</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/elasticsearch/" style="font-size: 13.33px;">elasticsearch</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" style="font-size: 10px;">对象结构</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">面向对象</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">steven</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">steven</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Flink基本介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/12/21/Flink%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/" class="article-date">
+  	<time datetime="2019-12-21T08:27:40.000Z" itemprop="datePublished">2019-12-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Flink基本介绍
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h1><h2 id="分层架构"><a href="#分层架构" class="headerlink" title="分层架构"></a>分层架构</h2><ul>
+<li><p>API&amp;Libraries层</p>
+<p>如DataStream API、DataSet API。</p>
+</li>
+<li><p>Runtime核心层</p>
+<p>负责对上层不同接口提供基础服务，支持分布式Stream作业的执行、JobGraph到ExecutionGraph的映射转换、任务调度等。</p>
+</li>
+<li><p>物理部署层</p>
+<p>涉及Flink的部署模式，目前支持的有：本地、集群、云、Kubernetes。</p>
+</li>
+</ul>
+<h2 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h2><p>组件之间的通信通过Akka Freamwork。</p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><h3 id="1-处理时间-Process-Time"><a href="#1-处理时间-Process-Time" class="headerlink" title="1. 处理时间(Process Time)"></a>1. 处理时间(Process Time)</h3><p>事件被处理的时间，是Operator的机器的系统时钟。</p>
+<h3 id="2-事件时间-Event-Time"><a href="#2-事件时间-Event-Time" class="headerlink" title="2. 事件时间(Event Time)"></a>2. 事件时间(Event Time)</h3><p>事件实际发生的时间，由数据源产生。</p>
+<h3 id="3-摄取时间-Ingestion-Time"><a href="#3-摄取时间-Ingestion-Time" class="headerlink" title="3. 摄取时间(Ingestion Time)"></a>3. 摄取时间(Ingestion Time)</h3><p>记录进入source被观察到的系统时间。</p>
+<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/event_ingestion_processing_time.svg" alt=""></p>
+<h2 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h2><p>将有界或者无界数据集拆分成一个个有限长度大数据区间的机制，即在数据集中增加临时的处理边界，用于将事件按照事件或者其他特征进行分组分析。</p>
+<h3 id="1-滚动窗口-Tumbling-Window"><a href="#1-滚动窗口-Tumbling-Window" class="headerlink" title="1.滚动窗口(Tumbling  Window)"></a>1.滚动窗口(Tumbling  Window)</h3><p>将时间拆分成固定长度，时间可以是事件时间或者处理时间。</p>
+<h3 id="2-滑动窗口-Sliding-Window"><a href="#2-滑动窗口-Sliding-Window" class="headerlink" title="2.滑动窗口(Sliding Window)"></a>2.滑动窗口(Sliding Window)</h3><p>按照滑动步长将时间拆分成固定的长度，当滑动步长小于时间窗口时候，相邻的窗口会有重叠。</p>
+<h3 id="3-会话窗口-Session-Window"><a href="#3-会话窗口-Session-Window" class="headerlink" title="3.会话窗口(Session Window)"></a>3.会话窗口(Session Window)</h3><p>以活动时间间隔为边界，将一些列的连续事件拆分到不同的会话中，会话窗口的长度是动态的。</p>
+<h2 id="水印"><a href="#水印" class="headerlink" title="水印"></a>水印</h2><p>水印(Watermark)是嵌入在事件时间轴上用于判断事件时间窗口内所有数据均已达到引擎的一种时间推理工具，是一种时间戳。它表示，当事件时间小于水印标记时间的事件不会再出现。</p>
+<p>watermark由数据源嵌入或者由Flink应用程序生成，可以自定义生成水印。有三种水印生成器：</p>
+<h3 id="1-周期性水印生成器"><a href="#1-周期性水印生成器" class="headerlink" title="(1) 周期性水印生成器"></a>(1) 周期性水印生成器</h3><p>根据事件或者处理时间周期性的周期性的触发水印生成器(Assigner)，两个水印时间戳之间不一定具有固定的时间间隔。</p>
+<p>默认实现有：</p>
+<p><strong>AscendingTimestampExtractor</strong></p>
+<p>产生的时间戳和水印必须是单调非递减的，对事件的时间顺序有要求，如果产生了递减的时间戳，就要处理异常。</p>
+<p><strong>BoundedOutOfOrdernessTimestampExtractor</strong></p>
+<p>产生的时间戳和水印是允许“有界乱序”的，构造它时传入的参数maxOutOfOrderness就是乱序区间的长度，而实际发射的水印为通过覆写extractTimestamp()方法提取出来的时间戳减去乱序区间，这里会保存一个currentMaxTimestamp，记录着时间最近的水印，每个新到达的元素得到的timestamp只有在大于currentMaxTimestamp时才会更新currentMaxTimestamp的当前值。</p>
+<p><strong>IngestionTimeExtractor</strong></p>
+<p>基于当前系统时钟生成时间戳和水印。</p>
+<h3 id="2-间歇性水印生成器"><a href="#2-间歇性水印生成器" class="headerlink" title="(2) 间歇性水印生成器"></a>(2) 间歇性水印生成器</h3><p>在观察到事件时间后，需要依赖于事件本身的某些属性决定是否发射水印的情况，会计算某个条件来判断是否发射水印，</p>
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><p>触发器(trigger)决定在窗口的什么时间点启动应用程序定义的数据处理任务。watermark迟到会拉长窗口的生存期，早到会导致数据处理结果不准确，触发器就是解决这两个问题被引入的。</p>
+<h3 id="触发机制："><a href="#触发机制：" class="headerlink" title="触发机制："></a>触发机制：</h3><h4 id="1-onElement"><a href="#1-onElement" class="headerlink" title="(1) onElement"></a>(1) onElement</h4><p>窗口每收到一个元素调用一次该方法，返回结果决定是否触发算子函数。</p>
+<h4 id="2-onProcessingTime"><a href="#2-onProcessingTime" class="headerlink" title="(2) onProcessingTime"></a>(2) onProcessingTime</h4><p>根据注册的处理时间定时器触发。</p>
+<h4 id="3-onEventTime"><a href="#3-onEventTime" class="headerlink" title="(3) onEventTime"></a>(3) onEventTime</h4><p>根据注册的事件时间定时器触发。</p>
+<h4 id="4-onMerge"><a href="#4-onMerge" class="headerlink" title="(4) onMerge"></a>(4) onMerge</h4><p>两个窗口合并时触发。</p>
+<h3 id="触发结果"><a href="#触发结果" class="headerlink" title="触发结果:"></a>触发结果:</h3><h4 id="1-忽略-CONTINUE"><a href="#1-忽略-CONTINUE" class="headerlink" title="(1) 忽略(CONTINUE)"></a>(1) 忽略(CONTINUE)</h4><h4 id="2-触发-FIRE"><a href="#2-触发-FIRE" class="headerlink" title="(2) 触发(FIRE)"></a>(2) 触发(FIRE)</h4><h4 id="3-清除-PURGE"><a href="#3-清除-PURGE" class="headerlink" title="(3) 清除(PURGE)"></a>(3) 清除(PURGE)</h4><p>清空窗口的所有元素，窗口被销毁。</p>
+<h4 id="4-触发并清除-FILRE-AND-PURGE"><a href="#4-触发并清除-FILRE-AND-PURGE" class="headerlink" title="(4) 触发并清除(FILRE_AND_PURGE)"></a>(4) 触发并清除(FILRE_AND_PURGE)</h4><p>触发窗口函数，并在函数执行结束后清空窗口所有的元素，窗口被销毁。</p>
+<h3 id="内置触发器"><a href="#内置触发器" class="headerlink" title="内置触发器"></a>内置触发器</h3><ul>
+<li>EventTimeTrigger：根据事件时间轴上的水印触发。</li>
+<li>ProcessTimeTrigger：根据处理时间触发。</li>
+<li>CounterTrigger：根据窗口内元素数据量触发。</li>
+<li>DeltaTrigger：根据某种特征是否超过指定的阈值决定是否触发。</li>
+</ul>
+<h2 id="清除器"><a href="#清除器" class="headerlink" title="清除器"></a>清除器</h2><p>在触发器触发后，窗口函数执行前或者执行后清除窗口内元素。</p>
+<h3 id="内置清除器"><a href="#内置清除器" class="headerlink" title="内置清除器"></a>内置清除器</h3><ul>
+<li>CountEvictor：保持窗口内元素数量为预定值。</li>
+<li>DeltaEvictor：根据元素之间的关系，清除超过指定阈值的元素。</li>
+<li>TimeEvictor：根据窗口元素时间戳决定清除哪些元素。</li>
+</ul>
+<h2 id="迟到生存期"><a href="#迟到生存期" class="headerlink" title="迟到生存期"></a>迟到生存期</h2><p>默认的迟到生存期为0，事件时间窗口在水印到来后结束，无需考虑迟到事件。</p>
+<h2 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h2><p>Steam有一个或者多个分区，有两种模式：</p>
+<h3 id="1-直连模式-One-to-One-模式"><a href="#1-直连模式-One-to-One-模式" class="headerlink" title="(1) 直连模式(One-to-One)模式"></a>(1) 直连模式(One-to-One)模式</h3><p>一个实例的输出是另一实例的输入，从上一个task全部输入到下一个task，没有拆分成多个分区。</p>
+<h3 id="2-分区-Redistribution-模式"><a href="#2-分区-Redistribution-模式" class="headerlink" title="(2) 分区(Redistribution)模式"></a>(2) 分区(Redistribution)模式</h3><p>一个实例的输出拆分成多个部分传输给下级实例。</p>
+<h2 id="检查点-checkPoint"><a href="#检查点-checkPoint" class="headerlink" title="检查点(checkPoint)"></a>检查点(checkPoint)</h2><p>CheckPoint可以将中间结果定期保存起来，这种定期触发保存中间结果的机制是CheckPoint。过程是JobManager定期向Taskmanager发送RPC消息，subTask将其计算的state定期保存到StateBackEnd(State存储后端)中，并且向JobManager发送是否成功。可以保证Flink集群在某个算子因为某些原因(如 异常退出)出现故障时，TaskManager中的SubTask恶意从上一次成功的CheckPoint的State恢复。</p>
+<h3 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h3><ul>
+<li>支持时空穿梭的外部数据源，如Kafka、分布式文件系统等。</li>
+<li>可持久化的外部状态存储，如分布式文件系统等。</li>
+</ul>
+<h2 id="State"><a href="#State" class="headerlink" title="State"></a>State</h2><p>flink中有状态函数和运算符在各个元素(element)/事件(event)的处理过程中存储的数据。比如在每分钟/小时/天聚合事件时，状态保存待处理的聚合。</p>
+<h2 id="exactly-once语义"><a href="#exactly-once语义" class="headerlink" title="exactly-once语义"></a>exactly-once语义</h2><h3 id="1-at-most-once"><a href="#1-at-most-once" class="headerlink" title="(1) at most once"></a>(1) at most once</h3><p>尽可能的正确，但不一定正确，系统发生故障恢复后结果可能出错。</p>
+<h3 id="2-at-least-once"><a href="#2-at-least-once" class="headerlink" title="(2) at least once"></a>(2) at least once</h3><p>系统发生故障恢复时，不会漏掉恢复之前的事件，但是可能会重复计算，适用于实时性要求高，准确性不高的场景。</p>
+<h3 id="3-exactly-once"><a href="#3-exactly-once" class="headerlink" title="(3) exactly-once"></a>(3) exactly-once</h3><p>系统发生故障恢复后，最终结果与不发生故障时是一致的。</p>
+<h2 id="数据分区"><a href="#数据分区" class="headerlink" title="数据分区"></a>数据分区</h2><p>通过合理控制传输通道中的数据分布可以达到最优的网络性能。</p>
+<h3 id="1-应用程序自定义分区-Custom-Partition"><a href="#1-应用程序自定义分区-Custom-Partition" class="headerlink" title="(1) 应用程序自定义分区(Custom Partition)"></a>(1) 应用程序自定义分区(Custom Partition)</h3><p>根据指定key的位置进行数据分区：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dateStream.partitionCustom(partitioner,<span class="string">"someKey"</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-均匀分布分区-Random-Partition"><a href="#2-均匀分布分区-Random-Partition" class="headerlink" title="(2) 均匀分布分区(Random Partition)"></a>(2) 均匀分布分区(Random Partition)</h3><p>数据会均匀的发送到下一级节点:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.shuffle()</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-负载均衡分区-Rebalance-Partition"><a href="#3-负载均衡分区-Rebalance-Partition" class="headerlink" title="(3) 负载均衡分区(Rebalance Partition)"></a>(3) 负载均衡分区(Rebalance Partition)</h3><p>根据轮训调度算法，将数据均匀的发送到下一级节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dateStream.rebalance()</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-可伸缩分区-Rescale-Partition"><a href="#4-可伸缩分区-Rescale-Partition" class="headerlink" title="(4) 可伸缩分区(Rescale Partition)"></a>(4) 可伸缩分区(Rescale Partition)</h3><p>根据资源使用情况动态的调整同一作业的数据分布，根据物理实例部署时的资源共享情况动态调节数据分布，尽可能的让数据在同一slot流转，减少网络开销。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.rescale()</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-广播分区-Broadcsting-Partition"><a href="#5-广播分区-Broadcsting-Partition" class="headerlink" title="(5) 广播分区(Broadcsting Partition)"></a>(5) 广播分区(Broadcsting Partition)</h3><p>每一个元素都被广播到所有下一级节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.broadcast()</span><br></pre></td></tr></table></figure>
+
+<h2 id="资源共享"><a href="#资源共享" class="headerlink" title="资源共享"></a>资源共享</h2><p>Flink将多个任务链接成一个任务在一个线程中执行，降低线程上下切换的开销，减小缓存容量，提高系统吞吐量的同时降低延迟。</p>
+<h3 id="1-创建链"><a href="#1-创建链" class="headerlink" title="(1) 创建链"></a>(1) 创建链</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.map(...).map(...).startNewChain().map(...)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-关闭作业链接优化"><a href="#2-关闭作业链接优化" class="headerlink" title="(2) 关闭作业链接优化"></a>(2) 关闭作业链接优化</h3><p>任意两个算子实例不可以共享线程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.map(...).disableChaining()</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Slot共享组"><a href="#3-Slot共享组" class="headerlink" title="(3) Slot共享组"></a>(3) Slot共享组</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.map(...).slotShardingGroup(<span class="string">"name"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h2><p>Source和Sink节点连接诶外部数据源的组件称为连接器(Connector)。</p>
+<ul>
+<li><p>source一致性保障</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>一致性保障</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Apache Kafka</td>
+<td>exactly once</td>
+</tr>
+<tr>
+<td>AWS Kinesis Streams</td>
+<td>exactly once</td>
+</tr>
+<tr>
+<td>RabbitMQ</td>
+<td>at most once(v 0.10)/exacly once (v 1.0)</td>
+</tr>
+<tr>
+<td>Twitter Streaming API</td>
+<td>at most once</td>
+</tr>
+<tr>
+<td>Collections</td>
+<td>exactly once</td>
+</tr>
+<tr>
+<td>Files</td>
+<td>exactly once</td>
+</tr>
+<tr>
+<td>Sockets</td>
+<td>at most once</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ul>
+<li><p>Sink一致性保障</p>
+<table>
+<thead>
+<tr>
+<th>Sink</th>
+<th>一致性保障</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HDFS Roling Sink</td>
+<td>exactly once</td>
+</tr>
+<tr>
+<td>Elasticsearch</td>
+<td>at least once</td>
+</tr>
+<tr>
+<td>Kafka Producer</td>
+<td>at least once</td>
+</tr>
+<tr>
+<td>Cassandra Sink</td>
+<td>at least once /exactly once</td>
+</tr>
+<tr>
+<td>AWS Kinesis Streams</td>
+<td>at least once</td>
+</tr>
+<tr>
+<td>File Sink</td>
+<td>at least once</td>
+</tr>
+<tr>
+<td>Socket Sink</td>
+<td>at least once</td>
+</tr>
+<tr>
+<td>Standard Output</td>
+<td>at least once</td>
+</tr>
+<tr>
+<td>Redis Sink</td>
+<td>at least once</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h1 id="运行时结构"><a href="#运行时结构" class="headerlink" title="运行时结构"></a>运行时结构</h1><h2 id="1-Task线程"><a href="#1-Task线程" class="headerlink" title="1. Task线程"></a>1. Task线程</h2><p>Flink中，每个<strong>Operator</strong>称为一个任务(<strong>task</strong>),Operator每个实例，每个任务在一个JVM线程中执行。多个子任务链接成一个任务，在一个线程中执行，可以降低线程上下文切换产生的开销。</p>
+<h2 id="2-Manager进程"><a href="#2-Manager进程" class="headerlink" title="2. Manager进程"></a>2. Manager进程</h2><p>(1) JobManager进程负责分布式任务管理，如任务调度、故障恢复和检查点等等。为了保证高可用可以有多个JobManager，其相当于主从架构的Master。客户端向JobManager提交任务。</p>
+<p>(2)TaskManager进程负责执行任务的线程，缓存和传输stream。</p>
+<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/processes.svg" alt=""></p>
+<h2 id="3-线程共享Slot"><a href="#3-线程共享Slot" class="headerlink" title="3. 线程共享Slot"></a>3. 线程共享Slot</h2><p>为了控制任务的执行数量，TaskManager将计算资源划分为多个Slot，每个Slot单独分享给其分配的计算资源，有利于任务间的资源隔离。</p>
+<p>TaskManager可以配置成单slot模式，这个worker在运行时就独占整个JVM进程；同一个JVM进程上的多个任务可以共享TCP连接、心跳和数据。</p>
+<p>Flink不允许不同作业的任务共享同一个slot，但是允许同一个作业的不同任务共享同一个slot。<br><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/slot_sharing.svg" alt=""></p>
+<h1 id="作业控制"><a href="#作业控制" class="headerlink" title="作业控制"></a>作业控制</h1><p>JobManager将计算图的逻辑形式(JobGraph)编译成物理形式(ExecutionGraph)</p>
+<h2 id="JobGraph"><a href="#JobGraph" class="headerlink" title="JobGraph"></a>JobGraph</h2><p>由Operator和传输通道的数据缓存(Intermediate Data set)组成，Operator是计算图中的顶点(JobVertex),并行度控制其实例数量，处理函数(ProcessFunction)定义转换函数。</p>
+<h2 id="ExecutionGraph"><a href="#ExecutionGraph" class="headerlink" title="ExecutionGraph"></a>ExecutionGraph</h2><p>由Execution Vertex和Intermediate Result的多个分区组成，每个作业的Job Vertex都对应一个ExecutionJobVertex，一个ExecutionJobVertex 对应多个并行的Execution Vertex实例，数据缓存被拆分成多个区，即Intermediate  Result Partition。</p>
+<h1 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h1><p>分为两种：</p>
+<h2 id="1-Keyed-State"><a href="#1-Keyed-State" class="headerlink" title="1. Keyed State"></a>1. Keyed State</h2><p>定义在KeyedStream上的函数和Operator的状态，每一个Operator会有多个并行的实例，但是相同的key数据只能由同一个实例处理，因此一个Keyed状态只会对应一个Operator实例，一个Operator实例会有多个状态分区。</p>
+<h2 id="2-Non-Keyed-State"><a href="#2-Non-Keyed-State" class="headerlink" title="2. Non-Keyed State"></a>2. Non-Keyed State</h2><p>即非分区的Operator状态，Kafka连接器的每一个并行实例负责一个消息分区，对应消息消费位置就是这个连接器实例的非分区状态。</p>
+<hr>
+<p>每一类状态有两种托管方式：</p>
+<h2 id="1-托管方式"><a href="#1-托管方式" class="headerlink" title="1.托管方式"></a>1.托管方式</h2><p>这类状态的数据结构由引擎定义，Flink运行时负责序列化和写入状态后端。当并行度改变时，Flink引擎负责重新拆分到各实例上。</p>
+<p>内置托管的Keyed State：</p>
+<ul>
+<li>ValueState<T>: 状态为单值的</li>
+<li>ListState<T>:状态是多值的</li>
+<li>ReducingState<T>:Reduce函数状态</li>
+<li>AggregatingState&lt;IN,OUT&gt;:聚合函数的状态</li>
+<li>MapState&lt;UK,UV&gt;:Map函数的状态</li>
+</ul>
+<h2 id="2-非托管方式"><a href="#2-非托管方式" class="headerlink" title="2.非托管方式"></a>2.非托管方式</h2><p>由程序自定义，引擎由字节流形式写入状态后端。</p>
+<h1 id="计划执行图"><a href="#计划执行图" class="headerlink" title="计划执行图"></a>计划执行图</h1><p>可以分为四层： StreamGraph、JobGraph、ExecutionGraph、物理执行图。</p>
+<h2 id="StreamGraph"><a href="#StreamGraph" class="headerlink" title="StreamGraph"></a>StreamGraph</h2><p>根据Stream API编写的代码生成的最初始的图，用来表示程序的初始结构。</p>
+<h2 id="JobGraph-1"><a href="#JobGraph-1" class="headerlink" title="JobGraph"></a>JobGraph</h2><p>StreamGraph优化后生成JobGraph，提交给JobManager的数据结构，主要的优化为，将多个符合条件的节点链接在一起作为一个节点，可以减少数据在节点间的数据流动消耗。</p>
+<h2 id="ExecutionGraph-1"><a href="#ExecutionGraph-1" class="headerlink" title="ExecutionGraph"></a>ExecutionGraph</h2><p>JobManager根据JobGraph生成ExecutionGraph，方便和调度监控各个task的状态，是JobGraph的并行版本。</p>
+<h2 id="物理执行图"><a href="#物理执行图" class="headerlink" title="物理执行图"></a>物理执行图</h2><p>JobManager根据ExecutionGraph对Job进行调度之后，在各个TaskManager上部署Task上形成的图。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/29/Flink%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Flink数据类型
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/18/Hadoop%E4%B9%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hadoop之分布式文件系统</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 steven
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java-JVM | steven&#39;s blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JVM内存布局  一、堆区 堆分成两大块 新生代和老年代。对象产生之初在新生代， 步入暮年时进入老年代， 同时老年代也接纳在新生代无法容纳的超大对象。 新生代由一个Eden区和两个Survivor区构成。绝大部分对象位于Eden区，当Eden区填满时候，会触发YGC，没有被引用的对象直接被回收，依然存活的对象会被送到Survivor区。 这里要注意，因为有两个Survivor区S0和S1，会选择未">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-JVM">
+<meta property="og:url" content="stone-steven.github.io/2019/11/25/Java-JVM/index.html">
+<meta property="og:site_name" content="steven&#39;s blog">
+<meta property="og:description" content="JVM内存布局  一、堆区 堆分成两大块 新生代和老年代。对象产生之初在新生代， 步入暮年时进入老年代， 同时老年代也接纳在新生代无法容纳的超大对象。 新生代由一个Eden区和两个Survivor区构成。绝大部分对象位于Eden区，当Eden区填满时候，会触发YGC，没有被引用的对象直接被回收，依然存活的对象会被送到Survivor区。 这里要注意，因为有两个Survivor区S0和S1，会选择未">
+<meta property="og:image" content="https://s2.ax1x.com/2019/12/01/QegbQJ.md.png">
+<meta property="article:published_time" content="2019-11-25T14:47:33.000Z">
+<meta property="article:modified_time" content="2019-12-01T08:42:50.000Z">
+<meta property="article:author" content="steven">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/12/01/QegbQJ.md.png">
+  
+    <link rel="alternative" href="/atom.xml" title="steven&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">steven</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Flink/" style="font-size: 13.33px;">Flink</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/elasticsearch/" style="font-size: 13.33px;">elasticsearch</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" style="font-size: 10px;">对象结构</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">面向对象</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">steven</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">steven</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Java-JVM" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/25/Java-JVM/" class="article-date">
+  	<time datetime="2019-11-25T14:47:33.000Z" itemprop="datePublished">2019-11-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java-JVM
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JVM内存布局</p>
+<p><a href="https://imgse.com/i/QegbQJ" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/12/01/QegbQJ.md.png" alt="QegbQJ.md.png"></a></p>
+<p>一、堆区</p>
+<p>堆分成两大块 新生代和老年代。对象产生之初在新生代， 步入暮年时进入老年代， 同时老年代也接纳在新生代无法容纳的超大对象。</p>
+<p>新生代由一个Eden区和两个Survivor区构成。绝大部分对象位于Eden区，当Eden区填满时候，会触发YGC，没有被引用的对象直接被回收，依然存活的对象会被送到Survivor区。</p>
+<p>这里要注意，因为有两个Survivor区S0和S1，会选择未使用的那块空间。这里要有两个Survivor区的原因是，当进行YGC时，Eden区和Survivor区都将会有要保留的对象，这时可以从Eden区和其中一个保存有对象的Survivor区找出保留对象，一起复制到另一个Survivor区，这样也可以尽可能多的利用空间，避免空间碎片的产生。如果移交的对象大于Survivor区的空间上限，将会直接将对象移交给老年代。对象也不会一直存在于Survivor区，每个对象都有一个计数器，每次YGC都会加1，通过设置－XX:MaxTenuringThreshold 参数能配置计数器的值到达某个阐值的时候， 对象从新生代晋升至老年代。</p>
+<p>当老年代无法放下时，会触发FullGC，如果依然放不下，会抛出OOM。</p>
+<p>二、元空间</p>
+<p>区别于之前的永久代，元空间在本地内存进行分配。原来的Perm区的字符串常量移至堆内存，其他信息比如类元信息、字段、静态属性、方法和常量等都移到元空间中。</p>
+<p>三、虚拟机栈</p>
+<p>虚拟机栈通过压栈和出栈的方式，对每个方法对应的活动栈帧进行运算处理，方法正常执行结束，会跳转到另一个栈帧上。在执行的过程中，如果出现异常，会进行异常回溯，返回地址通过异常处理表确定。栈帧包括局部变量表、操作栈、动态连接、方法返回地址等。</p>
+<ol>
+<li><p>局部变量表</p>
+<p>存放方法参数和局部变量。</p>
+</li>
+<li><p>操作栈</p>
+<p>在方法执行过程中，会有各种指令往栈中写入和提取信息。</p>
+</li>
+<li><p>动态链接</p>
+<p>每个栈帧中包含一个在常量池中对当前方法的引用 ， 目的是支持方法调用过程的动态连接。</p>
+</li>
+<li><p>方法返回地址</p>
+<p>无论正常或者发生异常退出方法，都将返回方法被调用的位置。退出的可能方式：返回值压入上层调用栈帧，异常信息抛给能处理的栈帧，PC计数器指向方法调用后的下一条指令。</p>
+</li>
+</ol>
+<p>四、本地方法栈</p>
+<p>​    是结程对象私有的，本地方法可以通过JNI(Java Native Interface)来访问虚拟机运行时的数据区，甚至可以调用寄存器，具有和JVM相同的能力和权限。   </p>
+<p>五、程序计数器</p>
+<p>​    程序计数器用来存放执行指令的偏移量和行号指示器等， 线程执行或恢复都要依赖程序计数器。程序计数器在各个线程之间互不影响，此区域 也不会发生内存溢出异常。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/27/Java-volatile%E4%B8%8Esynchronized%E5%8E%9F%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          volatile与synchronized原理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/25/Java-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java-类的生命周期</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 steven
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redis集群介绍 | steven&#39;s blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="单机模式​    单机模式的局限性：  单点故障问题 如果仅有的一台Redis服务器发生宕机，将导致缓存服务不可用，引发一系列的问题。  容量问题 Redis是基于内存存储的数据库，对内存容量较高，单台的内存存在一定的瓶颈。  性能问题 虽然Redis有可以达到较高的QPS，但是遇到高并发情况，还是会出现性能不足情况。   集群模式主从模式​    选定其中一台Redis服务器作为主服务器，若干台">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis集群介绍">
+<meta property="og:url" content="stone-steven.github.io/2019/12/06/Redis%E9%9B%86%E7%BE%A4%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="steven&#39;s blog">
+<meta property="og:description" content="单机模式​    单机模式的局限性：  单点故障问题 如果仅有的一台Redis服务器发生宕机，将导致缓存服务不可用，引发一系列的问题。  容量问题 Redis是基于内存存储的数据库，对内存容量较高，单台的内存存在一定的瓶颈。  性能问题 虽然Redis有可以达到较高的QPS，但是遇到高并发情况，还是会出现性能不足情况。   集群模式主从模式​    选定其中一台Redis服务器作为主服务器，若干台">
+<meta property="article:published_time" content="2019-12-06T13:22:06.000Z">
+<meta property="article:modified_time" content="2019-12-09T14:34:32.000Z">
+<meta property="article:author" content="steven">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="steven&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">steven</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Flink/" style="font-size: 13.33px;">Flink</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/elasticsearch/" style="font-size: 13.33px;">elasticsearch</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" style="font-size: 10px;">对象结构</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">面向对象</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">steven</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">steven</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Redis集群介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/12/06/Redis%E9%9B%86%E7%BE%A4%E4%BB%8B%E7%BB%8D/" class="article-date">
+  	<time datetime="2019-12-06T13:22:06.000Z" itemprop="datePublished">2019-12-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis集群介绍
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="单机模式"><a href="#单机模式" class="headerlink" title="单机模式"></a>单机模式</h1><p>​    单机模式的局限性：</p>
+<ol>
+<li><p>单点故障问题</p>
+<p>如果仅有的一台Redis服务器发生宕机，将导致缓存服务不可用，引发一系列的问题。</p>
+</li>
+<li><p>容量问题</p>
+<p>Redis是基于内存存储的数据库，对内存容量较高，单台的内存存在一定的瓶颈。</p>
+</li>
+<li><p>性能问题</p>
+<p>虽然Redis有可以达到较高的QPS，但是遇到高并发情况，还是会出现性能不足情况。</p>
+</li>
+</ol>
+<h1 id="集群模式"><a href="#集群模式" class="headerlink" title="集群模式"></a>集群模式</h1><h2 id="主从模式"><a href="#主从模式" class="headerlink" title="主从模式"></a>主从模式</h2><p>​    选定其中一台Redis服务器作为主服务器，若干台服务器作为从服务器。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>Master节点可以进行读写操作，写操作会同步给Slave节点，Slave节点是只读的。</li>
+<li>Master节点可以有多个Slave节点，一台Slave节点只能对应一台Master节点。</li>
+<li>如果有一台Slave节点发生宕机，其他节点不会受到影响，可以继续提供服务，当这台Slave节点重启后可以从Master同步数据，然后继续服务。</li>
+<li>如果Master节点发生宕机，因为这种模式下只有一台Master所以，此时集群中只有Slave节点，只能提供读的能力。</li>
+</ul>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>​    同步数据分为全量同步和增量同步两种。</p>
+<h4 id="全量同步"><a href="#全量同步" class="headerlink" title="全量同步"></a>全量同步</h4><ul>
+<li><p>Slave节点连接Master节点，发送SYNC命令。</p>
+</li>
+<li><p>Master节点收到SYNC命令后，执行BGSAVE命令生成RDB文件，并且会在缓冲区记录此操作之后的所有的写命令。</p>
+</li>
+<li><p>当Master节点执行完BGSAVE命令后，会所有的服务器发送RDB文件，同时写命令继续记录。</p>
+</li>
+<li><p>当Slave节点接收到来自于Master节点的RDB文件后，会丢弃所有的旧数据，读取RDB文件载入新数据。</p>
+</li>
+<li><p>随后Master节点向Slave节点发送缓冲区缓冲的写操作数据。</p>
+</li>
+<li><p>Slave节点接受来自Master节点的缓冲区的写操作的数据，至此全量数据同步完成。</p>
+</li>
+</ul>
+<h4 id="增量同步"><a href="#增量同步" class="headerlink" title="增量同步"></a>增量同步</h4><ul>
+<li>Master接收到写请求，然后将写命令发送到Slave节点。</li>
+<li>Slave节点接收到来自Master节点的命令，更新数据。</li>
+</ul>
+<h2 id="哨兵-Sentinel-模式"><a href="#哨兵-Sentinel-模式" class="headerlink" title="哨兵(Sentinel)模式"></a>哨兵(Sentinel)模式</h2><p>​    主从模式在Master节点宕机后会导致无法提供写服务，只能通过人工干预将Slave节点提升为Master节点，同时应用端也需要更新Master节点的地址，这种方式无法快速处理问题，将会导致一段时间内服务中断。</p>
+<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>这种模式是建立在主从模式上的，不同的是当Master节点，哨兵节点会从Slave节点中选择一个节点作为新的Master节点，并会修改配置文件，使得其它的Slave节点指向新的Master节点。</li>
+<li>如果重启宕机的Master节点后，这个节点将会作为Slave节点。</li>
+<li>哨兵节点是一个特殊的节点，它不存储数据。</li>
+</ul>
+<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><ul>
+<li><p>每隔10秒哨兵节点会向Master节点和Slave节点发送info命令获取最新的拓扑结构。</p>
+</li>
+<li><p>每隔1秒钟，每个哨兵节点会向Master和Slave节点以及其他哨兵节点发送ping命令做心跳检测，判断是否存在不可达节点。</p>
+</li>
+<li><p>如果某个哨兵节点向一个节点发出的心跳检测没有得到响应，那么就认为该节点已下线，也叫哨兵主观下线。</p>
+</li>
+<li><p>当哨兵主观下线的节点是Master节点时，哨兵会询问其他哨兵对该节点的判断，当判断超过一定个数时，哨兵就会确认确实已经下线，就会对Master节点进行客观下线的判定。</p>
+</li>
+<li><p>当Master客观下线时，各个哨兵节点会进行协商，选出领导者哨兵节点，这个领导者哨兵会从Slave节点选择一个节点作为Master节点，优先选择与主节点复制相似度最高的节点，然后将其余的Slave节点指向新的Master节点。如果原来的Slave节点重启后，将会作为新的Slave节点，并从Master节点同步数据。</p>
+</li>
+<li><p>当使用哨兵模式时，客户端连接哨兵节点。</p>
+</li>
+</ul>
+<h2 id="Cluster模式"><a href="#Cluster模式" class="headerlink" title="Cluster模式"></a>Cluster模式</h2><p>​    哨兵模式实现了Master节点的自动故障转移，但是没有实现Slave节点的自动故障转移。</p>
+<h3 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h3><ul>
+<li><p>所有的节点都是主从模式，Slave不提供服务，只用作备用。</p>
+</li>
+<li><p>不支持同时处理多个key，因为需要分发到多个节点上。</p>
+</li>
+<li><p>支持在线增加删除节点。</p>
+</li>
+<li><p>客户端可以连接任何一台Master节点。</p>
+</li>
+</ul>
+<h3 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h3><ul>
+<li>Redis集群有16384个hash slot，对每个key计算CRC16值，然后对16384取模，可以获取key对应的hash slot，每个master都会有部分slot。</li>
+<li>集群中的每个节点定期向其他节点发送ping请求，如果一段时间内一直通信失败，则发送ping请求记得点认为接受节点存在故障，把其标记为主观下线，并且节点状态会在集群中传播，如果所的节点都标记其主观下线，那么该节点就是客观下线，并通知该节点的Slave节点进行故障转移。</li>
+<li>当某个节点客观下线后，该节点的从节点开始故障转移流程，首先进行资格检查，每个从节点检查与主节点的断开时间，查过一定时间的取消选举资格，然后同样在所有的从节点寻找复制偏移量最大的节点开始进行选举，只有持有slot的Master节点才有投票权，当Slave节点收集到过半的票数时，晋升为Master节点，并通知其他的Slave节点将Master更新为自己。</li>
+</ul>
+<p>​        </p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/09/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Java-线程池
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/04/Spring-AOP/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring-AOP</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 steven
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

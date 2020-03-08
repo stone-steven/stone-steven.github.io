@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flink部署 | steven&#39;s blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.standlone 是flink自带的分布式集群模式，不依赖于其他的资源调度框架。 1234修改flink-conf.yaml文件jobmanager.rpc.address:设置jobmanager服务器地址;然后设置slave文件将taskManager服务器地址加入；将这些文件复制到每一台服务器上。进入bin目录启动start-cluster.sh，在master节点上执行后，maste">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flink部署">
+<meta property="og:url" content="stone-steven.github.io/2020/02/17/Flink%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="steven&#39;s blog">
+<meta property="og:description" content="1.standlone 是flink自带的分布式集群模式，不依赖于其他的资源调度框架。 1234修改flink-conf.yaml文件jobmanager.rpc.address:设置jobmanager服务器地址;然后设置slave文件将taskManager服务器地址加入；将这些文件复制到每一台服务器上。进入bin目录启动start-cluster.sh，在master节点上执行后，maste">
+<meta property="og:image" content="https://ci.apache.org/projects/flink/flink-docs-release-1.10/fig/FlinkOnYarn.svg">
+<meta property="article:published_time" content="2020-02-17T13:14:17.000Z">
+<meta property="article:modified_time" content="2020-03-01T14:37:15.298Z">
+<meta property="article:author" content="steven">
+<meta property="article:tag" content="Flink">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ci.apache.org/projects/flink/flink-docs-release-1.10/fig/FlinkOnYarn.svg">
+  
+    <link rel="alternative" href="/atom.xml" title="steven&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">steven</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Flink/" style="font-size: 13.33px;">Flink</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/elasticsearch/" style="font-size: 13.33px;">elasticsearch</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" style="font-size: 10px;">对象结构</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">面向对象</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">steven</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">steven</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Flink部署" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/02/17/Flink%E9%83%A8%E7%BD%B2/" class="article-date">
+  	<time datetime="2020-02-17T13:14:17.000Z" itemprop="datePublished">2020-02-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Flink部署
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1.standlone</strong></p>
+<p>是flink自带的分布式集群模式，不依赖于其他的资源调度框架。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修改flink-conf.yaml文件jobmanager.rpc.address:设置jobmanager服务器地址;</span><br><span class="line">然后设置slave文件将taskManager服务器地址加入；</span><br><span class="line">将这些文件复制到每一台服务器上。</span><br><span class="line">进入bin目录启动start-cluster.sh，在master节点上执行后，master节点如果到slave节点是ssh免密的，可以ssh到各slaver节点启动taskmanager进程。</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.standlone(HA)</strong></p>
+<p>是standlone的高可用模式。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">需要借助zookeeper集群，配置zoo.conf，加入集群信息，然后启动start-zookeeper-quorum.sh；</span><br><span class="line">masters文件中要加入一台以上的机器地址。</span><br><span class="line">在flink-conf.yaml加入</span><br><span class="line">high-availability: zookeeper</span><br><span class="line">high-availability.zookeeper.quorum: ...</span><br><span class="line">high-availability.zookeeper.path.root: /flink #ZooKeeper 根节点，在该节点下放置所有集群节点(可选)。</span><br><span class="line">high-availability.cluster-id: ... #ZooKeeper的cluster-id节点，在该节点下放置集群的所有相关数据(可选)。</span><br><span class="line">high-availability.storageDir: hdfs:///flink/recovery #存储目录，JobManager 元数据保存在文件系统 storageDir 中，在 ZooKeeper 中仅保存了指向此状态的指针</span><br><span class="line">最后启动start-cluster.sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.Flink on yarn集群部署</strong></p>
+<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.10/fig/FlinkOnYarn.svg" alt=""></p>
+<p>当运行一个高可用YARN集群时，不需要运行多个JobManager（ApplicationMaster）实例，只需要运行一个实例，如果失败了通过YARN来进行重启。</p>
+<p><strong>优点</strong></p>
+<ul>
+<li><p>可以提高集群资源利用率，资源是按需使用的</p>
+</li>
+<li><p>任务设定优先级</p>
+</li>
+<li><p>Yarn可以处理进程失败情况，保证高可用，其中JobManager和TaskManager由Yarn NodeManager监控，当他们进程异常退出时，Yarn ResourceManager会调度其到其他机器。</p>
+</li>
+</ul>
+<p><strong>Yarn</strong></p>
+<ul>
+<li>ResourceManager ResourceManager 负责整个集群的资源管理和分配，是一个全局的资源管理系统。 NodeManager 以心跳的方式向 ResourceManager 汇报资源使用情况（目前主要是 CPU 和内存的使用情况）。RM 只接受 NM 的资源回报信息，对于具体的资源处理则交给 NM 自己处理。</li>
+<li>NodeManager NodeManager 是每个节点上的资源和任务管理器，它是管理这台机器的代理，负责该节点程序的运行，以及该节点资源的管理和监控。YARN 集群每个节点都运行一个NodeManager。 NodeManager 定时向 ResourceManager 汇报本节点资源（CPU、内存）的使用情况和Container 的运行状态。当 ResourceManager 宕机时 NodeManager 自动连接 RM 备用节点。 NodeManager 接收并处理来自 ApplicationMaster 的 Container 启动、停止等各种请求。</li>
+<li>ApplicationMaster 负责与 RM 调度器协商以获取资源（用 Container 表示）。 将得到的任务进一步分配给内部的任务(资源的二次分配)。 与 NM 通信以启动/停止任务。 监控所有任务运行状态，并在任务运行失败时重新为任务申请资源以重启任务</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile </span><br><span class="line">export HADOOP_CONF_DIR= # 配置Hadoop环境变量</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/29/Flink%E8%BF%9F%E5%88%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Flink迟到数据处理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/10/Java-AQS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java-AQS</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2020 steven
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
