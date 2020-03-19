@@ -1,205 +1,136 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
   
-  <title>Flink基本介绍 | steven&#39;s blog</title>
-
-  <!-- keywords -->
+    <link rel="shortcut icon" href="/css/images/logo.png">
   
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基本架构分层架构 API&amp;Libraries层 如DataStream API、DataSet API。  Runtime核心层 负责对上层不同接口提供基础服务，支持分布式Stream作业的执行、JobGraph到ExecutionGraph的映射转换、任务调度等。  物理部署层 涉及Flink的部署模式，目前支持的有：本地、集群、云、Kubernetes。   通信组件之间的通信通过Ak">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Flink基本介绍">
-<meta property="og:url" content="stone-steven.github.io/2019/12/21/Flink%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/index.html">
-<meta property="og:site_name" content="steven&#39;s blog">
-<meta property="og:description" content="基本架构分层架构 API&amp;Libraries层 如DataStream API、DataSet API。  Runtime核心层 负责对上层不同接口提供基础服务，支持分布式Stream作业的执行、JobGraph到ExecutionGraph的映射转换、任务调度等。  物理部署层 涉及Flink的部署模式，目前支持的有：本地、集群、云、Kubernetes。   通信组件之间的通信通过Ak">
-<meta property="og:image" content="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/event_ingestion_processing_time.svg">
-<meta property="og:image" content="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/processes.svg">
-<meta property="og:image" content="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/slot_sharing.svg">
-<meta property="article:published_time" content="2019-12-21T08:27:40.000Z">
-<meta property="article:modified_time" content="2020-03-03T11:45:51.390Z">
-<meta property="article:author" content="steven">
-<meta property="article:tag" content="Flink">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/event_ingestion_processing_time.svg">
-  
-    <link rel="alternative" href="/atom.xml" title="steven&#39;s blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
-  
+  <title>
+    
+      Flink基本介绍 | steven&#39;s blog
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
   
 <link rel="stylesheet" href="/css/style.css">
 
   
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
+    
+<script src="/js/qrious.js"></script>
 
   
-<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-
   
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
 
 
   
 <meta name="generator" content="Hexo 4.2.0"></head>
-<body>
-  <div id="container">
-    <div id="particles-js"></div>
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
-			
-		</a>
-
-		<hgroup>
-		  <h1 class="header-author"><a href="/">steven</a></h1>
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Flink/" style="font-size: 13.33px;">Flink</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/elasticsearch/" style="font-size: 13.33px;">elasticsearch</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" style="font-size: 10px;">对象结构</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">面向对象</a>
-					</div>
-				</section>
-				
-				
-				
-
-				
-			</div>
-		</div>
-	</header>				
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
 </div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>steven's blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
     </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">steven</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author">steven</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-      <div class="body-wrap"><article id="post-Flink基本介绍" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/21/Flink%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/" class="article-date">
-  	<time datetime="2019-12-21T08:27:40.000Z" itemprop="datePublished">2019-12-21</time>
-</a>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+      </ul>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Flink基本介绍
-      
-    </h1>
-  
+  </div>
+</header>
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li></ul>
-	</div>
-
-        
-
-        
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h1><h2 id="分层架构"><a href="#分层架构" class="headerlink" title="分层架构"></a>分层架构</h2><ul>
+    <div id="article-banner">
+  <h2>Flink基本介绍</h2>
+  <p class="post-date">2019-12-21</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h1><h2 id="分层架构"><a href="#分层架构" class="headerlink" title="分层架构"></a>分层架构</h2><ul>
 <li><p>API&amp;Libraries层</p>
 <p>如DataStream API、DataSet API。</p>
 </li>
@@ -405,99 +336,202 @@
 <h2 id="JobGraph-1"><a href="#JobGraph-1" class="headerlink" title="JobGraph"></a>JobGraph</h2><p>StreamGraph优化后生成JobGraph，提交给JobManager的数据结构，主要的优化为，将多个符合条件的节点链接在一起作为一个节点，可以减少数据在节点间的数据流动消耗。</p>
 <h2 id="ExecutionGraph-1"><a href="#ExecutionGraph-1" class="headerlink" title="ExecutionGraph"></a>ExecutionGraph</h2><p>JobManager根据JobGraph生成ExecutionGraph，方便和调度监控各个task的状态，是JobGraph的并行版本。</p>
 <h2 id="物理执行图"><a href="#物理执行图" class="headerlink" title="物理执行图"></a>物理执行图</h2><p>JobManager根据ExecutionGraph对Job进行调度之后，在各个TaskManager上部署Task上形成的图。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Flink" >
+    <span class="tag-code">Flink</span>
+  </a>
 
-      
-    </div>
+      </div>
     
-  </div>
-  
+    <!-- Tags END -->
+    <!-- NAV START -->
     
-<nav id="article-nav">
-  
-    <a href="/2019/12/29/Flink%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/12/18/Hadoop%E4%B9%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+        <span class="nav-arrow">← </span>
+        
+          Hadoop之分布式文件系统
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/12/29/Flink%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
         
           Flink数据类型
         
-      </div>
-    </a>
-  
-  
-    <a href="/2019/12/18/Hadoop%E4%B9%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hadoop之分布式文件系统</div>
-      <strong class="article-nav-caption">&gt;</strong>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-
-
-
-
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2020 steven
-      </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
-        </div>
-    </div>
-  </div>
-</footer>
-    </div>
+        <span class="nav-arrow"> →</span>
+      </a>
     
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#基本架构"><span class="toc-nav-text">基本架构</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#分层架构"><span class="toc-nav-text">分层架构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#通信"><span class="toc-nav-text">通信</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#基本概念"><span class="toc-nav-text">基本概念</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#时间"><span class="toc-nav-text">时间</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-处理时间-Process-Time"><span class="toc-nav-text">1. 处理时间(Process Time)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-事件时间-Event-Time"><span class="toc-nav-text">2. 事件时间(Event Time)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-摄取时间-Ingestion-Time"><span class="toc-nav-text">3. 摄取时间(Ingestion Time)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#窗口"><span class="toc-nav-text">窗口</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-滚动窗口-Tumbling-Window"><span class="toc-nav-text">1.滚动窗口(Tumbling  Window)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-滑动窗口-Sliding-Window"><span class="toc-nav-text">2.滑动窗口(Sliding Window)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-会话窗口-Session-Window"><span class="toc-nav-text">3.会话窗口(Session Window)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#水印"><span class="toc-nav-text">水印</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-周期性水印生成器"><span class="toc-nav-text">(1) 周期性水印生成器</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-间歇性水印生成器"><span class="toc-nav-text">(2) 间歇性水印生成器</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#触发器"><span class="toc-nav-text">触发器</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#触发机制："><span class="toc-nav-text">触发机制：</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-onElement"><span class="toc-nav-text">(1) onElement</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-onProcessingTime"><span class="toc-nav-text">(2) onProcessingTime</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-onEventTime"><span class="toc-nav-text">(3) onEventTime</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-onMerge"><span class="toc-nav-text">(4) onMerge</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#触发结果"><span class="toc-nav-text">触发结果:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-忽略-CONTINUE"><span class="toc-nav-text">(1) 忽略(CONTINUE)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-触发-FIRE"><span class="toc-nav-text">(2) 触发(FIRE)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-清除-PURGE"><span class="toc-nav-text">(3) 清除(PURGE)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-触发并清除-FILRE-AND-PURGE"><span class="toc-nav-text">(4) 触发并清除(FILRE_AND_PURGE)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#内置触发器"><span class="toc-nav-text">内置触发器</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#清除器"><span class="toc-nav-text">清除器</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#内置清除器"><span class="toc-nav-text">内置清除器</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#迟到生存期"><span class="toc-nav-text">迟到生存期</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模式"><span class="toc-nav-text">模式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-直连模式-One-to-One-模式"><span class="toc-nav-text">(1) 直连模式(One-to-One)模式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-分区-Redistribution-模式"><span class="toc-nav-text">(2) 分区(Redistribution)模式</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#检查点-checkPoint"><span class="toc-nav-text">检查点(checkPoint)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用条件"><span class="toc-nav-text">使用条件</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#State"><span class="toc-nav-text">State</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#exactly-once语义"><span class="toc-nav-text">exactly-once语义</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-at-most-once"><span class="toc-nav-text">(1) at most once</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-at-least-once"><span class="toc-nav-text">(2) at least once</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-exactly-once"><span class="toc-nav-text">(3) exactly-once</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#数据分区"><span class="toc-nav-text">数据分区</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-应用程序自定义分区-Custom-Partition"><span class="toc-nav-text">(1) 应用程序自定义分区(Custom Partition)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-均匀分布分区-Random-Partition"><span class="toc-nav-text">(2) 均匀分布分区(Random Partition)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-负载均衡分区-Rebalance-Partition"><span class="toc-nav-text">(3) 负载均衡分区(Rebalance Partition)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-可伸缩分区-Rescale-Partition"><span class="toc-nav-text">(4) 可伸缩分区(Rescale Partition)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-广播分区-Broadcsting-Partition"><span class="toc-nav-text">(5) 广播分区(Broadcsting Partition)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#资源共享"><span class="toc-nav-text">资源共享</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-创建链"><span class="toc-nav-text">(1) 创建链</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-关闭作业链接优化"><span class="toc-nav-text">(2) 关闭作业链接优化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Slot共享组"><span class="toc-nav-text">(3) Slot共享组</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#连接器"><span class="toc-nav-text">连接器</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#运行时结构"><span class="toc-nav-text">运行时结构</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Task线程"><span class="toc-nav-text">1. Task线程</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Manager进程"><span class="toc-nav-text">2. Manager进程</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-线程共享Slot"><span class="toc-nav-text">3. 线程共享Slot</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#作业控制"><span class="toc-nav-text">作业控制</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JobGraph"><span class="toc-nav-text">JobGraph</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ExecutionGraph"><span class="toc-nav-text">ExecutionGraph</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#状态管理"><span class="toc-nav-text">状态管理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Keyed-State"><span class="toc-nav-text">1. Keyed State</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Non-Keyed-State"><span class="toc-nav-text">2. Non-Keyed State</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-托管方式"><span class="toc-nav-text">1.托管方式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-非托管方式"><span class="toc-nav-text">2.非托管方式</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#计划执行图"><span class="toc-nav-text">计划执行图</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#StreamGraph"><span class="toc-nav-text">StreamGraph</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JobGraph-1"><span class="toc-nav-text">JobGraph</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ExecutionGraph-1"><span class="toc-nav-text">ExecutionGraph</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#物理执行图"><span class="toc-nav-text">物理执行图</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
 
 <script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
-
-<script src="/js/main.js"></script>
-
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  (function () {
+    var url = 'stone-steven.github.io/2019/12/21/Flink基本介绍/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
     }
-});
+    $('.header').removeClass('fixed-header')
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
 </script>
 
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
 
 
-  </div>
-</body>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
 </html>

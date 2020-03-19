@@ -1,1209 +1,417 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
   
-  <title>steven&#39;s blog</title>
-
-  <!-- keywords -->
+    <link rel="shortcut icon" href="/css/images/logo.png">
   
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="steven&#39;s blog">
-<meta property="og:url" content="stone-steven.github.io/index.html">
-<meta property="og:site_name" content="steven&#39;s blog">
-<meta property="article:author" content="steven">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternative" href="/atom.xml" title="steven&#39;s blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
-  
+  <title>
+    
+      steven&#39;s blog
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
   
 <link rel="stylesheet" href="/css/style.css">
 
   
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
+    
+<script src="/js/qrious.js"></script>
 
   
-<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-
   
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
 
 
   
 <meta name="generator" content="Hexo 4.2.0"></head>
-<body>
-  <div id="container">
-    <div id="particles-js"></div>
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
-			
-		</a>
-
-		<hgroup>
-		  <h1 class="header-author"><a href="/">steven</a></h1>
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Flink/" style="font-size: 13.33px;">Flink</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/elasticsearch/" style="font-size: 13.33px;">elasticsearch</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" style="font-size: 10px;">对象结构</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">面向对象</a>
-					</div>
-				</section>
-				
-				
-				
-
-				
-			</div>
-		</div>
-	</header>				
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
 </div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>steven's blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
     </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">steven</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author">steven</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-      <div class="body-wrap">
-  
-    <article id="post-Kafka" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/03/06/Kafka/" class="article-date">
-  	<time datetime="2020-03-06T09:46:29.000Z" itemprop="datePublished">2020-03-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="menu-mask">
+      <ul class="menu-list">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/06/Kafka/">
-        Kafka
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
         
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="1-Message"><a href="#1-Message" class="headerlink" title="1.Message"></a>1.Message</h2><p>基本数据单元是message，Kafka为了提高效率会将多个消息放到一个批次中，然后批量写入。</p>
-<h2 id="2-Topic"><a href="#2-Topic" class="headerlink" title="2.Topic"></a>2.Topic</h2><p>Kafka的数据通过Topic来进行分类，一个Topic可以分为若干个分区Partitions，一个分区对应一个提交日志，在日志中按照追加方式写入。通过分区，数据可以分布在多台服务器上，可以提高更好的性能。多个分区无法保证消息的有序性，如果要保证有序性，可以使用单个分区。</p>
-<h2 id="3-Producer"><a href="#3-Producer" class="headerlink" title="3.Producer"></a>3.Producer</h2><p>生产者创建消息，一般情况下消息均匀的分发到各个分区，也可以指定分区。</p>
-<h2 id="4-Consumer"><a href="#4-Consumer" class="headerlink" title="4.Consumer"></a>4.Consumer</h2><p>消费者可以订阅主题，并可以通过偏移量(offset)来区分读取过得消息，offset会保存在zk或者kafka中。一个Topic可以被多个消费者消费，且多个消费者之间互不影响。</p>
-<h2 id="5-Broker"><a href="#5-Broker" class="headerlink" title="5.Broker"></a>5.Broker</h2><p>Kafka服务器也叫Broker，它接受来自生产者的消息，并且为消息设置偏移量，将消息保存在磁盘中，也服务于消费者，从磁盘读取数据返回消息。多台Broker可以组成一个集群，其中有一台Broker会作为集群控制器(Controller)，它负责管理集群。一个分区可以分配多个Broker，但是只会有一个Leader。</p>
-
-      
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+      </ul>
     </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
   </div>
+</header>
+
+    <main class="app-body">
   
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Flink迟到数据处理" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/29/Flink%E8%BF%9F%E5%88%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="article-date">
-  	<time datetime="2020-02-29T08:09:22.000Z" itemprop="datePublished">2020-02-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/13/Hadoop%E9%83%A8%E7%BD%B2/">Hadoop部署</a>
+      </h2>
+      <p class="article-date">March 13, 2020</p>
+      
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/29/Flink%E8%BF%9F%E5%88%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
-        Flink迟到数据处理
+  <a href="/tags#Hadoop" >
+    <span class="tag-code">Hadoop</span>
+  </a>
+
+      
+      <div class="article-summary">
         
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>外部系统产生的数据往往不能及时、按序到达Flink系统，在Flink中有两重保障来处理乱序数据。</p>
-<p><strong>1.水印机制</strong></p>
-<p>通过水印机制，可以解决乱序的数据问题。每个水印都会带有一个时间戳，当水印W出现时，表示时间早于W的数据都已经到达，也是触发窗口计算的标记。在并行度大于1的任务中多个流都会产生水印，这时会选择数值最小的那个水印作为基准。</p>
-<p><strong>2.窗口允许延迟机制</strong></p>
-<p>​    (1) 可以使用allowedLateness()方法来设定窗口允许延迟，这样在窗口触发计算之后可以不立刻销毁，可以等待一段时间再记性销毁，当有迟到的数据来到时，会触发新的窗口计算。</p>
-<p>​    (2) 可以将迟到的数据本身作为一个特殊的流，通过sideOutputLateData()方法可以将其侧输出到流中。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Flink部署" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/17/Flink%E9%83%A8%E7%BD%B2/" class="article-date">
-  	<time datetime="2020-02-17T13:14:17.000Z" itemprop="datePublished">2020-02-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          1.生成ssh公钥和私钥
+123456ssh-keygen -t rsa -C "hadoop"#为了防止将之前的文件替换掉，这里输入文件名id_rsa_hadoop#会生成公钥和私钥分别是id_rsa_hadoop.pub和id_rsa_hadoopcat id_rsa_hadoop.pu ...
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/17/Flink%E9%83%A8%E7%BD%B2/">
-        Flink部署
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1.standlone</strong></p>
-<p>是flink自带的分布式集群模式，不依赖于其他的资源调度框架。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修改flink-conf.yaml文件jobmanager.rpc.address:设置jobmanager服务器地址;</span><br><span class="line">然后设置slave文件将taskManager服务器地址加入；</span><br><span class="line">将这些文件复制到每一台服务器上。</span><br><span class="line">进入bin目录启动start-cluster.sh，在master节点上执行后，master节点如果到slave节点是ssh免密的，可以ssh到各slaver节点启动taskmanager进程。</span><br></pre></td></tr></table></figure>
-
-<p><strong>2.standlone(HA)</strong></p>
-<p>是standlone的高可用模式。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">需要借助zookeeper集群，配置zoo.conf，加入集群信息，然后启动start-zookeeper-quorum.sh；</span><br><span class="line">masters文件中要加入一台以上的机器地址。</span><br><span class="line">在flink-conf.yaml加入</span><br><span class="line">high-availability: zookeeper</span><br><span class="line">high-availability.zookeeper.quorum: ...</span><br><span class="line">high-availability.zookeeper.path.root: /flink #ZooKeeper 根节点，在该节点下放置所有集群节点(可选)。</span><br><span class="line">high-availability.cluster-id: ... #ZooKeeper的cluster-id节点，在该节点下放置集群的所有相关数据(可选)。</span><br><span class="line">high-availability.storageDir: hdfs:///flink/recovery #存储目录，JobManager 元数据保存在文件系统 storageDir 中，在 ZooKeeper 中仅保存了指向此状态的指针</span><br><span class="line">最后启动start-cluster.sh</span><br></pre></td></tr></table></figure>
-
-<p><strong>3.Flink on yarn集群部署</strong></p>
-<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.10/fig/FlinkOnYarn.svg" alt=""></p>
-<p>当运行一个高可用YARN集群时，不需要运行多个JobManager（ApplicationMaster）实例，只需要运行一个实例，如果失败了通过YARN来进行重启。</p>
-<p><strong>优点</strong></p>
-<ul>
-<li><p>可以提高集群资源利用率，资源是按需使用的</p>
-</li>
-<li><p>任务设定优先级</p>
-</li>
-<li><p>Yarn可以处理进程失败情况，保证高可用，其中JobManager和TaskManager由Yarn NodeManager监控，当他们进程异常退出时，Yarn ResourceManager会调度其到其他机器。</p>
-</li>
-</ul>
-<p><strong>Yarn</strong></p>
-<ul>
-<li>ResourceManager ResourceManager 负责整个集群的资源管理和分配，是一个全局的资源管理系统。 NodeManager 以心跳的方式向 ResourceManager 汇报资源使用情况（目前主要是 CPU 和内存的使用情况）。RM 只接受 NM 的资源回报信息，对于具体的资源处理则交给 NM 自己处理。</li>
-<li>NodeManager NodeManager 是每个节点上的资源和任务管理器，它是管理这台机器的代理，负责该节点程序的运行，以及该节点资源的管理和监控。YARN 集群每个节点都运行一个NodeManager。 NodeManager 定时向 ResourceManager 汇报本节点资源（CPU、内存）的使用情况和Container 的运行状态。当 ResourceManager 宕机时 NodeManager 自动连接 RM 备用节点。 NodeManager 接收并处理来自 ApplicationMaster 的 Container 启动、停止等各种请求。</li>
-<li>ApplicationMaster 负责与 RM 调度器协商以获取资源（用 Container 表示）。 将得到的任务进一步分配给内部的任务(资源的二次分配)。 与 NM 通信以启动/停止任务。 监控所有任务运行状态，并在任务运行失败时重新为任务申请资源以重启任务</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile </span><br><span class="line">export HADOOP_CONF_DIR= # 配置Hadoop环境变量</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Java-AQS" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/02/10/Java-AQS/" class="article-date">
-  	<time datetime="2020-02-10T01:24:30.000Z" itemprop="datePublished">2020-02-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/10/Java-AQS/">
-        Java-AQS
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>AQS全称为AbstractQueuedSynchronizer是抽象队列同步器。</p>
-<p><strong>原理</strong></p>
-<p>如果被请求的共享资源空闲，则将当前请求资源的线程设置为有效的工作线程，并且将共享资源设置为锁定状态；如果被请求的共享资源被占用，那么就需要一套线程阻塞等待以及被唤醒时锁分配的机制，这个机制 AQS 是用 CLH 队列锁实现的，即将暂时获取不到锁的线程加入到该队列中。</p>
-<p>CLH(Craig,Landin,and Hagersten) 队列是一个虚拟的双向队列（虚拟的双向队列即不存在队列实例，仅存在结点之间的关联关系），AQS 是将每条请求共享资源的线程封装成一个 CLH 锁队列的一个结点（Node）来实现锁的分配。</p>
-<p><strong>共享方式</strong></p>
-<ol>
-<li><p>共享</p>
-<p>多个线程可以同时执行，如Semaphore、CountDownLatch等。</p>
-</li>
-<li><p>独占</p>
-<p>同时只能有一个线程执行，如ReentrantLock。</p>
-</li>
-</ol>
-<p><strong>实现</strong></p>
-<p><strong>自旋锁</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> state = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">while</span>(!compareAndSet(<span class="number">0</span>,<span class="number">1</span>))&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span></span>&#123;</span><br><span class="line">  status = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>假设有线程A和线程B两个线程，线程A先进入lock()方法中，state原始状态为0，设置为1会返回成功，while(false会退出循环)，A线程可以继续执行。如果此时，B线程进入，在进入lock()方法时，因为state此时为1，compareAndSet方法会一直返回false，会进入死循环。直到线程A调用unlock方法，线程B的lock方法才能跳出循环，然后接着执行。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Spring-循环依赖" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/01/28/Spring-%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/" class="article-date">
-  	<time datetime="2020-01-28T03:24:36.000Z" itemprop="datePublished">2020-01-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/28/Spring-%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/">
-        Spring-循环依赖
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>产生原因</strong></p>
-<p>依赖存在着多种方式比如构造方法形式的依赖，还有setField形式的依赖。spring自己可以解决循环依赖问题，可以通过延迟设置属性来实现，但是如果是两个bean都是通过构造方法来依赖对方的话spring就无法解决，会产生循环依赖的异常。</p>
-<p><strong>单例初始化过程</strong></p>
-<ol>
-<li><p>createBeanInstance：调用构造方法实例化对象。</p>
-</li>
-<li><p>populateBean：为对象设置属性。</p>
-</li>
-<li><p>initializeBean：调用指定的初始化方法。</p>
-</li>
-</ol>
-<p><strong>解决方式</strong></p>
-<p>spring中有三种缓存：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="keyword">new</span> ConcurrentHashMap&lt;String, Object&gt;(<span class="number">256</span>);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, ObjectFactory&lt;?&gt;&gt; singletonFactories = <span class="keyword">new</span> HashMap&lt;String, ObjectFactory&lt;?&gt;&gt;(<span class="number">16</span>);</span><br><span class="line"><span class="comment">//保存刚刚创建没有进行属性注入的提前曝光对象</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; earlySingletonObjects = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(<span class="number">16</span>);</span><br></pre></td></tr></table></figure>
-
-<p>singletonObjects单例对象只会实例化一次，需要缓存，原型则不需要。</p>
-<p>singletonFactories缓存的是工厂，工厂返回的是bean，为了解决循环依赖</p>
-<p>singletonFactories和earlySingletonObjects保存临时的对象，当所有的对象创建完成后，这两个对象保存的对象数量会变为0.</p>
-<p>获取过程：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">getSingleton</span><span class="params">(String beanName, <span class="keyword">boolean</span> allowEarlyReference)</span> </span>&#123;</span><br><span class="line">   Object singletonObject = <span class="keyword">this</span>.singletonObjects.get(beanName);</span><br><span class="line">   <span class="keyword">if</span> (singletonObject == <span class="keyword">null</span> &amp;&amp; isSingletonCurrentlyInCreation(beanName)) &#123;</span><br><span class="line">      <span class="keyword">synchronized</span> (<span class="keyword">this</span>.singletonObjects) &#123;</span><br><span class="line">         singletonObject = <span class="keyword">this</span>.earlySingletonObjects.get(beanName);</span><br><span class="line">         <span class="keyword">if</span> (singletonObject == <span class="keyword">null</span> &amp;&amp; allowEarlyReference) &#123;</span><br><span class="line">            ObjectFactory&lt;?&gt; singletonFactory = <span class="keyword">this</span>.singletonFactories.get(beanName);</span><br><span class="line">            <span class="keyword">if</span> (singletonFactory != <span class="keyword">null</span>) &#123;</span><br><span class="line">               singletonObject = singletonFactory.getObject();</span><br><span class="line">               <span class="keyword">this</span>.earlySingletonObjects.put(beanName, singletonObject);</span><br><span class="line">               <span class="keyword">this</span>.singletonFactories.remove(beanName);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> (singletonObject != NULL_OBJECT ? singletonObject : <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Spring会先从singletonObjects中尝试获取，如果获取不到并且对象在创建中，就会尝试从earlySingletonObjects中获取，如果还是获取不到并且允许从singletonFactories通过getObject获取，则通过singletonFactory.getObject()获取.</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Mysql" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/01/01/Mysql/" class="article-date">
-  	<time datetime="2020-01-01T07:51:02.000Z" itemprop="datePublished">2020-01-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/01/Mysql/">
-        Mysql
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-事务"><a href="#1-事务" class="headerlink" title="1.事务"></a>1.事务</h2><p>(1) 原子性：</p>
-<p>一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</p>
-<p>(2) 一致性：</p>
-<p>在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。</p>
-<p>(3) 隔离性：</p>
-<p>数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）。</p>
-<p>(4) 持久性</p>
-<p>事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</p>
-<h2 id="2-隔离级别"><a href="#2-隔离级别" class="headerlink" title="2.隔离级别"></a>2.隔离级别</h2><table>
-<thead>
-<tr>
-<th>隔离级别</th>
-<th>脏读</th>
-<th>不可重复读</th>
-<th>幻读</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Read uncommitted</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Read committed</td>
-<td>×</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Repeatable read</td>
-<td>×</td>
-<td>×</td>
-<td>√</td>
-</tr>
-<tr>
-<td>Serializable</td>
-<td>×</td>
-<td>×</td>
-<td>×</td>
-</tr>
-</tbody></table>
-<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>当一个事务对数据进行了修改，而且修改还没有提交到数据库中，这时，另外一个事务也访问这个数据，就会读取到脏数据。</p>
-<h3 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h3><p>在同一个事务内，事务A多次读同一数据，在这个事务还没有结束时，另外一个事务B也访问该同一数据。如果在事务A两次读数据之间，事务B进行了修改，然后并提交了事务，那么事务A两次读到的的数据可能是不一样的。</p>
-<h3 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h3><p>多次读取时，数量不一致。如在事务A两次查询数据数量之间，事务B的操作修改了表中的数据总量，当事务A在B修改后读取时就会出现数据量前后不一致的情况。</p>
-<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><p>MyISAM和InnoDB，这两种引擎索引的底层数据结构都是B+树。</p>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>(1) 事务：</p>
-<p>MyISAM不支持事务，InnoDB支持事务。</p>
-<p>(2) 锁：</p>
-<p>MyISAM只有表锁，InnoDB有行锁和表锁。</p>
-<p>(3)索引</p>
-<p>MyISAM是数据和索引分离的属于非聚集索引,查询时先查询索引，索引中保存着数据在数据文件的地址，需要在数据文件中找到具体的数据，InnoDB数据和索引是一起的属于聚集索引。</p>
-<h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><p>多版本并发控制，主要思想为通过多版本来进行读写分离。在处理事务时，除了使用锁之外还结合了MVCC机制，处理并问题。InnoDB的MVCC是通过在每行记录中后面多加两个隐藏列来实现的，分别是创建时间和过期时间，存储的是系统版本号，每开启一个新事务，版本号就会递增。</p>
-<h2 id="4-锁"><a href="#4-锁" class="headerlink" title="4. 锁"></a>4. 锁</h2><p>按锁的机制可以分为共享锁和排它锁，按照锁的粒度可以分为行锁和表锁。</p>
-<h3 id="共享锁和排它锁"><a href="#共享锁和排它锁" class="headerlink" title="共享锁和排它锁"></a>共享锁和排它锁</h3><p>共享锁：当一个事务获取了一个数据行的共享锁，其他事务可以获得该行的共享锁，无法获取排它锁。即可以并发的进行读取，而无法进行增删改。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">LOCK</span> <span class="keyword">IN</span> <span class="keyword">SHARE</span> <span class="keyword">MODE</span>;</span><br></pre></td></tr></table></figure>
-
-<p>排它锁：一个事务获取了数据行的排它锁，其他事务不能获取该数据行的共享锁和排他锁。获取排他锁的事务能够读写数据，其他事务无法进行读取修改。 insert、update、delete，InnoDB 会自动给涉及的数据加排他锁，只有select 需要我们手动设置排他锁，对于一般的 select 语句，InnoDB不会加任何锁。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="行锁和表锁"><a href="#行锁和表锁" class="headerlink" title="行锁和表锁"></a>行锁和表锁</h3><p>行锁：锁表中对应的行，只限制当前行的读写。资源开销大，加锁慢；会出现<strong>死锁</strong>；锁定粒度最小，锁冲突的概率最低，并发度最高，性能高。SQL语句中必须要有索引的限制条件，比如where id=””。没有加索引限制就会变成表锁。</p>
-<p>表锁：锁的是整张表，限制整张表的读写。资源开销小，加锁快；不会出现<strong>死锁</strong>；锁定粒度大，锁冲突的概率最高，并发度最低，性能低。</p>
-<h2 id="5-索引"><a href="#5-索引" class="headerlink" title="5.索引"></a>5.索引</h2><p>使用索引可以大大的加快查询速度，但是相应的创建和维护索引需要耗费时间，除了时间外还有索引会占用更过的空间，当对数据进行增删改时候，索引也需要进行相应的变化。</p>
-<h3 id="建立原则"><a href="#建立原则" class="headerlink" title="建立原则"></a>建立原则</h3><p>需要合理的去建立索引，对于经常进行更新的表避免建立过多的索引，对于经常查询的字段可以建立索引，提高查询速度。对于区分度较低的列避免建立索引。</p>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h4 id="1-普通索引"><a href="#1-普通索引" class="headerlink" title="(1) 普通索引"></a>(1) 普通索引</h4><p>只包含单个列，没有特殊限制条件。</p>
-<h4 id="2-唯一索引"><a href="#2-唯一索引" class="headerlink" title="(2) 唯一索引"></a>(2) 唯一索引</h4><p>索引中的列可以是空值，但是必须是唯一的。</p>
-<h4 id="3-主键索引"><a href="#3-主键索引" class="headerlink" title="(3) 主键索引"></a>(3) 主键索引</h4><p>特殊的唯一索引，不允许空值。</p>
-<h4 id="4-组合索引"><a href="#4-组合索引" class="headerlink" title="(4) 组合索引"></a>(4) 组合索引</h4><p>在多个字段组合上创建的索引，当查询条件使用了组合索引的最左边的字段时，索引才会使用，使用时会遵循最左前缀原则。</p>
-<h3 id="聚簇索引与非聚簇索引"><a href="#聚簇索引与非聚簇索引" class="headerlink" title="聚簇索引与非聚簇索引"></a>聚簇索引与非聚簇索引</h3><p>聚簇索引：将数据存储与索引放到了一块，找到索引也就找到了数据,索引顺序与物理顺序一致。聚簇索引是将数据跟索引结构放到一块，因此一个表仅有一个聚簇索引，<strong>聚簇索引默认是主键</strong>，如果表中没有定义主键，InnoDB 会选择一个<strong>唯一的非空索引</strong>代替。</p>
-<p>非聚簇索引：将数据存储于索引分开结构，表数据存储顺序与索引顺序无关，索引结构的叶子节点指向了数据的对应行。</p>
-<p><strong>主键</strong></p>
-<p>推荐使用整形自增主键，首先会更容易比较大小，然后在插入新数据时，对树的整体结构调整较小，否则需要对树进行分裂等操作。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Flink数据类型" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/29/Flink%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="article-date">
-  	<time datetime="2019-12-29T03:23:08.000Z" itemprop="datePublished">2019-12-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/29/Flink%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
-        Flink数据类型
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Flink数据类型是由TypeInfomation定义，常用的TypeInfomation有BasicTypeInfo、TupleTypeInfo、CaseClassTypeInfo、PojoTypeInfo。它的主要作用是为了在Flink系统内有效的对数据结构类型进行管理。</p>
-<p><strong>数据类型</strong></p>
-<ul>
-<li><p>原生数据类型</p>
-<p>Flink通过实现BasicTypeInfo数据类型，可以支持任意的Java原生基本类型或者String类型。还有数组方式的BasicArrayTypeInfo。</p>
-</li>
-<li><p>Java Tuples类型</p>
-<p>通过定义TupleTypeInfo描述Tuple类型数据，默认支持字段数量的上线为25。</p>
-</li>
-<li><p>Scala Case Class类型</p>
-<p>通过实现CaseClassTypeInfo支持任意的Scala Case Class，包括Scala tuples类型，支持上限位22.</p>
-</li>
-<li><p>POJO类型</p>
-<p>可以完成复杂数据结构的定义，通过实现PojoTypeInfo来描述任意的POJO，包括Java和Scala类。POJO要求：</p>
-<ol>
-<li>类必须是public修饰并且独立定义，不能是内部类；</li>
-<li>必要包默认的空构造方法；</li>
-<li>所有的字段必须是public的或者是具有public修饰的getter和setter的方法。</li>
-<li></li>
-</ol>
-</li>
-<li><p>Flink Value类型</p>
-<p>Values实现了org.apache.flink.types.Value接口，包括read()和write()两个方法完成序列化和反序列化的操作，Flink内置有Value类型，如IntValue，StringValue的数据类型。</p>
-</li>
-</ul>
-<p><strong>TypeInfomation信息获取</strong></p>
-<p>通常情况下Flink可以正常进行数据类型的判断，但是某些情况下无法直接获取到，如泛型的类型擦除，使得Flink不能容易的判断数据类型。可以通过类型提示来告诉系统函数传入的参数类型信息和输出参数类型信息，使用TypeHint。对于POJO类型，使用PojoTypeInfomation创建序列化器，对于标准类型如Integer等通过Flink自带的序列化器进行序列化，对于其他的数据类型直接调用Kryo序列化工具来进行。当Kryo无法进行序列化时，可以使用Avro进行。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Flink基本介绍" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/21/Flink%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/" class="article-date">
-  	<time datetime="2019-12-21T08:27:40.000Z" itemprop="datePublished">2019-12-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/21/Flink%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/">
-        Flink基本介绍
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h1><h2 id="分层架构"><a href="#分层架构" class="headerlink" title="分层架构"></a>分层架构</h2><ul>
-<li><p>API&amp;Libraries层</p>
-<p>如DataStream API、DataSet API。</p>
-</li>
-<li><p>Runtime核心层</p>
-<p>负责对上层不同接口提供基础服务，支持分布式Stream作业的执行、JobGraph到ExecutionGraph的映射转换、任务调度等。</p>
-</li>
-<li><p>物理部署层</p>
-<p>涉及Flink的部署模式，目前支持的有：本地、集群、云、Kubernetes。</p>
-</li>
-</ul>
-<h2 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h2><p>组件之间的通信通过Akka Freamwork。</p>
-<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><h3 id="1-处理时间-Process-Time"><a href="#1-处理时间-Process-Time" class="headerlink" title="1. 处理时间(Process Time)"></a>1. 处理时间(Process Time)</h3><p>事件被处理的时间，是Operator的机器的系统时钟。</p>
-<h3 id="2-事件时间-Event-Time"><a href="#2-事件时间-Event-Time" class="headerlink" title="2. 事件时间(Event Time)"></a>2. 事件时间(Event Time)</h3><p>事件实际发生的时间，由数据源产生。</p>
-<h3 id="3-摄取时间-Ingestion-Time"><a href="#3-摄取时间-Ingestion-Time" class="headerlink" title="3. 摄取时间(Ingestion Time)"></a>3. 摄取时间(Ingestion Time)</h3><p>记录进入source被观察到的系统时间。</p>
-<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/event_ingestion_processing_time.svg" alt=""></p>
-<h2 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h2><p>将有界或者无界数据集拆分成一个个有限长度大数据区间的机制，即在数据集中增加临时的处理边界，用于将事件按照事件或者其他特征进行分组分析。</p>
-<h3 id="1-滚动窗口-Tumbling-Window"><a href="#1-滚动窗口-Tumbling-Window" class="headerlink" title="1.滚动窗口(Tumbling  Window)"></a>1.滚动窗口(Tumbling  Window)</h3><p>将时间拆分成固定长度，时间可以是事件时间或者处理时间。</p>
-<h3 id="2-滑动窗口-Sliding-Window"><a href="#2-滑动窗口-Sliding-Window" class="headerlink" title="2.滑动窗口(Sliding Window)"></a>2.滑动窗口(Sliding Window)</h3><p>按照滑动步长将时间拆分成固定的长度，当滑动步长小于时间窗口时候，相邻的窗口会有重叠。</p>
-<h3 id="3-会话窗口-Session-Window"><a href="#3-会话窗口-Session-Window" class="headerlink" title="3.会话窗口(Session Window)"></a>3.会话窗口(Session Window)</h3><p>以活动时间间隔为边界，将一些列的连续事件拆分到不同的会话中，会话窗口的长度是动态的。</p>
-<h2 id="水印"><a href="#水印" class="headerlink" title="水印"></a>水印</h2><p>水印(Watermark)是嵌入在事件时间轴上用于判断事件时间窗口内所有数据均已达到引擎的一种时间推理工具，是一种时间戳。它表示，当事件时间小于水印标记时间的事件不会再出现。</p>
-<p>watermark由数据源嵌入或者由Flink应用程序生成，可以自定义生成水印。有三种水印生成器：</p>
-<h3 id="1-周期性水印生成器"><a href="#1-周期性水印生成器" class="headerlink" title="(1) 周期性水印生成器"></a>(1) 周期性水印生成器</h3><p>根据事件或者处理时间周期性的周期性的触发水印生成器(Assigner)，两个水印时间戳之间不一定具有固定的时间间隔。</p>
-<p>默认实现有：</p>
-<p><strong>AscendingTimestampExtractor</strong></p>
-<p>产生的时间戳和水印必须是单调非递减的，对事件的时间顺序有要求，如果产生了递减的时间戳，就要处理异常。</p>
-<p><strong>BoundedOutOfOrdernessTimestampExtractor</strong></p>
-<p>产生的时间戳和水印是允许“有界乱序”的，构造它时传入的参数maxOutOfOrderness就是乱序区间的长度，而实际发射的水印为通过覆写extractTimestamp()方法提取出来的时间戳减去乱序区间，这里会保存一个currentMaxTimestamp，记录着时间最近的水印，每个新到达的元素得到的timestamp只有在大于currentMaxTimestamp时才会更新currentMaxTimestamp的当前值。</p>
-<p><strong>IngestionTimeExtractor</strong></p>
-<p>基于当前系统时钟生成时间戳和水印。</p>
-<h3 id="2-间歇性水印生成器"><a href="#2-间歇性水印生成器" class="headerlink" title="(2) 间歇性水印生成器"></a>(2) 间歇性水印生成器</h3><p>在观察到事件时间后，需要依赖于事件本身的某些属性决定是否发射水印的情况，会计算某个条件来判断是否发射水印，</p>
-<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><p>触发器(trigger)决定在窗口的什么时间点启动应用程序定义的数据处理任务。watermark迟到会拉长窗口的生存期，早到会导致数据处理结果不准确，触发器就是解决这两个问题被引入的。</p>
-<h3 id="触发机制："><a href="#触发机制：" class="headerlink" title="触发机制："></a>触发机制：</h3><h4 id="1-onElement"><a href="#1-onElement" class="headerlink" title="(1) onElement"></a>(1) onElement</h4><p>窗口每收到一个元素调用一次该方法，返回结果决定是否触发算子函数。</p>
-<h4 id="2-onProcessingTime"><a href="#2-onProcessingTime" class="headerlink" title="(2) onProcessingTime"></a>(2) onProcessingTime</h4><p>根据注册的处理时间定时器触发。</p>
-<h4 id="3-onEventTime"><a href="#3-onEventTime" class="headerlink" title="(3) onEventTime"></a>(3) onEventTime</h4><p>根据注册的事件时间定时器触发。</p>
-<h4 id="4-onMerge"><a href="#4-onMerge" class="headerlink" title="(4) onMerge"></a>(4) onMerge</h4><p>两个窗口合并时触发。</p>
-<h3 id="触发结果"><a href="#触发结果" class="headerlink" title="触发结果:"></a>触发结果:</h3><h4 id="1-忽略-CONTINUE"><a href="#1-忽略-CONTINUE" class="headerlink" title="(1) 忽略(CONTINUE)"></a>(1) 忽略(CONTINUE)</h4><h4 id="2-触发-FIRE"><a href="#2-触发-FIRE" class="headerlink" title="(2) 触发(FIRE)"></a>(2) 触发(FIRE)</h4><h4 id="3-清除-PURGE"><a href="#3-清除-PURGE" class="headerlink" title="(3) 清除(PURGE)"></a>(3) 清除(PURGE)</h4><p>清空窗口的所有元素，窗口被销毁。</p>
-<h4 id="4-触发并清除-FILRE-AND-PURGE"><a href="#4-触发并清除-FILRE-AND-PURGE" class="headerlink" title="(4) 触发并清除(FILRE_AND_PURGE)"></a>(4) 触发并清除(FILRE_AND_PURGE)</h4><p>触发窗口函数，并在函数执行结束后清空窗口所有的元素，窗口被销毁。</p>
-<h3 id="内置触发器"><a href="#内置触发器" class="headerlink" title="内置触发器"></a>内置触发器</h3><ul>
-<li>EventTimeTrigger：根据事件时间轴上的水印触发。</li>
-<li>ProcessTimeTrigger：根据处理时间触发。</li>
-<li>CounterTrigger：根据窗口内元素数据量触发。</li>
-<li>DeltaTrigger：根据某种特征是否超过指定的阈值决定是否触发。</li>
-</ul>
-<h2 id="清除器"><a href="#清除器" class="headerlink" title="清除器"></a>清除器</h2><p>在触发器触发后，窗口函数执行前或者执行后清除窗口内元素。</p>
-<h3 id="内置清除器"><a href="#内置清除器" class="headerlink" title="内置清除器"></a>内置清除器</h3><ul>
-<li>CountEvictor：保持窗口内元素数量为预定值。</li>
-<li>DeltaEvictor：根据元素之间的关系，清除超过指定阈值的元素。</li>
-<li>TimeEvictor：根据窗口元素时间戳决定清除哪些元素。</li>
-</ul>
-<h2 id="迟到生存期"><a href="#迟到生存期" class="headerlink" title="迟到生存期"></a>迟到生存期</h2><p>默认的迟到生存期为0，事件时间窗口在水印到来后结束，无需考虑迟到事件。</p>
-<h2 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h2><p>Steam有一个或者多个分区，有两种模式：</p>
-<h3 id="1-直连模式-One-to-One-模式"><a href="#1-直连模式-One-to-One-模式" class="headerlink" title="(1) 直连模式(One-to-One)模式"></a>(1) 直连模式(One-to-One)模式</h3><p>一个实例的输出是另一实例的输入，从上一个task全部输入到下一个task，没有拆分成多个分区。</p>
-<h3 id="2-分区-Redistribution-模式"><a href="#2-分区-Redistribution-模式" class="headerlink" title="(2) 分区(Redistribution)模式"></a>(2) 分区(Redistribution)模式</h3><p>一个实例的输出拆分成多个部分传输给下级实例。</p>
-<h2 id="检查点-checkPoint"><a href="#检查点-checkPoint" class="headerlink" title="检查点(checkPoint)"></a>检查点(checkPoint)</h2><p>CheckPoint可以将中间结果定期保存起来，这种定期触发保存中间结果的机制是CheckPoint。过程是JobManager定期向Taskmanager发送RPC消息，subTask将其计算的state定期保存到StateBackEnd(State存储后端)中，并且向JobManager发送是否成功。可以保证Flink集群在某个算子因为某些原因(如 异常退出)出现故障时，TaskManager中的SubTask恶意从上一次成功的CheckPoint的State恢复。</p>
-<h3 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h3><ul>
-<li>支持时空穿梭的外部数据源，如Kafka、分布式文件系统等。</li>
-<li>可持久化的外部状态存储，如分布式文件系统等。</li>
-</ul>
-<h2 id="State"><a href="#State" class="headerlink" title="State"></a>State</h2><p>flink中有状态函数和运算符在各个元素(element)/事件(event)的处理过程中存储的数据。比如在每分钟/小时/天聚合事件时，状态保存待处理的聚合。</p>
-<h2 id="exactly-once语义"><a href="#exactly-once语义" class="headerlink" title="exactly-once语义"></a>exactly-once语义</h2><h3 id="1-at-most-once"><a href="#1-at-most-once" class="headerlink" title="(1) at most once"></a>(1) at most once</h3><p>尽可能的正确，但不一定正确，系统发生故障恢复后结果可能出错。</p>
-<h3 id="2-at-least-once"><a href="#2-at-least-once" class="headerlink" title="(2) at least once"></a>(2) at least once</h3><p>系统发生故障恢复时，不会漏掉恢复之前的事件，但是可能会重复计算，适用于实时性要求高，准确性不高的场景。</p>
-<h3 id="3-exactly-once"><a href="#3-exactly-once" class="headerlink" title="(3) exactly-once"></a>(3) exactly-once</h3><p>系统发生故障恢复后，最终结果与不发生故障时是一致的。</p>
-<h2 id="数据分区"><a href="#数据分区" class="headerlink" title="数据分区"></a>数据分区</h2><p>通过合理控制传输通道中的数据分布可以达到最优的网络性能。</p>
-<h3 id="1-应用程序自定义分区-Custom-Partition"><a href="#1-应用程序自定义分区-Custom-Partition" class="headerlink" title="(1) 应用程序自定义分区(Custom Partition)"></a>(1) 应用程序自定义分区(Custom Partition)</h3><p>根据指定key的位置进行数据分区：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dateStream.partitionCustom(partitioner,<span class="string">"someKey"</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-均匀分布分区-Random-Partition"><a href="#2-均匀分布分区-Random-Partition" class="headerlink" title="(2) 均匀分布分区(Random Partition)"></a>(2) 均匀分布分区(Random Partition)</h3><p>数据会均匀的发送到下一级节点:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.shuffle()</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-负载均衡分区-Rebalance-Partition"><a href="#3-负载均衡分区-Rebalance-Partition" class="headerlink" title="(3) 负载均衡分区(Rebalance Partition)"></a>(3) 负载均衡分区(Rebalance Partition)</h3><p>根据轮训调度算法，将数据均匀的发送到下一级节点。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dateStream.rebalance()</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-可伸缩分区-Rescale-Partition"><a href="#4-可伸缩分区-Rescale-Partition" class="headerlink" title="(4) 可伸缩分区(Rescale Partition)"></a>(4) 可伸缩分区(Rescale Partition)</h3><p>根据资源使用情况动态的调整同一作业的数据分布，根据物理实例部署时的资源共享情况动态调节数据分布，尽可能的让数据在同一slot流转，减少网络开销。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.rescale()</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-广播分区-Broadcsting-Partition"><a href="#5-广播分区-Broadcsting-Partition" class="headerlink" title="(5) 广播分区(Broadcsting Partition)"></a>(5) 广播分区(Broadcsting Partition)</h3><p>每一个元素都被广播到所有下一级节点。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.broadcast()</span><br></pre></td></tr></table></figure>
-
-<h2 id="资源共享"><a href="#资源共享" class="headerlink" title="资源共享"></a>资源共享</h2><p>Flink将多个任务链接成一个任务在一个线程中执行，降低线程上下切换的开销，减小缓存容量，提高系统吞吐量的同时降低延迟。</p>
-<h3 id="1-创建链"><a href="#1-创建链" class="headerlink" title="(1) 创建链"></a>(1) 创建链</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.map(...).map(...).startNewChain().map(...)</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-关闭作业链接优化"><a href="#2-关闭作业链接优化" class="headerlink" title="(2) 关闭作业链接优化"></a>(2) 关闭作业链接优化</h3><p>任意两个算子实例不可以共享线程。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.map(...).disableChaining()</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-Slot共享组"><a href="#3-Slot共享组" class="headerlink" title="(3) Slot共享组"></a>(3) Slot共享组</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataStream.map(...).slotShardingGroup(<span class="string">"name"</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h2><p>Source和Sink节点连接诶外部数据源的组件称为连接器(Connector)。</p>
-<ul>
-<li><p>source一致性保障</p>
-<table>
-<thead>
-<tr>
-<th>Source</th>
-<th>一致性保障</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Apache Kafka</td>
-<td>exactly once</td>
-</tr>
-<tr>
-<td>AWS Kinesis Streams</td>
-<td>exactly once</td>
-</tr>
-<tr>
-<td>RabbitMQ</td>
-<td>at most once(v 0.10)/exacly once (v 1.0)</td>
-</tr>
-<tr>
-<td>Twitter Streaming API</td>
-<td>at most once</td>
-</tr>
-<tr>
-<td>Collections</td>
-<td>exactly once</td>
-</tr>
-<tr>
-<td>Files</td>
-<td>exactly once</td>
-</tr>
-<tr>
-<td>Sockets</td>
-<td>at most once</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<ul>
-<li><p>Sink一致性保障</p>
-<table>
-<thead>
-<tr>
-<th>Sink</th>
-<th>一致性保障</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>HDFS Roling Sink</td>
-<td>exactly once</td>
-</tr>
-<tr>
-<td>Elasticsearch</td>
-<td>at least once</td>
-</tr>
-<tr>
-<td>Kafka Producer</td>
-<td>at least once</td>
-</tr>
-<tr>
-<td>Cassandra Sink</td>
-<td>at least once /exactly once</td>
-</tr>
-<tr>
-<td>AWS Kinesis Streams</td>
-<td>at least once</td>
-</tr>
-<tr>
-<td>File Sink</td>
-<td>at least once</td>
-</tr>
-<tr>
-<td>Socket Sink</td>
-<td>at least once</td>
-</tr>
-<tr>
-<td>Standard Output</td>
-<td>at least once</td>
-</tr>
-<tr>
-<td>Redis Sink</td>
-<td>at least once</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<h1 id="运行时结构"><a href="#运行时结构" class="headerlink" title="运行时结构"></a>运行时结构</h1><h2 id="1-Task线程"><a href="#1-Task线程" class="headerlink" title="1. Task线程"></a>1. Task线程</h2><p>Flink中，每个<strong>Operator</strong>称为一个任务(<strong>task</strong>),Operator每个实例，每个任务在一个JVM线程中执行。多个子任务链接成一个任务，在一个线程中执行，可以降低线程上下文切换产生的开销。</p>
-<h2 id="2-Manager进程"><a href="#2-Manager进程" class="headerlink" title="2. Manager进程"></a>2. Manager进程</h2><p>(1) JobManager进程负责分布式任务管理，如任务调度、故障恢复和检查点等等。为了保证高可用可以有多个JobManager，其相当于主从架构的Master。客户端向JobManager提交任务。</p>
-<p>(2)TaskManager进程负责执行任务的线程，缓存和传输stream。</p>
-<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/processes.svg" alt=""></p>
-<h2 id="3-线程共享Slot"><a href="#3-线程共享Slot" class="headerlink" title="3. 线程共享Slot"></a>3. 线程共享Slot</h2><p>为了控制任务的执行数量，TaskManager将计算资源划分为多个Slot，每个Slot单独分享给其分配的计算资源，有利于任务间的资源隔离。</p>
-<p>TaskManager可以配置成单slot模式，这个worker在运行时就独占整个JVM进程；同一个JVM进程上的多个任务可以共享TCP连接、心跳和数据。</p>
-<p>Flink不允许不同作业的任务共享同一个slot，但是允许同一个作业的不同任务共享同一个slot。<br><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.9/fig/slot_sharing.svg" alt=""></p>
-<h1 id="作业控制"><a href="#作业控制" class="headerlink" title="作业控制"></a>作业控制</h1><p>JobManager将计算图的逻辑形式(JobGraph)编译成物理形式(ExecutionGraph)</p>
-<h2 id="JobGraph"><a href="#JobGraph" class="headerlink" title="JobGraph"></a>JobGraph</h2><p>由Operator和传输通道的数据缓存(Intermediate Data set)组成，Operator是计算图中的顶点(JobVertex),并行度控制其实例数量，处理函数(ProcessFunction)定义转换函数。</p>
-<h2 id="ExecutionGraph"><a href="#ExecutionGraph" class="headerlink" title="ExecutionGraph"></a>ExecutionGraph</h2><p>由Execution Vertex和Intermediate Result的多个分区组成，每个作业的Job Vertex都对应一个ExecutionJobVertex，一个ExecutionJobVertex 对应多个并行的Execution Vertex实例，数据缓存被拆分成多个区，即Intermediate  Result Partition。</p>
-<h1 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h1><p>分为两种：</p>
-<h2 id="1-Keyed-State"><a href="#1-Keyed-State" class="headerlink" title="1. Keyed State"></a>1. Keyed State</h2><p>定义在KeyedStream上的函数和Operator的状态，每一个Operator会有多个并行的实例，但是相同的key数据只能由同一个实例处理，因此一个Keyed状态只会对应一个Operator实例，一个Operator实例会有多个状态分区。</p>
-<h2 id="2-Non-Keyed-State"><a href="#2-Non-Keyed-State" class="headerlink" title="2. Non-Keyed State"></a>2. Non-Keyed State</h2><p>即非分区的Operator状态，Kafka连接器的每一个并行实例负责一个消息分区，对应消息消费位置就是这个连接器实例的非分区状态。</p>
-<hr>
-<p>每一类状态有两种托管方式：</p>
-<h2 id="1-托管方式"><a href="#1-托管方式" class="headerlink" title="1.托管方式"></a>1.托管方式</h2><p>这类状态的数据结构由引擎定义，Flink运行时负责序列化和写入状态后端。当并行度改变时，Flink引擎负责重新拆分到各实例上。</p>
-<p>内置托管的Keyed State：</p>
-<ul>
-<li>ValueState<T>: 状态为单值的</li>
-<li>ListState<T>:状态是多值的</li>
-<li>ReducingState<T>:Reduce函数状态</li>
-<li>AggregatingState&lt;IN,OUT&gt;:聚合函数的状态</li>
-<li>MapState&lt;UK,UV&gt;:Map函数的状态</li>
-</ul>
-<h2 id="2-非托管方式"><a href="#2-非托管方式" class="headerlink" title="2.非托管方式"></a>2.非托管方式</h2><p>由程序自定义，引擎由字节流形式写入状态后端。</p>
-<h1 id="计划执行图"><a href="#计划执行图" class="headerlink" title="计划执行图"></a>计划执行图</h1><p>可以分为四层： StreamGraph、JobGraph、ExecutionGraph、物理执行图。</p>
-<h2 id="StreamGraph"><a href="#StreamGraph" class="headerlink" title="StreamGraph"></a>StreamGraph</h2><p>根据Stream API编写的代码生成的最初始的图，用来表示程序的初始结构。</p>
-<h2 id="JobGraph-1"><a href="#JobGraph-1" class="headerlink" title="JobGraph"></a>JobGraph</h2><p>StreamGraph优化后生成JobGraph，提交给JobManager的数据结构，主要的优化为，将多个符合条件的节点链接在一起作为一个节点，可以减少数据在节点间的数据流动消耗。</p>
-<h2 id="ExecutionGraph-1"><a href="#ExecutionGraph-1" class="headerlink" title="ExecutionGraph"></a>ExecutionGraph</h2><p>JobManager根据JobGraph生成ExecutionGraph，方便和调度监控各个task的状态，是JobGraph的并行版本。</p>
-<h2 id="物理执行图"><a href="#物理执行图" class="headerlink" title="物理执行图"></a>物理执行图</h2><p>JobManager根据ExecutionGraph对Job进行调度之后，在各个TaskManager上部署Task上形成的图。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Hadoop之分布式文件系统" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/18/Hadoop%E4%B9%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="article-date">
-  	<time datetime="2019-12-18T13:45:54.000Z" itemprop="datePublished">2019-12-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/18/Hadoop%E4%B9%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
-        Hadoop之分布式文件系统
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="设计架构"><a href="#设计架构" class="headerlink" title="设计架构"></a>设计架构</h2><p>HDFS采用主从结构，一个HDFS集群包括一个名称节点和若干数据节点。名称节点作为中心服务器，负责管理文件系统的命名空间及客户端对文件的访问。数据节点在名称节点的同一调度下进行数据的创建、删除和复制等操作，同时数据节点会定时向名称节点发送“心跳”信息，报告自己的状态，如果没有发送就会被标记为“宕机”。</p>
-<p>在系统内部，会将文件切分成若干数据块，这些数据块会分布存储到若干数据节点上。当客户端访问文件时，会把文件名发送给名称节点，名称节点会根据文件名称找到对应的数据块，然后根据这些数据块信息找到实际存储于各个数据节点数据节点的位置，并将位置信息发送给客户端，客户端访问这些数据节点获取数据，命名节点并不做实际的数据传输。</p>
-<h2 id="通信协议"><a href="#通信协议" class="headerlink" title="通信协议"></a>通信协议</h2><p>HDFS的通信协议基于TCP/IP协议，客户端与数据节点通过RPC来实现。</p>
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="块"><a href="#块" class="headerlink" title="块"></a>块</h2><p>为了提升读写效率，以块为单位读写数据，这样顺序读取效率会很高，可以有较少的磁盘寻道时间。HDFS默认块的大小为64MB。</p>
-<h2 id="名称节点"><a href="#名称节点" class="headerlink" title="名称节点"></a>名称节点</h2><p>NameNode负责管理分布式文件系统的命名空间，包括两种数据结构FsImage和EditLog。</p>
-<h3 id="FsImage"><a href="#FsImage" class="headerlink" title="FsImage"></a>FsImage</h3><p>用于维护文件系统树以及文件树种所有的文件和文件夹元数据。</p>
-<h3 id="EditLog"><a href="#EditLog" class="headerlink" title="EditLog"></a>EditLog</h3><p>是操作日志文件，记录了所有的针对文件的创建、删除、命名等操作。</p>
-<h2 id="数据节点"><a href="#数据节点" class="headerlink" title="数据节点"></a>数据节点</h2><p>是HDFS的工作节点，负责数据的存储和读取，能根据客户端或者名称节点的调度来进行数据的存储和检索，同时会定期向NameNode发送自己存储块的列表。</p>
-<h1 id="错误恢复"><a href="#错误恢复" class="headerlink" title="错误恢复"></a>错误恢复</h1><h2 id="1-NameNode出错"><a href="#1-NameNode出错" class="headerlink" title="1. NameNode出错"></a>1. NameNode出错</h2><p>除了NameNode之外，还有SecondaryNameNode，NameNode的数据会同步到SecondaryNameNode，SecondaryNameNode不会处理任何请求，只作为数据备份。当NameNode的FsImage和EditLog发生损坏，可以通过SecondaryNameNode的数据进行恢复。</p>
-<h2 id="2-DataNode出错"><a href="#2-DataNode出错" class="headerlink" title="2. DataNode出错"></a>2. DataNode出错</h2><p>数据节点发生故障，或者网路出现问题时，NameNode会认为DataNode宕机，这个DataNode上的数据都会被标记为不可读，NameNdoe将不会给他发送IO请求。因为此时，副本数量会小于冗余因子，会启动冗余复制，创建新的副本。</p>
-<h2 id="3-数据出错"><a href="#3-数据出错" class="headerlink" title="3. 数据出错"></a>3. 数据出错</h2><p>客户端读取到数据时，会进行数据校验，如果出错会向另一个数据节点请求数据，同时会向NameNode节点报告有问题文件块，NameNode会重进行重新复制。</p>
-<h1 id="Yarn"><a href="#Yarn" class="headerlink" title="Yarn"></a>Yarn</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h3 id="1-ResourceManager"><a href="#1-ResourceManager" class="headerlink" title="1.ResourceManager"></a>1.ResourceManager</h3><p>​    是整个集群资源的主要协调者和管理者，他负责给用户提交的应用程序分配资源，他会结合优先级、队列容量等信息作出决策，以共享的、安全的、多租户的方式制定分配策略，调度集群资源。</p>
-<h3 id="2-NodeManager"><a href="#2-NodeManager" class="headerlink" title="2.NodeManager"></a>2.NodeManager</h3><p>​    是Yarn集群中每个具体节点的管理者，主要负责节点内所欲容器的生命周期的管理，监视资源和节点健康。具体包括向ResourceManager发送定时心跳信息；监控Container的资源使用情况；根据ApplicationMaster的需要，在启动Container之前将所需要的程序和依赖复制到本地。</p>
-<h3 id="3-ApplicationMaster"><a href="#3-ApplicationMaster" class="headerlink" title="3.ApplicationMaster"></a>3.ApplicationMaster</h3><p>​    当用户提交程序时，Yarn会启动一个ApplicationMaster进程，它负责协调来自ResourceManager的资源，并通过 NodeManager 监视容器内资源的使用情况。</p>
-<h3 id="4-Container"><a href="#4-Container" class="headerlink" title="4.Container"></a>4.Container</h3><p>​    是Yarn中的抽象资源，封装了某个节点上的多维度资源，如内存、CPU、磁盘、网络等。当 AM 向 RM 申请资源时，RM 为 AM 返回的资源是用Container表示的。YARN 会为每个任务分配一个 Container，该任务只能使用该Container 中描述的资源。</p>
-<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><ol>
-<li><code>Client</code> 提交作业到 YARN 上；</li>
-<li><code>Resource Manager</code> 选择一个 <code>Node Manager</code>，启动一个 <code>Container</code> 并运行 <code>Application Master</code> 实例；</li>
-<li><code>Application Master</code> 根据实际需要向 <code>Resource Manager</code> 请求更多的 <code>Container</code> 资源（如果作业很小, 应用管理器会选择在其自己的 JVM 中运行任务）；</li>
-<li><code>Application Master</code> 通过获取到的 <code>Container</code> 资源执行分布式计算。</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Spring-MVC详解" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/15/Spring-MVC%E8%AF%A6%E8%A7%A3/" class="article-date">
-  	<time datetime="2019-12-15T09:12:34.000Z" itemprop="datePublished">2019-12-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/Spring-MVC%E8%AF%A6%E8%A7%A3/">
-        Spring-MVC详解
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>工作过程</strong></p>
-<p>当用户请求过来时，DispatcherServlet会使用处理器映射器(HandlerMapping)根据用户的请求内容获取到对应的处理器(Handler),然后通过HandlerAdapter可以运行对应的处理器和拦截器，处理器返回模型和视图给DispatcherServlet之后，DispatcherServlet会把对应的信息传递给视图解析器（ViewResolver）。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2020 steven
       </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
-        </div>
-    </div>
-  </div>
-</footer>
-    </div>
-    
+      <a class="more" href="/2020/03/13/Hadoop%E9%83%A8%E7%BD%B2/">Read more</a>
+    </article>
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/03/06/Kafka/">Kafka</a>
+      </h2>
+      <p class="article-date">March 6, 2020</p>
+      
+        
+  <a href="/tags#Kafka" >
+    <span class="tag-code">Kafka</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          基本概念1.Message基本数据单元是message，Kafka为了提高效率会将多个消息放到一个批次中，然后批量写入。
+2.TopicKafka的数据通过Topic来进行分类，一个Topic可以分为若干个分区Partitions，一个分区对应一个提交日志，在日志中按照追加方式写入。通过分区 ...
+        
+      </div>
+      <a class="more" href="/2020/03/06/Kafka/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/02/29/Flink%E8%BF%9F%E5%88%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">Flink迟到数据处理</a>
+      </h2>
+      <p class="article-date">February 29, 2020</p>
+      
+        
+  <a href="/tags#Flink" >
+    <span class="tag-code">Flink</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          外部系统产生的数据往往不能及时、按序到达Flink系统，在Flink中有两重保障来处理乱序数据。
+1.水印机制
+通过水印机制，可以解决乱序的数据问题。每个水印都会带有一个时间戳，当水印W出现时，表示时间早于W的数据都已经到达，也是触发窗口计算的标记。在并行度大于1的任务中多个流都会产生水印， ...
+        
+      </div>
+      <a class="more" href="/2020/02/29/Flink%E8%BF%9F%E5%88%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/02/17/Flink%E9%83%A8%E7%BD%B2/">Flink部署</a>
+      </h2>
+      <p class="article-date">February 17, 2020</p>
+      
+        
+  <a href="/tags#Flink" >
+    <span class="tag-code">Flink</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          1.standlone
+是flink自带的分布式集群模式，不依赖于其他的资源调度框架。
+1234修改flink-conf.yaml文件jobmanager.rpc.address:设置jobmanager服务器地址;然后设置slave文件将taskManager服务器地址加入；将这些文件复制 ...
+        
+      </div>
+      <a class="more" href="/2020/02/17/Flink%E9%83%A8%E7%BD%B2/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/02/10/Java-AQS/">Java-AQS</a>
+      </h2>
+      <p class="article-date">February 10, 2020</p>
+      
+        
+  <a href="/tags#Java" >
+    <span class="tag-code">Java</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          AQS全称为AbstractQueuedSynchronizer是抽象队列同步器。
+原理
+如果被请求的共享资源空闲，则将当前请求资源的线程设置为有效的工作线程，并且将共享资源设置为锁定状态，这里面用volatile int state表示；如果被请求的共享资源被占用，那么就需要一套线程阻塞等 ...
+        
+      </div>
+      <a class="more" href="/2020/02/10/Java-AQS/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/01/28/Spring-%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/">Spring-循环依赖</a>
+      </h2>
+      <p class="article-date">January 28, 2020</p>
+      
+        
+  <a href="/tags#Spring" >
+    <span class="tag-code">Spring</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          产生原因
+依赖存在着多种方式比如构造方法形式的依赖，还有setField形式的依赖。spring自己可以解决循环依赖问题，可以通过延迟设置属性来实现，但是如果是两个bean都是通过构造方法来依赖对方的话spring就无法解决，会产生循环依赖的异常。
+单例初始化过程
+
+createBeanIn ...
+        
+      </div>
+      <a class="more" href="/2020/01/28/Spring-%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/01/01/Mysql/">Mysql</a>
+      </h2>
+      <p class="article-date">January 1, 2020</p>
+      
+        
+  <a href="/tags#Mysql" >
+    <span class="tag-code">Mysql</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          概述1.事务(1) 原子性：
+一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。
+(2) 一致性：
+在事务开始之前和事务结束以后，数据 ...
+        
+      </div>
+      <a class="more" href="/2020/01/01/Mysql/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/29/Flink%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Flink数据类型</a>
+      </h2>
+      <p class="article-date">December 29, 2019</p>
+      
+        
+  <a href="/tags#Flink" >
+    <span class="tag-code">Flink</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Flink数据类型是由TypeInfomation定义，常用的TypeInfomation有BasicTypeInfo、TupleTypeInfo、CaseClassTypeInfo、PojoTypeInfo。它的主要作用是为了在Flink系统内有效的对数据结构类型进行管理。
+数据类型
+
+原 ...
+        
+      </div>
+      <a class="more" href="/2019/12/29/Flink%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/21/Flink%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/">Flink基本介绍</a>
+      </h2>
+      <p class="article-date">December 21, 2019</p>
+      
+        
+  <a href="/tags#Flink" >
+    <span class="tag-code">Flink</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          基本架构分层架构
+API&amp;Libraries层
+如DataStream API、DataSet API。
+
+Runtime核心层
+负责对上层不同接口提供基础服务，支持分布式Stream作业的执行、JobGraph到ExecutionGraph的映射转换、任务调度等。
+
+物理部署层
+涉 ...
+        
+      </div>
+      <a class="more" href="/2019/12/21/Flink%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/18/Hadoop%E4%B9%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">Hadoop之分布式文件系统</a>
+      </h2>
+      <p class="article-date">December 18, 2019</p>
+      
+        
+  <a href="/tags#Hadoop" >
+    <span class="tag-code">Hadoop</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          概述设计架构HDFS采用主从结构，一个HDFS集群包括一个名称节点和若干数据节点。名称节点作为中心服务器，负责管理文件系统的命名空间及客户端对文件的访问。数据节点在名称节点的同一调度下进行数据的创建、删除和复制等操作，同时数据节点会定时向名称节点发送“心跳”信息，报告自己的状态，如果没有发送 ...
+        
+      </div>
+      <a class="more" href="/2019/12/18/Hadoop%E4%B9%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a class="unvisible" href="/"><span class="page-arrow">←</span> Prev</a>
+  
+  
+    <a href="/page/2/">Next<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
 
 
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
 
 <script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
 </script>
 
-<script src="/js/main.js"></script>
-
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
 </script>
+<!-- Baidu Tongji -->
 
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 
+<script src="/js/script.js"></script>
 
-  </div>
-</body>
+  </body>
 </html>

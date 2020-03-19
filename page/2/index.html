@@ -1,1070 +1,428 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
   
-  <title>steven&#39;s blog</title>
-
-  <!-- keywords -->
+    <link rel="shortcut icon" href="/css/images/logo.png">
   
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="steven&#39;s blog">
-<meta property="og:url" content="stone-steven.github.io/page/2/index.html">
-<meta property="og:site_name" content="steven&#39;s blog">
-<meta property="article:author" content="steven">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternative" href="/atom.xml" title="steven&#39;s blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
-  
+  <title>
+    
+      steven&#39;s blog
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
   
 <link rel="stylesheet" href="/css/style.css">
 
   
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
   
+    
+<script src="/js/qrious.js"></script>
 
   
-<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-
   
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
 
 
   
 <meta name="generator" content="Hexo 4.2.0"></head>
-<body>
-  <div id="container">
-    <div id="particles-js"></div>
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
-			
-		</a>
-
-		<hgroup>
-		  <h1 class="header-author"><a href="/">steven</a></h1>
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Flink/" style="font-size: 13.33px;">Flink</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/elasticsearch/" style="font-size: 13.33px;">elasticsearch</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9E%84/" style="font-size: 10px;">对象结构</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">面向对象</a>
-					</div>
-				</section>
-				
-				
-				
-
-				
-			</div>
-		</div>
-	</header>				
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
 </div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>steven's blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
     </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">steven</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="https://s2.ax1x.com/2019/12/01/Qef6kq.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author">steven</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-      <div class="body-wrap">
-  
-    <article id="post-Java-ReentrantLock原理" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/15/Java-ReentrantLock%E5%8E%9F%E7%90%86/" class="article-date">
-  	<time datetime="2019-12-15T02:58:50.000Z" itemprop="datePublished">2019-12-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="menu-mask">
+      <ul class="menu-list">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/15/Java-ReentrantLock%E5%8E%9F%E7%90%86/">
-        Java-ReentrantLock原理
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
         
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h1><p>ReentrantLock 是可重入的独占锁， 同时只能有一个线程可以获取该锁，其他获取该锁 的线程会被阻塞而被放入该锁的 AQS 阻塞队列里面。该锁可以设置为公平锁和非公平锁两种，锁使用的是Sync类，该类继承自AQS，在这里AQS的state表示表示线程进入该锁的可重入次数。在默认情况下，state为0，在线程第一次获取该锁的时候回变为1，同样的线程获取第二次的时候会增加为2，释放时候会减1，以此类推。</p>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="void-lock"><a href="#void-lock" class="headerlink" title="void lock()"></a>void lock()</h2><p>​    获取时，如果该锁没有被其他线程占用并且当前线程没有获取过该锁，则当前线程可以获取该锁，并且将AQS状态置为1，然后直接返回。如果之前获取过，则AQS的state加1返回，如果已经被其他线程持有，则会将调用该方法的线程放入AQS的阻塞队列，然后挂起。</p>
-<h3 id="源码实现"><a href="#源码实现" class="headerlink" title="源码实现"></a>源码实现</h3><p>(JDK11)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="comment">//使用AQS的acquire方法</span></span><br><span class="line">        sync.acquire(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">acquire</span><span class="params">(<span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//ReentrantLock重写的tryAcquire(int aquires)方法</span></span><br><span class="line">        <span class="keyword">if</span> (!tryAcquire(arg) &amp;&amp;</span><br><span class="line">            acquireQueued(addWaiter(Node.EXCLUSIVE), arg))</span><br><span class="line">            selfInterrupt();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">acquireQueued</span><span class="params">(<span class="keyword">final</span> Node node, <span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> interrupted = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">                <span class="keyword">final</span> Node p = node.predecessor();</span><br><span class="line">                <span class="keyword">if</span> (p == head &amp;&amp; tryAcquire(arg)) &#123;</span><br><span class="line">                    setHead(node);</span><br><span class="line">                    p.next = <span class="keyword">null</span>; <span class="comment">// help GC</span></span><br><span class="line">                    <span class="keyword">return</span> interrupted;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (shouldParkAfterFailedAcquire(p, node))</span><br><span class="line">                    interrupted |= parkAndCheckInterrupt();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">            cancelAcquire(node);</span><br><span class="line">            <span class="keyword">if</span> (interrupted)</span><br><span class="line">                selfInterrupt();</span><br><span class="line">            <span class="keyword">throw</span> t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">int</span> acquires)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> nonfairTryAcquire(acquires);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selfInterrupt</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread.currentThread().interrupt();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">nonfairTryAcquire</span><span class="params">(<span class="keyword">int</span> acquires)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">final</span> Thread current = Thread.currentThread();</span><br><span class="line">            <span class="keyword">int</span> c = getState();</span><br><span class="line">    		<span class="comment">//如果当前的AQS state为0</span></span><br><span class="line">            <span class="keyword">if</span> (c == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">//尝试CAS获取该锁，将AQS设置为1，同时将该锁的持有者设置为当前线程，并返回</span></span><br><span class="line">                <span class="keyword">if</span> (compareAndSetState(<span class="number">0</span>, acquires)) &#123;</span><br><span class="line">                    setExclusiveOwnerThread(current);</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    		<span class="comment">//当前线程是持有者</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (current == getExclusiveOwnerThread()) &#123;</span><br><span class="line">                <span class="keyword">int</span> nextc = c + acquires;</span><br><span class="line">                <span class="keyword">if</span> (nextc &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">"Maximum lock count exceeded"</span>);</span><br><span class="line">                setState(nextc);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="void-lockInterruptibly"><a href="#void-lockInterruptibly" class="headerlink" title="void lockInterruptibly()"></a>void lockInterruptibly()</h2><p>该方法与 lock()方法类似，它的不同在于，它对中断进行响应，就是当前线程调用该方法时，如果其他线程调用了当前线程的interrupt()方法， 则当前线程会抛出 InterruptedException 异常， 然后返回。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lockInterruptibly</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        sync.acquireInterruptibly(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">acquireInterruptibly</span><span class="params">(<span class="keyword">int</span> arg)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (Thread.interrupted())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> InterruptedException();</span><br><span class="line">        <span class="keyword">if</span> (!tryAcquire(arg))</span><br><span class="line">            doAcquireInterruptibly(arg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="boolean-trylock"><a href="#boolean-trylock" class="headerlink" title="boolean trylock()"></a>boolean trylock()</h2><p>尝试获取锁，如果当前该锁没有被其他线程持有，则当前线程获取该锁井返回 true, 否则返回 false.该方法不会引起线程阻塞。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sync.nonfairTryAcquire(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="void-unlock"><a href="#void-unlock" class="headerlink" title="void unlock()"></a>void unlock()</h2><p>尝试释放锁，如果当前线程持有该锁， 则调用该方法会让该线程对该线程持有的 AQS状态值减 1， 如果减去1后当前状态值为 0，则当前线程会释放该锁， 否则只减1，不会释放锁。 如果当前线程没有持有该锁而调用了该方法则会抛出 Illega!MonitorStateException异常。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    sync.release(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">release</span><span class="params">(<span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (tryRelease(arg)) &#123;</span><br><span class="line">        Node h = head;</span><br><span class="line">        <span class="keyword">if</span> (h != <span class="keyword">null</span> &amp;&amp; h.waitStatus != <span class="number">0</span>)</span><br><span class="line">            unparkSuccessor(h);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">tryRelease</span><span class="params">(<span class="keyword">int</span> releases)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//AQS state减1 </span></span><br><span class="line">    <span class="keyword">int</span> c = getState() - releases;</span><br><span class="line">    <span class="comment">//如果该线程不是锁的持有者则抛出异常</span></span><br><span class="line">    <span class="keyword">if</span> (Thread.currentThread() != getExclusiveOwnerThread())</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalMonitorStateException();</span><br><span class="line">    <span class="keyword">boolean</span> free = <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">//如果state为0，清空持有线程</span></span><br><span class="line">    <span class="keyword">if</span> (c == <span class="number">0</span>) &#123;</span><br><span class="line">        free = <span class="keyword">true</span>;</span><br><span class="line">        setExclusiveOwnerThread(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    setState(c);</span><br><span class="line">    <span class="keyword">return</span> free;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+      </ul>
     </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
   </div>
+</header>
+
+    <main class="app-body">
   
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Java-LockSupport" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/14/Java-LockSupport/" class="article-date">
-  	<time datetime="2019-12-14T13:14:17.000Z" itemprop="datePublished">2019-12-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/15/Spring-MVC%E8%AF%A6%E8%A7%A3/">Spring-MVC详解</a>
+      </h2>
+      <p class="article-date">December 15, 2019</p>
+      
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/14/Java-LockSupport/">
-        Java-LockSupport
+  <a href="/tags#Spring" >
+    <span class="tag-code">Spring</span>
+  </a>
+
+      
+      <div class="article-summary">
         
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>LockSupport 是个工具类，它的主要作用是挂起和唤醒线程， 该工具类是创建锁和其他同步类的基础。 LockSupport类与每个使用它的线程都会关联一个许可证，在默认情况下调用LockSupport 类的方法的线程是不持有许可证的，LockSupport 是使用Unsafe类实现的。</p>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="park"><a href="#park" class="headerlink" title="park()"></a>park()</h2><p>​    如果调用 park 方法的线程已经拿到了与 LockSupport 关联的许可证，则调用Locksupport. park()时会马上返回，否则调用线程会被禁止参与线程的调度，也就是会被阻塞挂起。在其他线程调用 unpark(Thread thread）方法并且将当前线程作为参数时，调用park方法而被阻塞的线程会返回。另外，如果其他线程调用了阻塞线程的interrupt()方法，设置了中断标志或者线程被虚假唤醒，则阻塞线程也会返回。所以在调用park方法时最好也使用循环条件判断方式。调用 park() 方法而被阻塞的线程被其他线程中断而返回时并不会抛出InterruptedException 异常。</p>
-<h2 id="void-unpark-Thread-thread）"><a href="#void-unpark-Thread-thread）" class="headerlink" title="void unpark(Thread thread）"></a>void unpark(Thread thread）</h2><p>​    如果thread之前因调用 park()而被挂起，则调用unpark后，该线程会被唤醒。 如果thread之前没有调用park，则调用 unpark 方法后， 再调用park方法，其会立刻返回。</p>
-<h1 id="与wait-notify-notifyAll-区别"><a href="#与wait-notify-notifyAll-区别" class="headerlink" title="与wait() notify/notifyAll()区别"></a>与wait() notify/notifyAll()区别</h1><p>二者十分相似，不同之处在于必须能保证wait方法比notify方法先执行。如果notify方法比wait方法晚执行的话，就会导致因wait方法进入休眠的线程接收不到唤醒通知的问题。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Java-ThreadLocalRandom" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/14/Java-ThreadLocalRandom/" class="article-date">
-  	<time datetime="2019-12-14T08:36:31.000Z" itemprop="datePublished">2019-12-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          工作过程
+当用户请求过来时，DispatcherServlet会使用处理器映射器(HandlerMapping)根据用户的请求内容获取到对应的处理器(Handler),然后通过HandlerAdapter可以运行对应的处理器和拦截器，处理器返回模型和视图给DispatcherServlet之 ...
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/14/Java-ThreadLocalRandom/">
-        Java-ThreadLocalRandom
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>Random生成随机数</strong></p>
-<p>需要根据老的种子来生成新的种子，然后根据新的种子来生成随机数，但是在多线程条件下可能会有多个线程使用一个老的种子来更新，为了保证原子性，在第一个线程生成新的种子后，第二个线程需要丢弃自己的老种子来使用第一个线程的新种子，后续的线程也是。在多个线程拿到新的种子去更新老的种子时，使用CAS方式更新，这时只有一个线程能够用获取到，其他线程需要通过循环来获取，这样就会有大量的自旋重试，会降低并发性。</p>
-<p><strong>ThreadLocalRandom</strong></p>
-<p>随后ThreadLocalRandom进行了改进，它并没有使用继承自Random的原子性种子变量，具体的种子放在了调用线程的threadLocalRandomSeed变量中，这样在进行更新时，根据自己线程中维护的种子，不会产生多线程竞争原子变量问题。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Java-线程中断" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/14/Java-%E7%BA%BF%E7%A8%8B%E4%B8%AD%E6%96%AD/" class="article-date">
-  	<time datetime="2019-12-14T01:21:22.000Z" itemprop="datePublished">2019-12-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/14/Java-%E7%BA%BF%E7%A8%8B%E4%B8%AD%E6%96%AD/">
-        Java-线程中断
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>线程中断</strong></p>
-<p>线程中断是一种线程间的学协作方式，设置中断并不能直接终止该线程的执行，而是被中断的线程根据中断状态自行处理。</p>
-<p><strong>方法</strong></p>
-<ol>
-<li><p>void interrupt()</p>
-<p>中断线程，这里只是将被调用线程的中断标志置为true，并立即返回。如果被调用线程调用了wait、join或者sleep方法而被阻塞挂起，在另一个线程使用interrupt去中断它时，被调用线程会抛出InterruptException异常返回。</p>
-</li>
-<li><p>boolean interrupted()</p>
-<p>检测<strong>当前线程</strong>是否被中断，如果是返回true，否则返回false。注意这里的当前线程，是调用当前线程的中断标志而不是调用interrupted()方法实例的中断标志,如果是主线程去调用子线程的interrupted，判断的是主线程的中断状态。</p>
-</li>
-<li><p>boolean isInterrupted()</p>
-<p>检测<strong>当前线程</strong>是否被中断，如果是返回true，同时会清楚中断标志；否则返回false。</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">publ ic <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123; </span><br><span class="line">    Thread thr ead= <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">	<span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (Thread.currentThread().isInterrupted()) &#123;</span><br><span class="line">            System.out.println(Thread.currentThread() + <span class="string">"hi LXL"</span>); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;); </span><br><span class="line">    thread.start();</span><br><span class="line">    Thread.sleep(lOOO);</span><br><span class="line">    System.out.println(<span class="string">"main thread interrupt thread"</span>); </span><br><span class="line">    thread.interrupt();</span><br><span class="line">    thread.join(); </span><br><span class="line">    System.out.println( <span class="string">"main is over"</span>);</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Java-线程池" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/09/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="article-date">
-  	<time datetime="2019-12-09T09:53:15.000Z" itemprop="datePublished">2019-12-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/09/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
-        Java-线程池
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><p>每次创建新的线程时，需要开辟新的虚拟机栈、本地方法栈、程序计数器等私有空间，在线程销毁时候也要释放这些资源，如果进行频繁的创建和销毁会消耗大量的系统资源。使用线程池可以:</p>
-<ul>
-<li><p>管理和复用线程，控制最大并发度</p>
-</li>
-<li><p>实现任务队列的缓存和拒绝机制</p>
-</li>
-<li><p>实现与某些时间相关的功能，如定时任务等等</p>
-</li>
-<li><p>隔离线程执行环境，可以按照类别划分不同的线程池，避免多种任务之间相互影响。</p>
-</li>
-</ul>
-<h1 id="ThreadPoolExcutor"><a href="#ThreadPoolExcutor" class="headerlink" title="ThreadPoolExcutor"></a>ThreadPoolExcutor</h1><h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                          RejectedExecutionHandler handler)</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>corePoolSize</p>
-<p>核心线程数，当设置为0时，当任务执行结束之后会销毁，当大于0时，核心线程不会被销毁。</p>
-</li>
-<li><p>maximumPoolSize</p>
-<p>线程池可以容纳的最大的线程数，最多允许这么多线程并行执行，当请求线程超过部分将会放到缓存队列中。</p>
-</li>
-<li><p>keepAliveTime</p>
-<p>表示线程的空闲时间，当线程的空闲时间达到这个值时，线程将会被销毁，只保留corePoolSize个线程。</p>
-</li>
-<li><p>unit</p>
-<p>用来表示keepAliveTime的时间单位。</p>
-</li>
-<li><p>workQueue</p>
-<p>表示缓存队列，当请求的线程数超过maximumPoolSize时，将会放到这个队列中。</p>
-</li>
-<li><p>threadFactory</p>
-<p>表示线程工厂，用来创建线程。</p>
-</li>
-<li><p>handler</p>
-<p>表示拒绝策略，当workQueue超过缓存上线时，会通过该策略处理请求。ThreadPoolExecutor提供的策略有：</p>
-<p>(1)  ThreadPoolExecutor.AbortPolicy 默认的处理方式，抛出异常</p>
-<p>(2)  ThreadPoolExecutor.DiscardPolicy 忽略新任务，不抛出异常</p>
-<p>(3)  ThreadPoolExecutor.DiscardOldestPolicy 将等待时间最长的任务扔掉，然后自己排队</p>
-<p>(4)  ThreadPoolExecutor.CallerRunsPolicy 在任务提交者线程中执行</p>
-</li>
-</ul>
-<h2 id="相关字段"><a href="#相关字段" class="headerlink" title="相关字段"></a>相关字段</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> COUNT_BITS ＝ Integer.SIZE - <span class="number">3</span> ;</span><br></pre></td></tr></table></figure>
-
-<p>​    最左边3位表示线程池状态，右边的29位表示工作线程数。线程池状态分别为：    </p>
-<p>​    (1) RUNNING</p>
-<p>​        线程池在被刚创建时处于RUNNING状态，能够接收新任务，以及对已添加的任务进行处理。 </p>
-<p>​    (2) SHUTDOWN</p>
-<p>​         当调用线程池的 shutdown()方法，不接收新任务，但能处理已添加的任务。</p>
-<p>​    (3) STOP</p>
-<p>​        调用线程池的 shutdownNow()方法，不接受新任务，不处理已经接受的任务，并且会中断已经处理的任务。</p>
-<p>​    (4) TIDYING</p>
-<p>​        当线程池在SHUTDOWN状态下，阻塞队列为空并且线程池中执行的任务也为空时，就会从SHUTDOWN状态转为        TIDYING； 当线程池在STOP状态下，线程池中执行的任务为空时，就会由STOP转为TIDYING状态。当记录的任        务数量为0时，会执行 terminated() 方法。</p>
-<p>​    (5) TERMINATED</p>
-<p>​         TIDYING状态时，执行完terminated()之后,就会转为TERMINATED，此时线程池彻底终止。</p>
-<h2 id="线程池创建工具类Executors"><a href="#线程池创建工具类Executors" class="headerlink" title="线程池创建工具类Executors"></a>线程池创建工具类Executors</h2><ol>
-<li><p>Executors.newCachedThreadPool</p>
-<p>maximumPoolSize为Integer.MAX_VALUE,keepAliveTime为60s， 新任务到来时，如果正好有空闲线程在等待任务，就直接执行，否则就新建立一个线程，创建的线程个数不受限制，任何空闲线程如果60秒之内空闲将会终止。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</span><br><span class="line">                                      <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                      <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>Executors.newSingleThreadExecutor </p>
-<p>只使用一个线程，使用无界队列，适用于所有的任务需要顺序执行的场合。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService</span><br><span class="line">            (<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>,</span><br><span class="line">                                    <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                    <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="3">
-<li><p>Executors.newFixedThreadPool</p>
-<p> 使用固定数目的n个线程，使用无界队列。</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                      <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                      <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="4">
-<li><p>Executors.newScheduledThreadPool</p>
-<p>maximumPoolSize为Integer.MAX_VALUE,可以创建定时任务。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ScheduledExecutorService <span class="title">newScheduledThreadPool</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ScheduledThreadPoolExecutor(corePoolSize);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Redis集群介绍" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/06/Redis%E9%9B%86%E7%BE%A4%E4%BB%8B%E7%BB%8D/" class="article-date">
-  	<time datetime="2019-12-06T13:22:06.000Z" itemprop="datePublished">2019-12-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/06/Redis%E9%9B%86%E7%BE%A4%E4%BB%8B%E7%BB%8D/">
-        Redis集群介绍
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="单机模式"><a href="#单机模式" class="headerlink" title="单机模式"></a>单机模式</h1><p>​    单机模式的局限性：</p>
-<ol>
-<li><p>单点故障问题</p>
-<p>如果仅有的一台Redis服务器发生宕机，将导致缓存服务不可用，引发一系列的问题。</p>
-</li>
-<li><p>容量问题</p>
-<p>Redis是基于内存存储的数据库，对内存容量较高，单台的内存存在一定的瓶颈。</p>
-</li>
-<li><p>性能问题</p>
-<p>虽然Redis有可以达到较高的QPS，但是遇到高并发情况，还是会出现性能不足情况。</p>
-</li>
-</ol>
-<h1 id="集群模式"><a href="#集群模式" class="headerlink" title="集群模式"></a>集群模式</h1><h2 id="主从模式"><a href="#主从模式" class="headerlink" title="主从模式"></a>主从模式</h2><p>​    选定其中一台Redis服务器作为主服务器，若干台服务器作为从服务器。</p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
-<li>Master节点可以进行读写操作，写操作会同步给Slave节点，Slave节点是只读的。</li>
-<li>Master节点可以有多个Slave节点，一台Slave节点只能对应一台Master节点。</li>
-<li>如果有一台Slave节点发生宕机，其他节点不会受到影响，可以继续提供服务，当这台Slave节点重启后可以从Master同步数据，然后继续服务。</li>
-<li>如果Master节点发生宕机，因为这种模式下只有一台Master所以，此时集群中只有Slave节点，只能提供读的能力。</li>
-</ul>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>​    同步数据分为全量同步和增量同步两种。</p>
-<h4 id="全量同步"><a href="#全量同步" class="headerlink" title="全量同步"></a>全量同步</h4><ul>
-<li><p>Slave节点连接Master节点，发送SYNC命令。</p>
-</li>
-<li><p>Master节点收到SYNC命令后，执行BGSAVE命令生成RDB文件，并且会在缓冲区记录此操作之后的所有的写命令。</p>
-</li>
-<li><p>当Master节点执行完BGSAVE命令后，会所有的服务器发送RDB文件，同时写命令继续记录。</p>
-</li>
-<li><p>当Slave节点接收到来自于Master节点的RDB文件后，会丢弃所有的旧数据，读取RDB文件载入新数据。</p>
-</li>
-<li><p>随后Master节点向Slave节点发送缓冲区缓冲的写操作数据。</p>
-</li>
-<li><p>Slave节点接受来自Master节点的缓冲区的写操作的数据，至此全量数据同步完成。</p>
-</li>
-</ul>
-<h4 id="增量同步"><a href="#增量同步" class="headerlink" title="增量同步"></a>增量同步</h4><ul>
-<li>Master接收到写请求，然后将写命令发送到Slave节点。</li>
-<li>Slave节点接收到来自Master节点的命令，更新数据。</li>
-</ul>
-<h2 id="哨兵-Sentinel-模式"><a href="#哨兵-Sentinel-模式" class="headerlink" title="哨兵(Sentinel)模式"></a>哨兵(Sentinel)模式</h2><p>​    主从模式在Master节点宕机后会导致无法提供写服务，只能通过人工干预将Slave节点提升为Master节点，同时应用端也需要更新Master节点的地址，这种方式无法快速处理问题，将会导致一段时间内服务中断。</p>
-<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
-<li>这种模式是建立在主从模式上的，不同的是当Master节点，哨兵节点会从Slave节点中选择一个节点作为新的Master节点，并会修改配置文件，使得其它的Slave节点指向新的Master节点。</li>
-<li>如果重启宕机的Master节点后，这个节点将会作为Slave节点。</li>
-<li>哨兵节点是一个特殊的节点，它不存储数据。</li>
-</ul>
-<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><ul>
-<li><p>每隔10秒哨兵节点会向Master节点和Slave节点发送info命令获取最新的拓扑结构。</p>
-</li>
-<li><p>每隔1秒钟，每个哨兵节点会向Master和Slave节点以及其他哨兵节点发送ping命令做心跳检测，判断是否存在不可达节点。</p>
-</li>
-<li><p>如果某个哨兵节点向一个节点发出的心跳检测没有得到响应，那么就认为该节点已下线，也叫哨兵主观下线。</p>
-</li>
-<li><p>当哨兵主观下线的节点是Master节点时，哨兵会询问其他哨兵对该节点的判断，当判断超过一定个数时，哨兵就会确认确实已经下线，就会对Master节点进行客观下线的判定。</p>
-</li>
-<li><p>当Master客观下线时，各个哨兵节点会进行协商，选出领导者哨兵节点，这个领导者哨兵会从Slave节点选择一个节点作为Master节点，优先选择与主节点复制相似度最高的节点，然后将其余的Slave节点指向新的Master节点。如果原来的Slave节点重启后，将会作为新的Slave节点，并从Master节点同步数据。</p>
-</li>
-<li><p>当使用哨兵模式时，客户端连接哨兵节点。</p>
-</li>
-</ul>
-<h2 id="Cluster模式"><a href="#Cluster模式" class="headerlink" title="Cluster模式"></a>Cluster模式</h2><p>​    哨兵模式实现了Master节点的自动故障转移，但是没有实现Slave节点的自动故障转移。</p>
-<h3 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h3><ul>
-<li><p>所有的节点都是主从模式，Slave不提供服务，只用作备用。</p>
-</li>
-<li><p>不支持同时处理多个key，因为需要分发到多个节点上。</p>
-</li>
-<li><p>支持在线增加删除节点。</p>
-</li>
-<li><p>客户端可以连接任何一台Master节点。</p>
-</li>
-</ul>
-<h3 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h3><ul>
-<li>Redis集群有16384个hash slot，对每个key计算CRC16值，然后对16384取模，可以获取key对应的hash slot，每个master都会有部分slot。</li>
-<li>集群中的每个节点定期向其他节点发送ping请求，如果一段时间内一直通信失败，则发送ping请求记得点认为接受节点存在故障，把其标记为主观下线，并且节点状态会在集群中传播，如果所的节点都标记其主观下线，那么该节点就是客观下线，并通知该节点的Slave节点进行故障转移。</li>
-<li>当某个节点客观下线后，该节点的从节点开始故障转移流程，首先进行资格检查，每个从节点检查与主节点的断开时间，查过一定时间的取消选举资格，然后同样在所有的从节点寻找复制偏移量最大的节点开始进行选举，只有持有slot的Master节点才有投票权，当Slave节点收集到过半的票数时，晋升为Master节点，并通知其他的Slave节点将Master更新为自己。</li>
-</ul>
-<p>​        </p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Spring-AOP" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/04/Spring-AOP/" class="article-date">
-  	<time datetime="2019-12-04T14:27:12.000Z" itemprop="datePublished">2019-12-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/Spring-AOP/">
-        Spring-AOP
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ol>
-<li><p>连接点：<br>是程序执行过程的某一行为，如方法调用。连接点就是AOP向目标类打入楔子的候选锚点。连接点由方法表示的程序的执行点和用相对位置表示方法位置。</p>
-</li>
-<li><p>切入点：<br>在使用连接点时，所有通知所匹配的连接点由切入点表达式确定。</p>
-</li>
-<li><p>通知：</p>
-<p>在特定连接点执行的代码就是通知。通知类型有：</p>
-<p>(1)  前置通知：</p>
-<p>​    在某个连接点之前执行的通知。</p>
-<p>(2) 后置通知:</p>
-<p>​    在某个连接点退出时执行。</p>
-<p>(3) 返回后通知:</p>
-<p>​    在某个连接点正常完成执行后的通知。</p>
-<p> (4) 环绕通知:</p>
-<p>​    包围一个连接点的通知，可以在方法的调用前后定义行为。</p>
-<p> (5) 异常通知:</p>
-<p>​    在方法抛出异常导致退出时候执行的通知。</p>
-</li>
-<li><p>目标对象</p>
-<p>由AOP操作的具体目标对象。</p>
-</li>
-<li><p>切面：<br>由通知和切入点组成。</p>
-</li>
-</ol>
-<h2 id="AOP类型"><a href="#AOP类型" class="headerlink" title="AOP类型"></a>AOP类型</h2><p>​    有静态AOP和动态AOP两种；</p>
-<h3 id="静态AOP"><a href="#静态AOP" class="headerlink" title="静态AOP"></a>静态AOP</h3><p>​    AspectJ为静态的AOP方式，横切逻辑在编译时应用于代码。，如果要修改逻辑，必须要修改代码并重新编译。</p>
-<h3 id="动态AOP"><a href="#动态AOP" class="headerlink" title="动态AOP"></a>动态AOP</h3><p>​    Spring AOP为动态AOP，横切逻辑在运行时动态运用，可以通过更改AOP配置而无需重新编译应用程序。</p>
-<h2 id="Spring代理方式"><a href="#Spring代理方式" class="headerlink" title="Spring代理方式"></a>Spring代理方式</h2><p>​    支持JDK动态代理和CGLib代理，默认情况下目标对象实现了接口时，使用JDK动态代理，如果没有使用CGLib代理。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Spring-Bean的生命周期" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/02/Spring-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="article-date">
-  	<time datetime="2019-12-02T09:13:52.000Z" itemprop="datePublished">2019-12-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/Spring-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-        Spring-Bean的生命周期
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://s2.ax1x.com/2019/12/02/QumpdK.png" alt="QumpdK.png"></p>
-<h1 id="Bean的创建及初始化"><a href="#Bean的创建及初始化" class="headerlink" title="Bean的创建及初始化"></a>Bean的创建及初始化</h1><h2 id="顺序"><a href="#顺序" class="headerlink" title="顺序"></a>顺序</h2><ol>
-<li>调用构造方法创建bean</li>
-<li>注入依赖项</li>
-<li>如果有@PostConstruct 注解，则调用这个注解标注的方法</li>
-<li>如果BeanFactory设置了提供的所有Bean属性并且满足 BeanFactoryAware 和 ApplicationContextAware，将会调用 afterPropertiesSet()方法.</li>
-<li>最后，如果有initMethod声明，则调用initMethod声明的方法。</li>
-</ol>
-<h2 id="初始化实现方式"><a href="#初始化实现方式" class="headerlink" title="初始化实现方式"></a>初始化实现方式</h2><h3 id="使用-PostConstruct-注解"><a href="#使用-PostConstruct-注解" class="headerlink" title="使用@PostConstruct 注解"></a>使用@PostConstruct 注解</h3><p>​    只需要在bean的初始化方法上加上这个注解即可。</p>
-<h3 id="实现InitializingBean接口"><a href="#实现InitializingBean接口" class="headerlink" title="实现InitializingBean接口"></a>实现InitializingBean接口</h3><p>​    接口允许在bean代码中定义希望bean接收的Spring己经完成配置的通知。接口可以创造机会来检查bean配置以确保它是有效的，并提 供任何默认值。 InitializingBean 接口定义了一个方法，即afterPropertiesSet()。</p>
-<h3 id="Bean方式声明initMethod"><a href="#Bean方式声明initMethod" class="headerlink" title="@Bean方式声明initMethod"></a>@Bean方式声明initMethod</h3><p>​    声明初始化方法的另一种方法是指定＠Bean 注解的 initMeth创 属性，并将初始化方法的名称设置为它的值。 该注解用于在 Java 配置类中声明 bean。</p>
-<h1 id="Bean的销毁"><a href="#Bean的销毁" class="headerlink" title="Bean的销毁"></a>Bean的销毁</h1><h2 id="顺序-1"><a href="#顺序-1" class="headerlink" title="顺序"></a>顺序</h2><pre><code>1. 调用@PreDestroy注解声明的方法。
-2. 调用DisposableBean接口声明的destroy方法。
-3. 调用destroy-method声明的方法。</code></pre><h2 id="销毁的实现方式"><a href="#销毁的实现方式" class="headerlink" title="销毁的实现方式"></a>销毁的实现方式</h2><h3 id="PreDestroy-注解"><a href="#PreDestroy-注解" class="headerlink" title="@PreDestroy 注解"></a>@PreDestroy 注解</h3><p>​    在需要销毁的方法上加上这个注解。</p>
-<h3 id="实现DisposableBean接口"><a href="#实现DisposableBean接口" class="headerlink" title="实现DisposableBean接口"></a>实现DisposableBean接口</h3><p>​    实现该接口可以作为销毁回调的机制，它定义了一个destroy方法，该方法在销毁之前调用。</p>
-<h3 id="声明destroy-method"><a href="#声明destroy-method" class="headerlink" title="声明destroy-method"></a>声明destroy-method</h3><p>​    可在Bean上面类似于initMethod方式一样声明destroy-method。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Spring-自动装配方式" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/02/Spring-%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%96%B9%E5%BC%8F/" class="article-date">
-  	<time datetime="2019-12-02T08:44:57.000Z" itemprop="datePublished">2019-12-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/Spring-%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%96%B9%E5%BC%8F/">
-        Spring-自动装配方式
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>byName</strong></p>
-<p>​    当使用 byName模式进行自动装配时， Spring会尝i制每每个属性连接到同名的bean。因此， 如果目标 bean具有名为 property的属性并且在 ApplicationContext中定义了名字为property的bean， 那么 property bean将被分配给目标bean的 property 属性。</p>
-<p><strong>byType</strong></p>
-<p>​    当使用byType 进行自动装配时， Spring通过在ApplicationContext中自动使用相同类型的bean来尝试连接目标bean模式的每个属性。</p>
-<p><strong>构造函数</strong></p>
-<p>​    与 byType 模式在功能上是相同的， 只不过使用的是构造函数而不是setter来执行注 入。 Spring试图匹配构造函数中最大数量的参数。</p>
-<p><strong>默认模式</strong></p>
-<p>​     Spring将自动在构造函数模式和byType模式之间进行j在择。如果 bean有一个默认的（无参数）构 造函数，那么 Spring使用byType巳模式；否则，就使用构造函数模式。（后续版本中这种方式已经被标记为@Deprecated）。</p>
-<p><strong>none</strong></p>
-<p>​    这时默认设置，就是没有使用自动装配，依赖关系需要自己维护。</p>
-<p>​    </p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Spring-BeanFactory与FactoryBean" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/12/02/Spring-BeanFactory%E4%B8%8EFactoryBean/" class="article-date">
-  	<time datetime="2019-12-02T08:13:22.000Z" itemprop="datePublished">2019-12-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/02/Spring-BeanFactory%E4%B8%8EFactoryBean/">
-        Spring-BeanFactory与FactoryBean
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h1><p>​    BeanFactory是IOC容器的核心接口， 它定义了IOC的基本功能，它主要定义了getBean方法。getBean方法是IOC容器获取bean对象和引发依赖注入的起点。</p>
-<p>​    需要注意的是，BeanFactory 只能管理单例（Singleton）Bean 的生命周期。它不能管理原型(prototype,非单例)Bean 的生命周期。这是因为原型 Bean 实例被创建之后便被传给了客户端,容器失去了对它们的引用。</p>
-<p><strong>BeanFactory源码</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BeanFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 用来引用一个实例，或把它和工厂产生的Bean区分开，就是说，如果一个FactoryBean的名字为a，那么，&amp;a会得到那个Factory</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String FACTORY_BEAN_PREFIX = <span class="string">"&amp;"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 四个不同形式的getBean方法，获取实例</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Object <span class="title">getBean</span><span class="params">(String name)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"></span><br><span class="line">    &lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(String name, Class&lt;T&gt; requiredType)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"></span><br><span class="line">    &lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(Class&lt;T&gt; requiredType)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Object <span class="title">getBean</span><span class="params">(String name, Object... args)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">containsBean</span><span class="params">(String name)</span></span>; <span class="comment">// 是否存在</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isSingleton</span><span class="params">(String name)</span> <span class="keyword">throws</span> NoSuchBeanDefinitionException</span>;<span class="comment">// 是否为单实例</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isPrototype</span><span class="params">(String name)</span> <span class="keyword">throws</span> NoSuchBeanDefinitionException</span>;<span class="comment">// 是否为原型（多实例）</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isTypeMatch</span><span class="params">(String name, Class&lt;?&gt; targetType)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> NoSuchBeanDefinitionException</span>;<span class="comment">// 名称、类型是否匹配</span></span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt; getType(String name) <span class="keyword">throws</span> NoSuchBeanDefinitionException; <span class="comment">// 获取类型</span></span><br><span class="line"></span><br><span class="line">    String[] getAliases(String name);<span class="comment">// 根据实例的名字获取实例的别名</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="FactoryBean"><a href="#FactoryBean" class="headerlink" title="FactoryBean"></a>FactoryBean</h1><p>​    Spring 中有两种类型的Bean，一种是普通Bean，另一种是工厂Bean即FactoryBean。FactoryBean跟普通Bean不同，其返回的对象<strong>不是指定类的一个实例</strong>，而是<strong>该FactoryBean的getObject方法所返回的对象</strong>，如果要获取FactoryBean本身，可以在bean的名字前面加上&amp;。创建出来的对象是否属于单例由isSingleton中的返回决定。</p>
-<p><strong>FactoryBean源码</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FactoryBean</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">T <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line"> </span><br><span class="line">    Class&lt;?&gt; getObjectType();</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isSingleton</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    如果使用的xml方式配置bean可以直接使用，但是如果是Java配置方式，必须显示调用getObject方法来获得bean。</p>
-<p>​    有时需要实例化由非Spring提供的第三方程序，这时是没有实现FactoryBean接口的，可以使用另外一种方式，使用factory-beαn 和 factory-method 属性，factory-beαn 配置使用的factoryBean，factory-method配置创建目标bean的方法。</p>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>​    Spring中的所有Bean都是由BeanFactory来进行管理的，他是负责生产和管理bean的一个工厂，是Spring IOC的核心接口，他负责实例化、定位配置应用程序的对象以及建立他们之间的依赖。</p>
-<p>​    BeanFactory不是一般的bean，他能够生产对象，是个工厂bean。在某些情况下，无法通过new的方式创建一个对象，比如创建通过静态工厂访问的bean，这时使用编码方式会更为方便，自定义实例化bean的逻辑。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
-    </nav>
-  
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2020 steven
       </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
-        </div>
-    </div>
-  </div>
-</footer>
-    </div>
-    
+      <a class="more" href="/2019/12/15/Spring-MVC%E8%AF%A6%E8%A7%A3/">Read more</a>
+    </article>
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/15/Java-ReentrantLock%E5%8E%9F%E7%90%86/">Java-ReentrantLock原理</a>
+      </h2>
+      <p class="article-date">December 15, 2019</p>
+      
+        
+  <a href="/tags#Java" >
+    <span class="tag-code">Java</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          ReentrantLockReentrantLock 是可重入的独占锁， 同时只能有一个线程可以获取该锁，其他获取该锁 的线程会被阻塞而被放入该锁的 AQS 阻塞队列里面。该锁可以设置为公平锁和非公平锁两种，锁使用的是Sync类，该类继承自AQS，在这里AQS的state表示表示线程进入该锁 ...
+        
+      </div>
+      <a class="more" href="/2019/12/15/Java-ReentrantLock%E5%8E%9F%E7%90%86/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/14/Java-LockSupport/">Java-LockSupport</a>
+      </h2>
+      <p class="article-date">December 14, 2019</p>
+      
+        
+  <a href="/tags#Java" >
+    <span class="tag-code">Java</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          LockSupport 是个工具类，它的主要作用是挂起和唤醒线程， 该工具类是创建锁和其他同步类的基础。 LockSupport类与每个使用它的线程都会关联一个许可证，在默认情况下调用LockSupport 类的方法的线程是不持有许可证的，LockSupport 是使用Unsafe类实现的。 ...
+        
+      </div>
+      <a class="more" href="/2019/12/14/Java-LockSupport/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/14/Java-ThreadLocalRandom/">Java-ThreadLocalRandom</a>
+      </h2>
+      <p class="article-date">December 14, 2019</p>
+      
+        
+  <a href="/tags#Java" >
+    <span class="tag-code">Java</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          Random生成随机数
+需要根据老的种子来生成新的种子，然后根据新的种子来生成随机数，但是在多线程条件下可能会有多个线程使用一个老的种子来更新，为了保证原子性，在第一个线程生成新的种子后，第二个线程需要丢弃自己的老种子来使用第一个线程的新种子，后续的线程也是。在多个线程拿到新的种子去更新老的 ...
+        
+      </div>
+      <a class="more" href="/2019/12/14/Java-ThreadLocalRandom/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/14/Java-%E7%BA%BF%E7%A8%8B%E4%B8%AD%E6%96%AD/">Java-线程中断</a>
+      </h2>
+      <p class="article-date">December 14, 2019</p>
+      
+        
+  <a href="/tags#Java" >
+    <span class="tag-code">Java</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          线程中断
+线程中断是一种线程间的学协作方式，设置中断并不能直接终止该线程的执行，而是被中断的线程根据中断状态自行处理。
+方法
+
+void interrupt()
+中断线程，这里只是将被调用线程的中断标志置为true，并立即返回。如果被调用线程调用了wait、join或者sleep方法而被阻塞 ...
+        
+      </div>
+      <a class="more" href="/2019/12/14/Java-%E7%BA%BF%E7%A8%8B%E4%B8%AD%E6%96%AD/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/09/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/">Java-线程池</a>
+      </h2>
+      <p class="article-date">December 9, 2019</p>
+      
+        
+  <a href="/tags#Java" >
+    <span class="tag-code">Java</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          优点每次创建新的线程时，需要开辟新的虚拟机栈、本地方法栈、程序计数器等私有空间，在线程销毁时候也要释放这些资源，如果进行频繁的创建和销毁会消耗大量的系统资源。使用线程池可以:
+
+管理和复用线程，控制最大并发度
+
+实现任务队列的缓存和拒绝机制
+
+实现与某些时间相关的功能，如定时任务等等
+
+隔离 ...
+        
+      </div>
+      <a class="more" href="/2019/12/09/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/06/Redis%E9%9B%86%E7%BE%A4%E4%BB%8B%E7%BB%8D/">Redis集群介绍</a>
+      </h2>
+      <p class="article-date">December 6, 2019</p>
+      
+        
+  <a href="/tags#Redis" >
+    <span class="tag-code">Redis</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          单机模式​    单机模式的局限性：
+
+单点故障问题
+如果仅有的一台Redis服务器发生宕机，将导致缓存服务不可用，引发一系列的问题。
+
+容量问题
+Redis是基于内存存储的数据库，对内存容量较高，单台的内存存在一定的瓶颈。
+
+性能问题
+虽然Redis有可以达到较高的QPS，但是遇到高并发情 ...
+        
+      </div>
+      <a class="more" href="/2019/12/06/Redis%E9%9B%86%E7%BE%A4%E4%BB%8B%E7%BB%8D/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/04/Spring-AOP/">Spring-AOP</a>
+      </h2>
+      <p class="article-date">December 4, 2019</p>
+      
+        
+  <a href="/tags#Spring" >
+    <span class="tag-code">Spring</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          概述概念
+连接点：是程序执行过程的某一行为，如方法调用。连接点就是AOP向目标类打入楔子的候选锚点。连接点由方法表示的程序的执行点和用相对位置表示方法位置。
+
+切入点：在使用连接点时，所有通知所匹配的连接点由切入点表达式确定。
+
+通知：
+在特定连接点执行的代码就是通知。通知类型有：
+(1)  ...
+        
+      </div>
+      <a class="more" href="/2019/12/04/Spring-AOP/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/02/Spring-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Spring-Bean的生命周期</a>
+      </h2>
+      <p class="article-date">December 2, 2019</p>
+      
+        
+  <a href="/tags#Spring" >
+    <span class="tag-code">Spring</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          
+Bean的创建及初始化顺序
+调用构造方法创建bean
+注入依赖项
+如果有@PostConstruct 注解，则调用这个注解标注的方法
+如果BeanFactory设置了提供的所有Bean属性并且满足 BeanFactoryAware 和 ApplicationContextAware，将会调 ...
+        
+      </div>
+      <a class="more" href="/2019/12/02/Spring-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/02/Spring-%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%96%B9%E5%BC%8F/">Spring-自动装配方式</a>
+      </h2>
+      <p class="article-date">December 2, 2019</p>
+      
+        
+  <a href="/tags#Spring" >
+    <span class="tag-code">Spring</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          byName
+​    当使用 byName模式进行自动装配时， Spring会尝i制每每个属性连接到同名的bean。因此， 如果目标 bean具有名为 property的属性并且在 ApplicationContext中定义了名字为property的bean， 那么 property be ...
+        
+      </div>
+      <a class="more" href="/2019/12/02/Spring-%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%96%B9%E5%BC%8F/">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a href="/"><span class="page-arrow">← </span>Prev</a>
+  
+  
+    <a href="/page/3/">Next<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
 
 
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
 
 <script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
 </script>
 
-<script src="/js/main.js"></script>
-
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
 </script>
+<!-- Baidu Tongji -->
 
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
 
+<script src="/js/script.js"></script>
 
-  </div>
-</body>
+  </body>
 </html>
