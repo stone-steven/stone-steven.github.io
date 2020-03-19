@@ -102,12 +102,12 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>​        为了保证集群的高可用性，可以部署多台设置有Master资格的ES节点，这样只要不是所有主节点都宕机，集群可以处于稳定可用状态。但是同一时刻只能有一个Master节点存在，其他只能是具备成为主节点资格的节点。这时就需要进行选举，ES选举Master的算法为Bully算法。</p>
+    <section class="markdown-content"><p>为了保证集群的高可用性，可以部署多台设置有Master资格的ES节点，这样只要不是所有主节点都宕机，集群可以处于稳定可用状态。但是同一时刻只能有一个Master节点存在，其他只能是具备成为主节点资格的节点。这时就需要进行选举，ES选举Master的算法为Bully算法。</p>
 <p><strong>Bully算法</strong></p>
-<p>​        它假定所有节点都有一个唯一的ID，使用该ID对节点进行排序。任何时候的当前Leader都是参与集群的最高ID节点。该算法的优点是易于实现。</p>
-<p>​        但是，当拥有最大ID的节点处于不稳定状态的场景下会有问题。例如，Master负载过重而假死，集群拥有第二大ID的节点被选为新主，这时原来的Master恢复，再次被选为新主，ES通过推迟选举，直到当前Master节点失效的方式来解决这个问题。</p>
-<p>​        这样就会有能产生双主的问题，即在同一时间会有两个Master节点，俗称<strong>脑裂</strong>，这样就会导致集群内部信息混乱。为了解决这个问题，通过“选举投票过半”的方式来保证。</p>
-<p>​        <strong>discovery.zen.minimum_master_nodes</strong> ，这个参数决定了在选主过程中需要有多少个节点通信，一般设置为 （master_eligible_nodes / 2） + 1。集群具备Master节点数最好至少为3个，因为假设有两个具备成为Master的节点，(2/2)+1的结果为2，当其中一台机器宕机后，这时只有一台具备Master节点资格的服务器了，无法获取2个投票。当有3台具备Master节点的机器时，(3/2)+1为2，当Master节点宕机后，这时集群中有两个有Master资格节点的服务器，其中一台可以得到2个投票。</p>
+<p>它假定所有节点都有一个唯一的ID，使用该ID对节点进行排序。任何时候的当前Leader都是参与集群的最高ID节点。该算法的优点是易于实现。</p>
+<p>但是，当拥有最大ID的节点处于不稳定状态的场景下会有问题。例如，Master负载过重而假死，集群拥有第二大ID的节点被选为新主，这时原来的Master恢复，再次被选为新主，ES通过推迟选举，直到当前Master节点失效的方式来解决这个问题。</p>
+<p>这样就会有能产生双主的问题，即在同一时间会有两个Master节点，俗称<strong>脑裂</strong>，这样就会导致集群内部信息混乱。为了解决这个问题，通过“选举投票过半”的方式来保证。</p>
+<p><strong>discovery.zen.minimum_master_nodes</strong> ，这个参数决定了在选主过程中需要有多少个节点通信，一般设置为 （master_eligible_nodes / 2） + 1。集群具备Master节点数最好至少为3个，因为假设有两个具备成为Master的节点，(2/2)+1的结果为2，当其中一台机器宕机后，这时只有一台具备Master节点资格的服务器了，无法获取2个投票。当有3台具备Master节点的机器时，(3/2)+1为2，当Master节点宕机后，这时集群中有两个有Master资格节点的服务器，其中一台可以得到2个投票。</p>
 </section>
     <!-- Tags START -->
     

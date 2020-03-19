@@ -102,7 +102,7 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>​    ES在启动时会进行一系列的检查动作，这也是在部署ES服务器时，设置这些参数的原因，如果设置不正确，ES服务器将无法启动。</p>
+    <section class="markdown-content"><p>ES在启动时会进行一系列的检查动作，这也是在部署ES服务器时，设置这些参数的原因，如果设置不正确，ES服务器将无法启动。</p>
 <p><strong>堆大小检查</strong></p>
 <p>如果JVM初始堆大小（Xms）与最大堆大小（Xmx）的值不同，则使用期间JVM堆大小调整时可能会出现停顿。因此应该设置为相同值。如果开启了bootstrap.memory_lock，则JVM将在启动时锁定堆的初始大小。如果初始堆大小与最大堆大小不同，那么在堆大小发生变化后，可能无法保证所有JVM堆都锁定在内存中。</p>
 <p><strong>文件描述符检查</strong></p>
