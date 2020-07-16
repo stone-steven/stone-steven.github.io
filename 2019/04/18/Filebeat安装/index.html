@@ -10,7 +10,7 @@
   
   <title>
     
-      Hadoop部署 | steven&#39;s blog
+      Filebeat | steven&#39;s blog
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -93,8 +93,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Hadoop部署</h2>
-  <p class="post-date">2020-03-13</p>
+  <h2>Filebeat</h2>
+  <p class="post-date">2019-04-18</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -102,14 +102,14 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><strong>1.生成ssh公钥和私钥</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "hadoop"</span><br><span class="line"><span class="meta">#</span><span class="bash">为了防止将之前的文件替换掉，这里输入文件名</span></span><br><span class="line">id_rsa_hadoop</span><br><span class="line"><span class="meta">#</span><span class="bash">会生成公钥和私钥分别是id_rsa_hadoop.pub和id_rsa_hadoop</span></span><br><span class="line">cat id_rsa_hadoop.pub &gt;&gt; authorized_keys</span><br><span class="line">chmod 600 authorized_keys</span><br></pre></td></tr></table></figure>
+    <section class="markdown-content"><h3 id="1-下载并解压filebeat安装文件"><a href="#1-下载并解压filebeat安装文件" class="headerlink" title="1.下载并解压filebeat安装文件"></a>1.下载并解压filebeat安装文件</h3><h3 id="2-配置Filebeat"><a href="#2-配置Filebeat" class="headerlink" title="2.配置Filebeat"></a>2.配置Filebeat</h3><p>编辑filebeat.yml文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">filebeat.inputs:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">type:</span> <span class="string">log</span></span><br><span class="line">  <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">paths:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/opt/eshome2/elasticsearch-6.5.4/logs/gc.log</span></span><br><span class="line">    <span class="comment">#- c:\programdata\elasticsearch\logs\*</span></span><br><span class="line"><span class="attr">output.elasticsearch:</span></span><br><span class="line">  <span class="attr">hosts:</span> <span class="string">["ip:9200"]</span></span><br><span class="line"><span class="attr">setup.kibana:</span></span><br><span class="line">  <span class="attr">host:</span> <span class="string">"ip:5601"</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>2.下载并解压Hadoop文件</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf hadoop-2.6.0-cdh5.9.3.tar.gz</span><br></pre></td></tr></table></figure>
+<h3 id="3-启动kibana-Dashboards"><a href="#3-启动kibana-Dashboards" class="headerlink" title="3.启动kibana Dashboards"></a>3.启动kibana Dashboards</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./filebeat setup --dashboards</span><br></pre></td></tr></table></figure>
 
-<p><strong>3.配置环境变量</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line">export HADOOP_HOME=/Users/steven/software/hadoop-2.6.0-cdh5.9.3</span><br><span class="line">export PATH=$&#123;HADOOP_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
+<h3 id="4-启动FileBeat"><a href="#4-启动FileBeat" class="headerlink" title="4.启动FileBeat"></a>4.启动FileBeat</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown root filebeat.yml </span><br><span class="line">sudo ./filebeat -e</span><br></pre></td></tr></table></figure>
+
+<h3 id="可选-5-修改索引名称"><a href="#可选-5-修改索引名称" class="headerlink" title="(可选)5.修改索引名称"></a>(可选)5.修改索引名称</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">setup.template.overwrite</span>: <span class="string">true</span></span><br><span class="line"><span class="meta">setup.template.name</span>: <span class="string">"tomcat"</span></span><br><span class="line"><span class="meta">setup.template.pattern</span>: <span class="string">"tomcat-*"</span></span><br><span class="line"><span class="meta">setup.dashboards.index</span>: <span class="string">"tomcat-*"</span></span><br><span class="line"><span class="meta">output.elasticsearch.index</span>: <span class="string">"tomcat-%&#123;+yyyy.MM.dd&#125;"</span></span><br></pre></td></tr></table></figure>
 
 </section>
     <!-- Tags START -->
@@ -117,8 +117,8 @@
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Hadoop" >
-    <span class="tag-code">Hadoop</span>
+  <a href="/tags#Filebeat" >
+    <span class="tag-code">Filebeat</span>
   </a>
 
       </div>
@@ -129,13 +129,20 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2020/03/06/Kafka/">
+      <a class="nav-left" href="/2019/04/05/Flink%E4%BC%A0%E5%8F%82%E6%96%B9%E5%BC%8F/">
         <span class="nav-arrow">← </span>
         
-          Kafka
+          Flink传参方式
         
       </a>
     
+    
+      <a class="nav-right" href="/2019/10/18/Java-HashMap/">
+        
+          Java-HashMap
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
   </div>
 
@@ -157,7 +164,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-下载并解压filebeat安装文件"><span class="toc-nav-text">1.下载并解压filebeat安装文件</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-配置Filebeat"><span class="toc-nav-text">2.配置Filebeat</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-启动kibana-Dashboards"><span class="toc-nav-text">3.启动kibana Dashboards</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-启动FileBeat"><span class="toc-nav-text">4.启动FileBeat</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#可选-5-修改索引名称"><span class="toc-nav-text">(可选)5.修改索引名称</span></a></li></ol>
     
   </div>
 </aside>
@@ -167,7 +174,7 @@
 
 <script>
   (function () {
-    var url = 'stone-steven.github.io/2020/03/13/Hadoop部署/';
+    var url = 'stone-steven.github.io/2019/04/18/Filebeat安装/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -224,7 +231,7 @@
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
-    <footer class="app-footer">
+    <!-- <footer class="app-footer">
   <p class="copyright">
     &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
@@ -271,6 +278,6 @@
 
 
 <script src="/js/script.js"></script>
-
+ -->
   </body>
 </html>

@@ -109,7 +109,7 @@
 <li>coordinating node，如果发现primary node和所有replica node都成功写入之后，就返回响应结果给客户端</li>
 </ol>
 <h2 id="写数据底层原理"><a href="#写数据底层原理" class="headerlink" title="写数据底层原理"></a>写数据底层原理</h2><p>​        当写入时，会同时写入内存缓冲区和translog日志文件；在内存缓冲区的数据经过默认为1s时间或者空间满了后会将数据写入segment file中（但是这时的segment文件不是在磁盘中的，是在OS cache中）， 并且用commit point来记录所有segment的元数据 ；写入translog的文件在经过默认为30分钟的时间或者大于默认的512M，会强行进行flush操作，将OS cache中的数据写入到磁盘中。</p>
-<p> <img src="https://s2.ax1x.com/2019/12/06/QYBTjP.png" alt="QYBTjP.png"> </p>
+<p> <img src="https://s1.ax1x.com/2020/03/21/8WCjyQ.png" alt="8WCjyQ.png"></p>
 <h2 id="segment-file"><a href="#segment-file" class="headerlink" title="segment file"></a>segment file</h2><p>​       是存储倒排索引的文件，Lucene使用segment进行存储和管理。ES会定时将数据写入到segment file中，经过长时间的积累，就会产生很多文件，这样会很占用服务器资源（比如文件句柄数等），为了解决这个问题，ES会定期将很多小的segment文件进行合并，即merge操作，会合并成大的segment文件，然后后续的查询可以在大的segment文件上查询，也可以提高查询性能。</p>
 <h2 id="OS-cache"><a href="#OS-cache" class="headerlink" title="OS cache"></a>OS cache</h2><p>​        即操作系统缓存，在写入磁盘文件前，会先进入操作系统缓存中，ES的数据在进入这里就可以被搜索到，这也是ES可以近实时搜索的原因。</p>
 <h2 id="translog"><a href="#translog" class="headerlink" title="translog"></a>translog</h2><p>​        如果在数据还在内存中时（无论在内存缓冲区还是OS cache）发生宕机，就会导致数据丢失。translog中会保存写操作的日志内容，如果发生宕机，在ES重新启动后可以读取translog文件数据恢复未保存到磁盘的数据。但是有了translog也不能保证不丢数据，因为在进入之前translog的内容也是先在内存中的，这个时间为5秒，这时如果出现问题还是会丢一部分数据。</p>
@@ -242,7 +242,7 @@
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
-    <footer class="app-footer">
+    <!-- <footer class="app-footer">
   <p class="copyright">
     &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
@@ -289,6 +289,6 @@
 
 
 <script src="/js/script.js"></script>
-
+ -->
   </body>
 </html>

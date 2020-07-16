@@ -103,7 +103,14 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p><strong>工作过程</strong></p>
-<p>当用户请求过来时，DispatcherServlet会使用处理器映射器(HandlerMapping)根据用户的请求内容获取到对应的处理器(Handler),然后通过HandlerAdapter可以运行对应的处理器和拦截器，处理器返回模型和视图给DispatcherServlet之后，DispatcherServlet会把对应的信息传递给视图解析器（ViewResolver）。</p>
+<ol>
+<li>客户端请求到DispatcherServlet</li>
+<li>DispatcherServlet会使用处理器映射器(HandlerMapping)根据用户的请求内容获取到对应的处理器(Handler)</li>
+<li>然后会将请求发送到Handler</li>
+<li>Handler处理后会返回ModelAndView</li>
+<li>然后DispatcherServlet会把对应的信息传递给视图解析器（ViewResolver）</li>
+<li>最后视图负责将结果返回到客户端</li>
+</ol>
 </section>
     <!-- Tags START -->
     
@@ -224,7 +231,7 @@
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
-    <footer class="app-footer">
+    <!-- <footer class="app-footer">
   <p class="copyright">
     &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
@@ -271,6 +278,6 @@
 
 
 <script src="/js/script.js"></script>
-
+ -->
   </body>
 </html>

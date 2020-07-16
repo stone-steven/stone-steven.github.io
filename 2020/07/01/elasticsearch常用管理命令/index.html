@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="steven&#39;s blog">
+  <meta name="keyword" content="technology">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      elasticsearch常用管理命令 | steven&#39;s blog
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>steven's blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>elasticsearch常用管理命令</h2>
+  <p class="post-date">2020-07-01</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h3 id="索引创建和删除"><a href="#索引创建和删除" class="headerlink" title="索引创建和删除"></a>索引创建和删除</h3><ol>
+<li>创建索引<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT  /indexName</span><br></pre></td></tr></table></figure></li>
+<li>删除索引<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE indexName</span><br></pre></td></tr></table></figure>
+<h3 id="索引设置"><a href="#索引设置" class="headerlink" title="索引设置"></a>索引设置</h3></li>
+<li>增加副本</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PUT /indexName/_settings</span><br><span class="line">&#123;</span><br><span class="line">   <span class="attr">"number_of_replicas"</span> : <span class="number">2</span>,</span><br><span class="line">     <span class="attr">"index.routing.allocation.total_shards_per_node"</span>: <span class="string">"2"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.创建索引并禁用source</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">PUT http://localhost:9200/testsource</span><br><span class="line">&#123;</span><br><span class="line">	<span class="attr">"settings"</span> : &#123;</span><br><span class="line">		<span class="attr">"index"</span> : &#123;</span><br><span class="line">			<span class="attr">"number_of_shards"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="attr">"number_of_replicas"</span> : <span class="number">0</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">"mappings"</span> : &#123;</span><br><span class="line">			<span class="attr">"_default_"</span> : &#123;</span><br><span class="line">				<span class="attr">"_source"</span> : &#123;</span><br><span class="line">				<span class="attr">"enabled"</span> : <span class="literal">false</span></span><br><span class="line">				&#125;	</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>关闭索引</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /index*/_close</span><br></pre></td></tr></table></figure>
+<h3 id="分片设置"><a href="#分片设置" class="headerlink" title="分片设置"></a>分片设置</h3></li>
+<li><p>重新分配分片</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /_cluster/reroute</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"commands"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"allocate"</span>: &#123;</span><br><span class="line">        <span class="attr">"index"</span>: <span class="string">"indexName"</span>,</span><br><span class="line">        <span class="attr">"shard"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"node"</span>: <span class="string">"nodeName"</span>,</span><br><span class="line">        <span class="attr">"allow_primary"</span>: <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>移动节点数据</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PUT /indexName/_settings</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"index.routing.allocation.require.node_type"</span>: <span class="string">"customName"</span>,</span><br><span class="line">    <span class="attr">"index.routing.allocation.total_shards_per_node"</span>: <span class="string">"排除后的单个节点最大分片数"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>移动分片</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">POST /_cluster/reroute</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"commands"</span> : [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"move"</span> : &#123;</span><br><span class="line">                <span class="attr">"index"</span> : <span class="string">"test"</span>, <span class="attr">"shard"</span> : <span class="number">0</span>,</span><br><span class="line">                <span class="attr">"from_node"</span> : <span class="string">"node1"</span>, <span class="attr">"to_node"</span> : <span class="string">"node2"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"allocate_replica"</span> : &#123;</span><br><span class="line">                <span class="attr">"index"</span> : <span class="string">"test"</span>, <span class="attr">"shard"</span> : <span class="number">1</span>,</span><br><span class="line">                <span class="attr">"node"</span> : <span class="string">"node3"</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>指定分片分布<br>分别设置两组位于不同交换机下的节点，设置自定义节点属性（rack_id可以换成其他自定义属性）<br>node.rack_id: rack_one<br>node.rack_id: rack_two<br>然后将rack_id属性设置为一个awareness allocation属性（所有node上都要设置）：<br>cluster.routing.allocation.awareness.attributes: racd_id</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PUT /_cluster/settings</span><br><span class="line">&#123;</span><br><span class="line">     <span class="attr">"persistent"</span> : &#123;</span><br><span class="line">        <span class="attr">"cluster.routing.allocation.awareness.force.rack_id.values:"</span>: <span class="string">"rack_one,rack_two"</span>,</span><br><span class="line">        <span class="attr">"cluster.routing.allocation.awareness.attributes"</span>: <span class="string">"rack_id"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>移除节点</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /_cluster/settings</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"transient"</span> : &#123;      </span><br><span class="line">        <span class="attr">"cluster.routing.allocation.exclude._ip"</span> : <span class="string">"ip1,ip2..."</span>    </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="动态设置"><a href="#动态设置" class="headerlink" title="动态设置"></a>动态设置</h3><ul>
+<li>临时（Transient）<br>这些变更在集群重启之前一直会生效。一旦整个集群重启，这些配置就被清除。</li>
+<li>永久（Persistent）<br>这些变更会永久存在直到被显式修改。即使全集群重启它们也会存活下来并覆盖掉静态配置文件里的选项。<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PUT /_cluster/settings</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"persistent"</span> : &#123;</span><br><span class="line">        <span class="attr">"discovery.zen.minimum_master_nodes"</span> : <span class="number">2</span> </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"transient"</span> : &#123;</span><br><span class="line">        <span class="attr">"indices.store.throttle.max_bytes_per_sec"</span> : <span class="string">"50mb"</span> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数据备份"><a href="#数据备份" class="headerlink" title="数据备份"></a>数据备份</h3>使用 snapshot API。这个会拿到你集群里当前的状态和数据然后保存到一个共享仓库里。<br>第一个快照会是一个数据的完整拷贝，但是所有后续的快照会保留的是已存快照和新数据之间的差异。后续备份会相当快速，因为它们只传输很小的数据量。</li>
+</ul>
+<p>备份仓库选择：<br>共享文件系统，比如 NAS、Amazon S3、HDFS (Hadoop 分布式文件系统)、Azure Cloud<br>创建仓库：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PUT _snapshot/仓库名称 </span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"fs"</span>, <span class="comment">//fs是指定仓库类型</span></span><br><span class="line">    <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"location"</span>: <span class="string">"/mount/backups/my_backup"</span> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从快照恢复:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /_snapshot/my_backup/snapshot_1/_restore</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"indices"</span>: <span class="string">"index_1"</span>, </span><br><span class="line">    <span class="attr">"rename_pattern"</span>: <span class="string">"index_(.+)"</span>, </span><br><span class="line">    <span class="attr">"rename_replacement"</span>: <span class="string">"restored_index_$1"</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="慢日志"><a href="#慢日志" class="headerlink" title="慢日志"></a>慢日志</h3><p>默认情况，慢日志是不开启的。要开启它，需要定义具体动作（query，fetch 还是 index），你期望的事件记录等级（ WARN 、 DEBUG 等），以及时间阈值。<br>索引级别的设置，也就是说可以独立应用给单个索引</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /索引/_settings</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"index.search.slowlog.threshold.query.warn"</span> : <span class="string">"10s"</span>, </span><br><span class="line">    <span class="attr">"index.search.slowlog.threshold.fetch.debug"</span>: <span class="string">"500ms"</span>, </span><br><span class="line">    <span class="attr">"index.indexing.slowlog.threshold.index.info"</span>: <span class="string">"5s"</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>集群级别设置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PUT /_cluster/settings</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"transient"</span> : &#123;</span><br><span class="line">        <span class="attr">"logger.index.search.slowlog"</span> : <span class="string">"DEBUG"</span>, </span><br><span class="line">        <span class="attr">"logger.index.indexing.slowlog"</span> : <span class="string">"WARN"</span> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="缓存设置"><a href="#缓存设置" class="headerlink" title="缓存设置"></a>缓存设置</h3><ol>
+<li>清空全部缓存<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST localhost:9200/_cache/clear</span><br></pre></td></tr></table></figure></li>
+<li>清除单一索引缓存<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST localhost:9200/index/_cache/clear</span><br></pre></td></tr></table></figure></li>
+<li>清除多索引缓存<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST localhost:9200/index1,index2,index3/_cache/clear</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="索引别名设置"><a href="#索引别名设置" class="headerlink" title="索引别名设置"></a>索引别名设置</h3><ol>
+<li><p>删除索引别名</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST /_aliases</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"actions"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"remove"</span>: &#123;</span><br><span class="line">        <span class="attr">"index"</span>: <span class="string">"indexName"</span>,</span><br><span class="line">        <span class="attr">"alias"</span>: <span class="string">"indexAlias"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增索引别名</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST /_aliases</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"actions"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"add"</span>: &#123;</span><br><span class="line">        <span class="attr">"index"</span>: <span class="string">"indexName"</span>,</span><br><span class="line">        <span class="attr">"alias"</span>: <span class="string">"indexAlias"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="fielddata内存占用"><a href="#fielddata内存占用" class="headerlink" title="fielddata内存占用"></a>fielddata内存占用</h3><ol>
+<li><p>查看</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST http://集群地址/_cat/fielddata?v&amp;fields=*</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>动态设置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /_cluster/settings </span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"persistent"</span>: &#123;</span><br><span class="line">    <span class="attr">"indices.fielddata.cache.size"</span>: <span class="string">"30%"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h3 id="清空translog"><a href="#清空translog" class="headerlink" title="清空translog"></a>清空translog</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /_all/_flush</span><br></pre></td></tr></table></figure>
+
+<h3 id="kill-es进程方式"><a href="#kill-es进程方式" class="headerlink" title="kill es进程方式"></a>kill es进程方式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -<span class="number">9</span> `ps -ef | grep  <span class="string">"elasticsearch"</span> | grep -v <span class="string">"grep"</span>|awk <span class="string">'&#123;print $2&#125;'</span>`</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看集群状态"><a href="#查看集群状态" class="headerlink" title="查看集群状态"></a>查看集群状态</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET http://ip:9200/_cat/health</span><br></pre></td></tr></table></figure>
+
+<p>集群的状态（status）：red红表示集群不可用，有故障。yellow黄表示集群不可靠但可用，一般单节点时就是此状态。green正常状态，表示集群一切正常。<br>节点数（node.total）：节点数，这里是2，表示该集群有两个节点。<br>数据节点数（node.data）：存储数据的节点数。<br>分片数（shards）：当前集群有多少数据分片，包括了副本分片。<br>主分片数（pri）：当前集群主分片数量<br>激活的分片百分比（active_shards_percent）：这里可以理解为加载的数据分片数，只有加载所有的分片数，集群才算正常启动。</p>
+<h3 id="ES-7-x版本查看任务以及取消任务"><a href="#ES-7-x版本查看任务以及取消任务" class="headerlink" title="ES 7.x版本查看任务以及取消任务"></a>ES 7.x版本查看任务以及取消任务</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /_tasks</span><br><span class="line">POST /_task/node_id:task_id/_cancel</span><br></pre></td></tr></table></figure>
+
+<h3 id="索引段合并"><a href="#索引段合并" class="headerlink" title="索引段合并"></a>索引段合并</h3><p>单一的分段比众多分段占用的磁盘空间更小一些；<br>· 可以大幅减少进程需要打开的文件fd；<br>· 可以加快搜索过程，因为搜索需要检索全部分段；<br>· 单个分段加载到内存时也比多个分段更节省内存占用；<br>· 可以加快索引恢复速度。<br>可以选择在系统的空闲时间段对不再更新的只读索引执行Force<br>Merge：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST localhost:9200&#x2F;twitter&#x2F;_forcemerge</span><br></pre></td></tr></table></figure>
+
+<p>该命令将分段合并为单个分段，执行成功后会自行“flush”。</p>
+<h3 id="查看磁盘可用空间"><a href="#查看磁盘可用空间" class="headerlink" title="查看磁盘可用空间"></a>查看磁盘可用空间</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET _cat/allocation</span><br></pre></td></tr></table></figure>
+
+<h3 id="指定索引按照IP信息排除节点"><a href="#指定索引按照IP信息排除节点" class="headerlink" title="指定索引按照IP信息排除节点"></a>指定索引按照IP信息排除节点</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/ctemm-njyh-2019-w04/_settings</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"index"</span>: &#123;</span><br><span class="line">    <span class="attr">"routing"</span>: &#123;</span><br><span class="line">      <span class="attr">"allocation"</span>: &#123;</span><br><span class="line">        <span class="attr">"total_shards_per_node"</span>: <span class="string">"2"</span>,</span><br><span class="line">        <span class="attr">"exclude"</span>: &#123;</span><br><span class="line">          <span class="attr">"_ip"</span>: <span class="string">"ip1,ip2...."</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="curl命令执行方式"><a href="#curl命令执行方式" class="headerlink" title="curl命令执行方式"></a>curl命令执行方式</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT "localhost:9200/_cluster/settings?pretty" -H 'Content-Type: application/json' -d'</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"transient"</span> : &#123;      </span><br><span class="line">        <span class="attr">"cluster.routing.allocation.exclude._ip"</span> : <span class="string">"ip"</span>    </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br><span class="line">'</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置数据在节点间的最大带宽"><a href="#设置数据在节点间的最大带宽" class="headerlink" title="设置数据在节点间的最大带宽"></a>设置数据在节点间的最大带宽</h3><table>
+<thead>
+<tr>
+<th>indices.recovery.max_bytes_per_sec</th>
+<th>默认20mb</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PUT _cluster/settings</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"persistent"</span>: &#123;</span><br><span class="line">    <span class="attr">"indices"</span>: &#123;</span><br><span class="line">      <span class="attr">"store"</span>: &#123;</span><br><span class="line">        <span class="attr">"throttle"</span>: &#123;</span><br><span class="line">          <span class="attr">"max_bytes_per_sec"</span>: <span class="string">"500mb"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置默认查询字段"><a href="#设置默认查询字段" class="headerlink" title="设置默认查询字段"></a>设置默认查询字段</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"settings.index.query.default_field": "message"</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看线程池状态信息"><a href="#查看线程池状态信息" class="headerlink" title="查看线程池状态信息"></a>查看线程池状态信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_cat/thread_pool?v</span><br><span class="line">_cat/thread_pool?v&amp;h=ip,search.active,search.queue,search.rejected#显示指定列信息</span><br></pre></td></tr></table></figure>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#elasticsearch" >
+    <span class="tag-code">elasticsearch</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2020/04/20/Java-Retrying/">
+        <span class="nav-arrow">← </span>
+        
+          重试类库Guava Retrying
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#索引创建和删除"><span class="toc-nav-text">索引创建和删除</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#索引设置"><span class="toc-nav-text">索引设置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#分片设置"><span class="toc-nav-text">分片设置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#动态设置"><span class="toc-nav-text">动态设置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数据备份"><span class="toc-nav-text">数据备份</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#慢日志"><span class="toc-nav-text">慢日志</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#缓存设置"><span class="toc-nav-text">缓存设置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#索引别名设置"><span class="toc-nav-text">索引别名设置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#fielddata内存占用"><span class="toc-nav-text">fielddata内存占用</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#清空translog"><span class="toc-nav-text">清空translog</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#kill-es进程方式"><span class="toc-nav-text">kill es进程方式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查看集群状态"><span class="toc-nav-text">查看集群状态</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ES-7-x版本查看任务以及取消任务"><span class="toc-nav-text">ES 7.x版本查看任务以及取消任务</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#索引段合并"><span class="toc-nav-text">索引段合并</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查看磁盘可用空间"><span class="toc-nav-text">查看磁盘可用空间</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#指定索引按照IP信息排除节点"><span class="toc-nav-text">指定索引按照IP信息排除节点</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#curl命令执行方式"><span class="toc-nav-text">curl命令执行方式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#设置数据在节点间的最大带宽"><span class="toc-nav-text">设置数据在节点间的最大带宽</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#设置默认查询字段"><span class="toc-nav-text">设置默认查询字段</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查看线程池状态信息"><span class="toc-nav-text">查看线程池状态信息</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'stone-steven.github.io/2020/07/01/elasticsearch常用管理命令/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <!-- <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+ -->
+  </body>
+</html>

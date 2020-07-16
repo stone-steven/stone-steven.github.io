@@ -96,6 +96,52 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2019/12/02/Spring-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Spring-Bean的生命周期</a>
+      </h2>
+      <p class="article-date">December 2, 2019</p>
+      
+        
+  <a href="/tags#Spring" >
+    <span class="tag-code">Spring</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          
+Bean的创建及初始化顺序
+调用构造方法创建bean
+注入依赖项
+如果有@PostConstruct 注解，则调用这个注解标注的方法
+如果BeanFactory设置了提供的所有Bean属性并且满足 BeanFactoryAware 和 ApplicationContextAware，将会调 ...
+        
+      </div>
+      <a class="more" href="/2019/12/02/Spring-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2019/12/02/Spring-%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%96%B9%E5%BC%8F/">Spring-自动装配方式</a>
+      </h2>
+      <p class="article-date">December 2, 2019</p>
+      
+        
+  <a href="/tags#Spring" >
+    <span class="tag-code">Spring</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          byName
+​    当使用 byName模式进行自动装配时， Spring会尝i制每每个属性连接到同名的bean。因此， 如果目标 bean具有名为 property的属性并且在 ApplicationContext中定义了名字为property的bean， 那么 property be ...
+        
+      </div>
+      <a class="more" href="/2019/12/02/Spring-%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%96%B9%E5%BC%8F/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2019/12/02/Spring-BeanFactory%E4%B8%8EFactoryBean/">Spring-BeanFactory与FactoryBean</a>
       </h2>
       <p class="article-date">December 2, 2019</p>
@@ -267,60 +313,10 @@ Mino ...
       <div class="article-summary">
         
           synchronized​    synchronized用的锁是保存在对象头中的，为了减少在获取锁和释放锁带来的性能损耗，Java中引入了偏向锁和轻量级锁。锁共有四种状态分别是无锁状态、偏向锁状态、轻量级锁状态和重量级锁状态，这些状态会随着竞争升级，而且只能升级不能降级。 
-偏向锁​    ...
+偏向锁在大多数 ...
         
       </div>
       <a class="more" href="/2019/11/27/Java-volatile%E4%B8%8Esynchronized%E5%8E%9F%E7%90%86/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/25/Java-JVM/">Java-JVM</a>
-      </h2>
-      <p class="article-date">November 25, 2019</p>
-      
-        
-  <a href="/tags#Java" >
-    <span class="tag-code">Java</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          JVM内存布局
-
-一、堆区
-堆分成两大块 新生代和老年代。对象产生之初在新生代， 步入暮年时进入老年代， 同时老年代也接纳在新生代无法容纳的超大对象。
-新生代由一个Eden区和两个Survivor区构成。绝大部分对象位于Eden区，当Eden区填满时候，会触发YGC，没有被引用的对象直接被回 ...
-        
-      </div>
-      <a class="more" href="/2019/11/25/Java-JVM/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/11/25/Java-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Java-类的生命周期</a>
-      </h2>
-      <p class="article-date">November 25, 2019</p>
-      
-        
-  <a href="/tags#Java" >
-    <span class="tag-code">Java</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          类的生命周期主要有：加载，链接，初始化，使用和卸载。
-加载
-会读取类文件产生二进制流，并转化为特定的数据结构，初步校验魔法数，常量池，文件长度，是否有父类等等，然后创建对应类的java.lang.Class实例。
-链接
-包括验证、准备和解析三个步骤。
-
-验证阶段:是更详细的校验，比如fina ...
-        
-      </div>
-      <a class="more" href="/2019/11/25/Java-%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Read more</a>
     </article>
   
 
@@ -340,7 +336,7 @@ Mino ...
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
-    <footer class="app-footer">
+    <!-- <footer class="app-footer">
   <p class="copyright">
     &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
@@ -387,6 +383,6 @@ Mino ...
 
 
 <script src="/js/script.js"></script>
-
+ -->
   </body>
 </html>

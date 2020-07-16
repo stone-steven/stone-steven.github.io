@@ -96,23 +96,71 @@
   
     <article class="article-card">
       <h2 class="article-head">
-        <a href="/2020/03/13/Hadoop%E9%83%A8%E7%BD%B2/">Hadoop部署</a>
+        <a href="/2020/07/01/elasticsearch%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/">elasticsearch常用管理命令</a>
       </h2>
-      <p class="article-date">March 13, 2020</p>
+      <p class="article-date">July 1, 2020</p>
       
         
-  <a href="/tags#Hadoop" >
-    <span class="tag-code">Hadoop</span>
+  <a href="/tags#elasticsearch" >
+    <span class="tag-code">elasticsearch</span>
   </a>
 
       
       <div class="article-summary">
         
-          1.生成ssh公钥和私钥
-123456ssh-keygen -t rsa -C "hadoop"#为了防止将之前的文件替换掉，这里输入文件名id_rsa_hadoop#会生成公钥和私钥分别是id_rsa_hadoop.pub和id_rsa_hadoopcat id_rsa_hadoop.pu ...
+          索引创建和删除
+创建索引1PUT  /indexName
+删除索引1DELETE indexName
+索引设置
+增加副本
+
+12345PUT /indexName/_settings&#123;   "number_of_replicas" : 2,     "index.routing.a ...
         
       </div>
-      <a class="more" href="/2020/03/13/Hadoop%E9%83%A8%E7%BD%B2/">Read more</a>
+      <a class="more" href="/2020/07/01/elasticsearch%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/04/20/Java-Retrying/">重试类库Guava Retrying</a>
+      </h2>
+      <p class="article-date">April 20, 2020</p>
+      
+        
+  <a href="/tags#Java" >
+    <span class="tag-code">Java</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          背景在一些业务场景中，可能因为一些异常情况如网络中断，服务器发生问题未能执行成功，导致未能达到我们想要的结果，这时候为了尽可能的保证成功，可以加入重试机制。而如果为每种重试机制都做一套的实现的话将会有大量的冗余代码，Guava Retrying类库可以很方便实现这一点。
+使用依赖
+12345 ...
+        
+      </div>
+      <a class="more" href="/2020/04/20/Java-Retrying/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/04/17/Spring-RequestBody%E6%B3%A8%E8%A7%A3%E5%8E%9F%E7%90%86/">Spring-RequestBody注解原理</a>
+      </h2>
+      <p class="article-date">April 17, 2020</p>
+      
+        
+  <a href="/tags#Spring" >
+    <span class="tag-code">Spring</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          请求首先会进入DispatcherServlet的doService方法
+123456789101112protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exce ...
+        
+      </div>
+      <a class="more" href="/2020/04/17/Spring-RequestBody%E6%B3%A8%E8%A7%A3%E5%8E%9F%E7%90%86/">Read more</a>
     </article>
   
     <article class="article-card">
@@ -272,54 +320,6 @@ createBeanIn ...
       <a class="more" href="/2019/12/29/Flink%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Read more</a>
     </article>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/12/21/Flink%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/">Flink基本介绍</a>
-      </h2>
-      <p class="article-date">December 21, 2019</p>
-      
-        
-  <a href="/tags#Flink" >
-    <span class="tag-code">Flink</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          基本架构分层架构
-API&amp;Libraries层
-如DataStream API、DataSet API。
-
-Runtime核心层
-负责对上层不同接口提供基础服务，支持分布式Stream作业的执行、JobGraph到ExecutionGraph的映射转换、任务调度等。
-
-物理部署层
-涉 ...
-        
-      </div>
-      <a class="more" href="/2019/12/21/Flink%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/12/18/Hadoop%E4%B9%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">Hadoop之分布式文件系统</a>
-      </h2>
-      <p class="article-date">December 18, 2019</p>
-      
-        
-  <a href="/tags#Hadoop" >
-    <span class="tag-code">Hadoop</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          概述设计架构HDFS采用主从结构，一个HDFS集群包括一个名称节点和若干数据节点。名称节点作为中心服务器，负责管理文件系统的命名空间及客户端对文件的访问。数据节点在名称节点的同一调度下进行数据的创建、删除和复制等操作，同时数据节点会定时向名称节点发送“心跳”信息，报告自己的状态，如果没有发送 ...
-        
-      </div>
-      <a class="more" href="/2019/12/18/Hadoop%E4%B9%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">Read more</a>
-    </article>
-  
 
   
     <div class="guide-pager">
@@ -337,7 +337,7 @@ Runtime核心层
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
-    <footer class="app-footer">
+    <!-- <footer class="app-footer">
   <p class="copyright">
     &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
@@ -384,6 +384,6 @@ Runtime核心层
 
 
 <script src="/js/script.js"></script>
-
+ -->
   </body>
 </html>

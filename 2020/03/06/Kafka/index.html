@@ -107,6 +107,23 @@
 <h2 id="3-Producer"><a href="#3-Producer" class="headerlink" title="3.Producer"></a>3.Producer</h2><p>生产者创建消息，一般情况下消息均匀的分发到各个分区，也可以指定分区。</p>
 <h2 id="4-Consumer"><a href="#4-Consumer" class="headerlink" title="4.Consumer"></a>4.Consumer</h2><p>消费者可以订阅主题，并可以通过偏移量(offset)来区分读取过得消息，offset会保存在zk或者kafka中。一个Topic可以被多个消费者消费，且多个消费者之间互不影响。</p>
 <h2 id="5-Broker"><a href="#5-Broker" class="headerlink" title="5.Broker"></a>5.Broker</h2><p>Kafka服务器也叫Broker，它接受来自生产者的消息，并且为消息设置偏移量，将消息保存在磁盘中，也服务于消费者，从磁盘读取数据返回消息。多台Broker可以组成一个集群，其中有一台Broker会作为集群控制器(Controller)，它负责管理集群。一个分区可以分配多个Broker，但是只会有一个Leader。</p>
+<h1 id="存储机制"><a href="#存储机制" class="headerlink" title="存储机制"></a>存储机制</h1><p>存储时会根据topic和partition划分目录层级，命名规则为<topic_name>-<partition_id>。为了更有效的查找数据，kafka采用了分段方式存储，每个segment的文件名称以该segment中最小的offset命名，这样就可以快速的定位要查找的数据位于哪个segment中。这时候可以确定要找到的顺序在哪一个segment中，但是仍然需要在这之中进行顺序查找，kafka 每个segment除了保存数据的log文件之外，还有一个保存索引的index文件，存储数据所在的位置。为了避免因为数据太多而使得索引文件变的很大，没有为每一条数据建立索引，而是每隔一定数量的字节数据建立一条索引。</p>
+<h1 id="设计与实现"><a href="#设计与实现" class="headerlink" title="设计与实现"></a>设计与实现</h1><p>传统读取磁盘文件的数据在每次发送到网络时，都需要将页面缓存先保存到用户缓存，然后在读取消息时再将其复制到内核空间，具体步骤如下。<br>(1) 操作系统将数据从磁盘中读取文件到内核空间里的页面缓存。<br>(2)应用程序将数据从内核空间读人用户空间的缓冲区。<br>(3)应用程序将读到的数据写回内核空间并放入socket缓冲区。<br>(4)操作系统将数据从socket缓冲区复制到网卡接口，此时数据才能通过网络发送归去。</p>
+<p>使用“零拷贝技术”（ zero-copy ）只需将磁盘文件的数据复制到页面缓存中一次，然后将数据从页面缓存直接发送到网络中（发送给不同的使用者时，都可以重复使用同一个页面缓存），避免了重复的复制操作。这样，消息使用的速度基本上等同于网络连接的速度了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transferTo</span><span class="params">(<span class="keyword">long</span> <span class="built_in">position</span>, <span class="keyword">long</span> count, WritableByteChannel target)</span></span>;</span><br><span class="line">transferTo()方法将数据从文件通道传输到给定的可写字节通道。</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="消费端配置"><a href="#消费端配置" class="headerlink" title="消费端配置"></a>消费端配置</h2><h3 id="auto-offset-reset值含义解释"><a href="#auto-offset-reset值含义解释" class="headerlink" title="auto.offset.reset值含义解释"></a>auto.offset.reset值含义解释</h3><ul>
+<li><p>earliest<br>当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费 </p>
+</li>
+<li><p>latest<br>当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据 </p>
+</li>
+<li><p>none<br>topic各分区都存在已提交的offset时，从offset后开始消费；只要有一个分区不存在已提交的offset，则抛出异常.</p>
+</li>
+</ul>
+<h1 id="不同版本区别"><a href="#不同版本区别" class="headerlink" title="不同版本区别"></a>不同版本区别</h1><ul>
+<li>kafka-0.10.1.X版本之前: auto.offset.reset 的值为smallest,和,largest.(offest保存在zk中)</li>
+<li>kafka-0.10.1.X版本之后: auto.offset.reset 的值更改为:earliest,latest,和none (offest保存在kafka的一个特殊的topic名为:__consumer_offsets里面)</li>
+</ul>
 </section>
     <!-- Tags START -->
     
@@ -133,9 +150,9 @@
       </a>
     
     
-      <a class="nav-right" href="/2020/03/13/Hadoop%E9%83%A8%E7%BD%B2/">
+      <a class="nav-right" href="/2020/04/17/Spring-RequestBody%E6%B3%A8%E8%A7%A3%E5%8E%9F%E7%90%86/">
         
-          Hadoop部署
+          Spring-RequestBody注解原理
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -160,7 +177,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#基本概念"><span class="toc-nav-text">基本概念</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Message"><span class="toc-nav-text">1.Message</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Topic"><span class="toc-nav-text">2.Topic</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-Producer"><span class="toc-nav-text">3.Producer</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-Consumer"><span class="toc-nav-text">4.Consumer</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-Broker"><span class="toc-nav-text">5.Broker</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#基本概念"><span class="toc-nav-text">基本概念</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Message"><span class="toc-nav-text">1.Message</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Topic"><span class="toc-nav-text">2.Topic</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-Producer"><span class="toc-nav-text">3.Producer</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-Consumer"><span class="toc-nav-text">4.Consumer</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-Broker"><span class="toc-nav-text">5.Broker</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#存储机制"><span class="toc-nav-text">存储机制</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#设计与实现"><span class="toc-nav-text">设计与实现</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#配置"><span class="toc-nav-text">配置</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#消费端配置"><span class="toc-nav-text">消费端配置</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#auto-offset-reset值含义解释"><span class="toc-nav-text">auto.offset.reset值含义解释</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#不同版本区别"><span class="toc-nav-text">不同版本区别</span></a></li></ol>
     
   </div>
 </aside>
@@ -227,7 +244,7 @@
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
-    <footer class="app-footer">
+    <!-- <footer class="app-footer">
   <p class="copyright">
     &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
@@ -274,6 +291,6 @@
 
 
 <script src="/js/script.js"></script>
-
+ -->
   </body>
 </html>

@@ -104,13 +104,19 @@
   <article class="post-article">
     <section class="markdown-content"><h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><p>每次创建新的线程时，需要开辟新的虚拟机栈、本地方法栈、程序计数器等私有空间，在线程销毁时候也要释放这些资源，如果进行频繁的创建和销毁会消耗大量的系统资源。使用线程池可以:</p>
 <ul>
-<li><p>管理和复用线程，控制最大并发度</p>
+<li>管理和复用线程，控制最大并发度</li>
+<li>实现任务队列的缓存和拒绝机制</li>
+<li>实现与某些时间相关的功能，如定时任务等等</li>
+<li>隔离线程执行环境，可以按照类别划分不同的线程池，避免多种任务之间相互影响。</li>
+</ul>
+<h1 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h1><ul>
+<li><p>线程池管理器:用于创建并管理线程池</p>
 </li>
-<li><p>实现任务队列的缓存和拒绝机制</p>
+<li><p>工作线程:线程池中的线程 </p>
 </li>
-<li><p>实现与某些时间相关的功能，如定时任务等等</p>
+<li><p>任务接口:每个任务必须实现的接口，用于工作线程调度其运行</p>
 </li>
-<li><p>隔离线程执行环境，可以按照类别划分不同的线程池，避免多种任务之间相互影响。</p>
+<li><p>任务队列:用于存放待处理的任务，提供一种缓冲机制</p>
 </li>
 </ul>
 <h1 id="ThreadPoolExcutor"><a href="#ThreadPoolExcutor" class="headerlink" title="ThreadPoolExcutor"></a>ThreadPoolExcutor</h1><h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                          RejectedExecutionHandler handler)</span></span></span><br></pre></td></tr></table></figure>
@@ -129,7 +135,11 @@
 <p>用来表示keepAliveTime的时间单位。</p>
 </li>
 <li><p>workQueue</p>
-<p>表示缓存队列，当请求的线程数超过maximumPoolSize时，将会放到这个队列中。</p>
+<p>表示缓存队列，常见的有：</p>
+<p>LinkedBlockingQueue􏲲􏱂􏱐􏱻􏰍􏰏􏲢􏱏􏲝􏲼􏲣􏱳􏰽􏰋􏲫􏲕􏰯􏰘􏱿􏲣􏳈􏰿􏲜􏰄􏲇􏱹􏰏􏰓：基于链表的阻塞队列</p>
+<p>ArrayBlockingQueue：基于数组的阻塞队列􏲲􏱂􏱐􏲀􏱍􏰏􏰟􏱹􏲢􏱏􏲝􏲼􏰓</p>
+<p>PriorityBlockingQueue􏲉􏳉􏰦􏳅􏰏􏲌􏰬􏲄􏱛􏰪􏱔􏱨􏰶􏰨􏳑：基于堆的优先级阻塞队列</p>
+<p>SynchronousQueue􏲉􏱷􏰟􏰞􏰡􏰴􏰫􏲙􏰹􏰏􏰵􏲴􏲄􏱛􏰶􏰨：没有实际存储空间的阻塞对列，他没有实际的存储空间，当使用这种队列时，只有正好有空闲线程在等待接受任务时候才会入队成功，否则只会创建线程直到达到maximumPoolSize。</p>
 </li>
 <li><p>threadFactory</p>
 <p>表示线程工厂，用来创建线程。</p>
@@ -144,17 +154,19 @@
 </ul>
 <h2 id="相关字段"><a href="#相关字段" class="headerlink" title="相关字段"></a>相关字段</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> COUNT_BITS ＝ Integer.SIZE - <span class="number">3</span> ;</span><br></pre></td></tr></table></figure>
 
-<p>​    最左边3位表示线程池状态，右边的29位表示工作线程数。线程池状态分别为：    </p>
+<p>最左边3位表示线程池状态，右边的29位表示工作线程数。线程池状态分别为：    </p>
 <p>​    (1) RUNNING</p>
-<p>​        线程池在被刚创建时处于RUNNING状态，能够接收新任务，以及对已添加的任务进行处理。 </p>
+<p>线程池在被刚创建时处于RUNNING状态，能够接收新任务，以及对已添加的任务进行处理。 </p>
 <p>​    (2) SHUTDOWN</p>
-<p>​         当调用线程池的 shutdown()方法，不接收新任务，但能处理已添加的任务。</p>
+<p>当调用线程池的 shutdown()方法，不接收新任务，但能处理已添加的任务。</p>
 <p>​    (3) STOP</p>
-<p>​        调用线程池的 shutdownNow()方法，不接受新任务，不处理已经接受的任务，并且会中断已经处理的任务。</p>
+<p>调用线程池的 shutdownNow()方法，不接受新任务，不处理已经接受的任务，并且会中断已经处理的任务。</p>
 <p>​    (4) TIDYING</p>
-<p>​        当线程池在SHUTDOWN状态下，阻塞队列为空并且线程池中执行的任务也为空时，就会从SHUTDOWN状态转为        TIDYING； 当线程池在STOP状态下，线程池中执行的任务为空时，就会由STOP转为TIDYING状态。当记录的任        务数量为0时，会执行 terminated() 方法。</p>
+<p>当线程池在SHUTDOWN状态下，阻塞队列为空并且线程池中执行的任务也为空时，就会从SHUTDOWN状态转为TIDYING； 当线程池在STOP状态下，线程池中执行的任务为空时，就会由STOP转为TIDYING状态。当记录的任务数量为0时，会执行 terminated() 方法。</p>
 <p>​    (5) TERMINATED</p>
-<p>​         TIDYING状态时，执行完terminated()之后,就会转为TERMINATED，此时线程池彻底终止。</p>
+<p>TIDYING状态时，执行完terminated()之后,就会转为TERMINATED，此时线程池彻底终止。</p>
+<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><p>当新任务到来时，如果当前线程个数小于corePoolSize，即使有空闲的线程也会创建一个新线程来执行这个任务；而如果线程数大于等于corePoolSize了就不会立即创建新线程，而是尝试排队，如果队列满了或者其他原因不能立即入队，就会检查线程数是否达到了maximumPoolSize，如果没有就会继续创建新线程直到达到了maximumPoolSize。</p>
+<p>当线程数大于等于corePoolSize时，非核心线程如果空闲了不会一直存在，他有一个最长的等待时间keepAliveTime，如果超过这个时间还是一直空闲的话，那么就会回收该线程。</p>
 <h2 id="线程池创建工具类Executors"><a href="#线程池创建工具类Executors" class="headerlink" title="线程池创建工具类Executors"></a>线程池创建工具类Executors</h2><ol>
 <li><p>Executors.newCachedThreadPool</p>
 <p>maximumPoolSize为Integer.MAX_VALUE,keepAliveTime为60s， 新任务到来时，如果正好有空闲线程在等待任务，就直接执行，否则就新建立一个线程，创建的线程个数不受限制，任何空闲线程如果60秒之内空闲将会终止。</p>
@@ -244,7 +256,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#优点"><span class="toc-nav-text">优点</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ThreadPoolExcutor"><span class="toc-nav-text">ThreadPoolExcutor</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#构造方法"><span class="toc-nav-text">构造方法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#相关字段"><span class="toc-nav-text">相关字段</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#线程池创建工具类Executors"><span class="toc-nav-text">线程池创建工具类Executors</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#优点"><span class="toc-nav-text">优点</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#组成"><span class="toc-nav-text">组成</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ThreadPoolExcutor"><span class="toc-nav-text">ThreadPoolExcutor</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#构造方法"><span class="toc-nav-text">构造方法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#相关字段"><span class="toc-nav-text">相关字段</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#执行过程"><span class="toc-nav-text">执行过程</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#线程池创建工具类Executors"><span class="toc-nav-text">线程池创建工具类Executors</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -311,7 +323,7 @@
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
-    <footer class="app-footer">
+    <!-- <footer class="app-footer">
   <p class="copyright">
     &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
@@ -358,6 +370,6 @@
 
 
 <script src="/js/script.js"></script>
-
+ -->
   </body>
 </html>
